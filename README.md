@@ -71,12 +71,48 @@ Each lesson includes:
 # Install dependencies
 npm install
 
+# Set up environment variables (optional, for Supabase integration)
+cp .env.example .env.local
+# Edit .env.local with your actual values
+
 # Start development server
 npm run dev
 
 # Build for production
 npm run build
 ```
+
+### Environment Variables
+
+This project uses environment variables for configuration. Create a `.env.local` file in the root directory:
+
+```env
+VITE_SUPABASE_URL=your_supabase_project_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+**Important:** Never commit `.env.local` to version control. It's already in `.gitignore`.
+
+### GitHub Actions Deployment
+
+The project includes a GitHub Actions workflow for automated deployment:
+
+1. **Set up GitHub Secrets:**
+   - Go to your repository settings → Secrets and variables → Actions
+   - Add the following secrets:
+     - `VITE_SUPABASE_URL` - Your Supabase project URL
+     - `VITE_SUPABASE_ANON_KEY` - Your Supabase anonymous key
+
+2. **Deployment:**
+   - The workflow automatically builds and deploys on push to `main`
+   - Build artifacts are uploaded and deployed to GitHub Pages
+   - Environment variables are securely injected during build
+
+3. **Access environment variables in code:**
+   ```typescript
+   const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
+   const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+   ```
 
 ## Project Structure
 
