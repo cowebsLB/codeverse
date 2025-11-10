@@ -7,6 +7,13 @@ import { lessons, Lesson } from '../../data/lessons'
 import { getDifficultyIcon } from '../../data/languages'
 import { achievements } from '../../data/achievements'
 import AchievementBadge from '../gamification/AchievementBadge'
+import DailyChallengesSection from '../gamification/DailyChallengesSection'
+import StreakFreezeButton from '../gamification/StreakFreezeButton'
+import ShareButton from '../gamification/ShareButton'
+import Leaderboard from '../gamification/Leaderboard'
+import UnlockablesShop from '../gamification/UnlockablesShop'
+import PowerUpShop from '../gamification/PowerUpShop'
+import StatisticsCard from '../gamification/StatisticsCard'
 
 export default function Profile() {
   const { user } = useAuthStore()
@@ -169,47 +176,85 @@ export default function Profile() {
                 </div>
               </div>
 
-              {/* Gamification Card */}
-              <div className="bg-gray-700 rounded-lg p-6">
-                <h3 className="text-xl font-bold font-heading text-white mb-4">Gamification</h3>
-                <div className="space-y-4">
-                  <div>
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-gray-300 font-body">Current Streak</span>
-                      <span className="text-orange-400 font-code font-bold"><span className="mr-1">🔥</span> {currentStreak} days</span>
-                    </div>
-                    {currentStreak > 0 && (
-                      <div className="text-xs text-gray-400 font-body">
-                        Longest: {longestStreak} days
+                  {/* Gamification Card */}
+                  <div className="bg-gray-700 rounded-lg p-6">
+                    <h3 className="text-xl font-bold font-heading text-white mb-4">Gamification</h3>
+                    <div className="space-y-4">
+                      <div>
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="text-gray-300 font-body">Current Streak</span>
+                          <span className="text-orange-400 font-code font-bold"><span className="mr-1">🔥</span> {currentStreak} days</span>
+                        </div>
+                        {currentStreak > 0 && (
+                          <div className="text-xs text-gray-400 font-body">
+                            Longest: {longestStreak} days
+                          </div>
+                        )}
                       </div>
-                    )}
-                  </div>
-                  <div>
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-gray-300 font-body">Coins</span>
-                      <span className="text-yellow-500 font-code font-bold"><span className="mr-1">💰</span> {coins}</span>
+                      <div>
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="text-gray-300 font-body">Coins</span>
+                          <span className="text-yellow-500 font-code font-bold"><span className="mr-1">💰</span> {coins}</span>
+                        </div>
+                      </div>
+                      <div>
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="text-gray-300 font-body">Achievements</span>
+                          <span className="text-indigo-400 font-code font-bold">
+                            {unlockedAchievements.length} of {achievements.length}
+                          </span>
+                        </div>
+                        <div className="text-xs text-gray-400 font-body">
+                          {achievementPercentage + '% unlocked'}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="mt-4 pt-4 border-t border-gray-600">
+                      <StreakFreezeButton />
                     </div>
                   </div>
-                  <div>
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-gray-300 font-body">Achievements</span>
-                      <span className="text-indigo-400 font-code font-bold">
-                        {unlockedAchievements.length} of {achievements.length}
-                      </span>
-                    </div>
-                    <div className="text-xs text-gray-400 font-body">
-                      {achievementPercentage + '% unlocked'}
-                    </div>
-                  </div>
-                </div>
-              </div>
+            </div>
+
+            {/* Statistics Section */}
+            <div className="mb-8">
+              <StatisticsCard />
+            </div>
+
+            {/* Daily Challenges Section */}
+            <div className="mb-8">
+              <DailyChallengesSection />
+            </div>
+
+            {/* Leaderboard Section */}
+            <div className="mb-8">
+              <Leaderboard />
+            </div>
+
+            {/* Power-Up Shop */}
+            <div className="mb-8">
+              <PowerUpShop />
+            </div>
+
+            {/* Unlockables Shop */}
+            <div className="mb-8">
+              <UnlockablesShop />
             </div>
 
             {/* Achievements Section */}
             <div className="bg-gray-700 rounded-lg p-6 mb-8">
-              <h3 className="text-xl font-bold font-heading text-white mb-4">
-                <span className="mr-2">🏆</span> Achievements ({unlockedAchievements.length} of {achievements.length})
-              </h3>
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-xl font-bold font-heading text-white">
+                  <span className="mr-2">🏆</span> Achievements ({unlockedAchievements.length} of {achievements.length})
+                </h3>
+                <ShareButton
+                  data={{
+                    type: 'achievement',
+                    title: `${unlockedAchievements.length} Achievements Unlocked`,
+                    description: `I've unlocked ${unlockedAchievements.length} achievements on Codeverse!`,
+                    url: window.location.href,
+                  }}
+                />
+              </div>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
                 {achievements.map((achievement) => (
                   <div key={achievement.id} className="text-center">

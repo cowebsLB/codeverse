@@ -143,6 +143,11 @@ export const useProgressStore = create<ProgressState>()((set, get) => ({
           await gamificationStore.addCoins(10) // Base coins for lesson completion
           await gamificationStore.updateStreakOnActivity()
           await gamificationStore.checkAndUnlockAchievements()
+          await gamificationStore.updateDailyChallengeProgress() // Update daily challenge progress
+          
+          // Update leaderboard
+          const { updateLeaderboardOnChange } = await import('./gamificationStore')
+          updateLeaderboardOnChange()
         } else if (xpGain > 0) {
           await get().addXP(xpGain)
         }

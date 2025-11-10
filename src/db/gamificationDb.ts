@@ -187,3 +187,234 @@ export async function updateDailyChallenge(
   }
 }
 
+// Unlockables
+export interface UnlockableRecord {
+  id: number
+  user_id: string
+  unlockable_id: string
+  unlocked_at: number
+  is_active: number
+}
+
+export async function getUnlockedItems(userId: string): Promise<string[]> {
+  await initDatabase()
+  const results = await executeQuery(
+    'SELECT unlockable_id FROM unlockables WHERE user_id = ?',
+    [userId]
+  )
+  return results.map((r: UnlockableRecord) => r.unlockable_id)
+}
+
+export async function unlockItem(userId: string, unlockableId: string): Promise<void> {
+  await initDatabase()
+  const unlockedAt = Date.now()
+  
+  const existing = await executeQuery(
+    'SELECT id FROM unlockables WHERE user_id = ? AND unlockable_id = ?',
+    [userId, unlockableId]
+  )
+  
+  if (existing.length === 0) {
+    await executeUpdate(
+      'INSERT INTO unlockables (user_id, unlockable_id, unlocked_at, is_active) VALUES (?, ?, ?, ?)',
+      [userId, unlockableId, unlockedAt, 0]
+    )
+  }
+}
+
+export async function setActiveUnlockable(userId: string, unlockableId: string, isActive: boolean): Promise<void> {
+  await initDatabase()
+  
+  // First, deactivate all unlockables of the same type
+  // (This would require getting the unlockable type, simplified for now)
+  
+  await executeUpdate(
+    'UPDATE unlockables SET is_active = ? WHERE user_id = ? AND unlockable_id = ?',
+    [isActive ? 1 : 0, userId, unlockableId]
+  )
+}
+
+export async function getActiveUnlockables(userId: string): Promise<string[]> {
+  await initDatabase()
+  const results = await executeQuery(
+    'SELECT unlockable_id FROM unlockables WHERE user_id = ? AND is_active = 1',
+    [userId]
+  )
+  return results.map((r: UnlockableRecord) => r.unlockable_id)
+}
+
+// Leaderboard
+export interface LeaderboardEntry {
+  user_id: string
+  user_name: string
+  total_xp: number
+  level: number
+  languages_mastered: number
+  achievements_unlocked: number
+  current_streak: number
+  rank?: number
+}
+
+export async function updateLeaderboardEntry(userId: string, userData: {
+  name: string
+  xp: number
+  level: number
+  languagesMastered: number
+  achievementsUnlocked: number
+  currentStreak: number
+}): Promise<void> {
+  await initDatabase()
+  const lastUpdated = Date.now()
+  
+  const existing = await executeQuery(
+    'SELECT id FROM leaderboard WHERE user_id = ?',
+    [userId]
+  )
+  
+  if (existing.length > 0) {
+    await executeUpdate(
+      `UPDATE leaderboard SET 
+        user_name = ?, total_xp = ?, level = ?, 
+        languages_mastered = ?, achievements_unlocked = ?, 
+        current_streak = ?, last_updated = ?
+      WHERE user_id = ?`,
+      [
+        userData.name,
+        userData.xp,
+        userData.level,
+        userData.languagesMastered,
+        userData.achievementsUnlocked,
+        userData.currentStreak,
+        lastUpdated,
+        userId,
+      ]
+    )
+  } else {
+    await executeUpdate(
+      `INSERT INTO leaderboard (
+        user_id, user_name, total_xp, level,
+        languages_mastered, achievements_unlocked,
+        current_streak, last_updated
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        userId,
+        userData.name,
+        userData.xp,
+        userData.level,
+        userData.languagesMastered,
+        userData.achievementsUnlocked,
+        userData.currentStreak,
+        lastUpdated,
+      ]
+    )
+  }
+}
+
+export async function getLeaderboard(limit: number = 100, sortBy: 'xp' | 'level' | 'streak' = 'xp'): Promise<LeaderboardEntry[]> {
+  await initDatabase()
+  
+  const sortColumn = {
+    xp: 'total_xp',
+    level: 'level',
+    streak: 'current_streak',
+  }[sortBy] || 'total_xp'
+  
+  const results = await executeQuery(
+    `SELECT * FROM leaderboard ORDER BY ${sortColumn} DESC LIMIT ?`,
+    [limit]
+  )
+  
+  return (results as LeaderboardEntry[]).map((entry, index) => ({
+    ...entry,
+    rank: index + 1,
+  }))
+}
+
+export async function getUserRank(userId: string, sortBy: 'xp' | 'level' | 'streak' = 'xp'): Promise<number | null> {
+  await initDatabase()
+  
+  const sortColumn = {
+    xp: 'total_xp',
+    level: 'level',
+    streak: 'current_streak',
+  }[sortBy] || 'total_xp'
+  
+  const results = await executeQuery(
+    `SELECT user_id FROM leaderboard ORDER BY ${sortColumn} DESC`,
+    []
+  )
+  
+  const rank = results.findIndex((r: { user_id: string }) => r.user_id === userId)
+  return rank >= 0 ? rank + 1 : null
+}
+
+// Power-ups
+export interface PowerUpRecord {
+  id: number
+  user_id: string
+  power_up_id: string
+  quantity: number
+  last_purchased: number | null
+}
+
+export async function getPowerUps(userId: string): Promise<Record<string, number>> {
+  await initDatabase()
+  const results = await executeQuery(
+    'SELECT power_up_id, quantity FROM power_ups WHERE user_id = ?',
+    [userId]
+  )
+  
+  const powerUps: Record<string, number> = {}
+  for (const r of results as PowerUpRecord[]) {
+    powerUps[r.power_up_id] = r.quantity
+  }
+  return powerUps
+}
+
+export async function addPowerUp(userId: string, powerUpId: string, quantity: number = 1): Promise<void> {
+  await initDatabase()
+  
+  const existing = await executeQuery(
+    'SELECT quantity FROM power_ups WHERE user_id = ? AND power_up_id = ?',
+    [userId, powerUpId]
+  )
+  
+  if (existing.length > 0) {
+    const currentQuantity = (existing[0] as PowerUpRecord).quantity
+    await executeUpdate(
+      'UPDATE power_ups SET quantity = ?, last_purchased = ? WHERE user_id = ? AND power_up_id = ?',
+      [currentQuantity + quantity, Date.now(), userId, powerUpId]
+    )
+  } else {
+    await executeUpdate(
+      'INSERT INTO power_ups (user_id, power_up_id, quantity, last_purchased) VALUES (?, ?, ?, ?)',
+      [userId, powerUpId, quantity, Date.now()]
+    )
+  }
+}
+
+export async function usePowerUp(userId: string, powerUpId: string): Promise<boolean> {
+  await initDatabase()
+  
+  const existing = await executeQuery(
+    'SELECT quantity FROM power_ups WHERE user_id = ? AND power_up_id = ?',
+    [userId, powerUpId]
+  )
+  
+  if (existing.length === 0) {
+    return false
+  }
+  
+  const currentQuantity = (existing[0] as PowerUpRecord).quantity
+  if (currentQuantity <= 0) {
+    return false
+  }
+  
+  await executeUpdate(
+    'UPDATE power_ups SET quantity = ? WHERE user_id = ? AND power_up_id = ?',
+    [currentQuantity - 1, userId, powerUpId]
+  )
+  
+  return true
+}
+

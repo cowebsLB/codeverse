@@ -124,6 +124,49 @@ function createTables(database: Database) {
       FOREIGN KEY (user_id) REFERENCES users(id)
     )
   `)
+
+  // Unlockables table
+  database.run(`
+    CREATE TABLE IF NOT EXISTS unlockables (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      user_id TEXT NOT NULL,
+      unlockable_id TEXT NOT NULL,
+      unlocked_at INTEGER NOT NULL,
+      is_active INTEGER NOT NULL DEFAULT 0,
+      UNIQUE(user_id, unlockable_id),
+      FOREIGN KEY (user_id) REFERENCES users(id)
+    )
+  `)
+
+  // Leaderboard table (for global rankings)
+  database.run(`
+    CREATE TABLE IF NOT EXISTS leaderboard (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      user_id TEXT NOT NULL,
+      user_name TEXT NOT NULL,
+      total_xp INTEGER NOT NULL DEFAULT 0,
+      level INTEGER NOT NULL DEFAULT 1,
+      languages_mastered INTEGER NOT NULL DEFAULT 0,
+      achievements_unlocked INTEGER NOT NULL DEFAULT 0,
+      current_streak INTEGER NOT NULL DEFAULT 0,
+      last_updated INTEGER NOT NULL,
+      UNIQUE(user_id),
+      FOREIGN KEY (user_id) REFERENCES users(id)
+    )
+  `)
+
+  // Power-ups table
+  database.run(`
+    CREATE TABLE IF NOT EXISTS power_ups (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      user_id TEXT NOT NULL,
+      power_up_id TEXT NOT NULL,
+      quantity INTEGER NOT NULL DEFAULT 0,
+      last_purchased INTEGER,
+      UNIQUE(user_id, power_up_id),
+      FOREIGN KEY (user_id) REFERENCES users(id)
+    )
+  `)
 }
 
 export function saveDatabase() {

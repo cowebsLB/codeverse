@@ -10,15 +10,29 @@ import {
   getCoins,
   addCoins,
   spendCoins,
+  getDailyChallenges,
+  updateDailyChallenge,
+  DailyChallenge as DailyChallengeRecord,
 } from '../db/gamificationDb'
 import { achievements, Achievement } from '../data/achievements'
+import { getDailyChallengeForDate, DailyChallenge } from '../data/dailyChallenges'
 import { updateUserStats } from '../db/userStatsDb'
+
+interface DailyChallengeProgress {
+  challenge: DailyChallenge
+  progress: number
+  completed: boolean
+  rewardCoins: number
+  rewardXP: number
+}
 
 interface GamificationState {
   unlockedAchievements: string[]
   currentStreak: number
   longestStreak: number
   coins: number
+  streakFreezes: number
+  dailyChallenges: DailyChallengeProgress[]
   initialized: boolean
   init: () => Promise<void>
   checkAndUnlockAchievements: () => Promise<string[]>
@@ -26,6 +40,10 @@ interface GamificationState {
   addCoins: (amount: number) => Promise<void>
   spendCoins: (amount: number) => Promise<boolean>
   getStreakMultiplier: () => number
+  useStreakFreeze: () => Promise<boolean>
+  getDailyChallenges: () => Promise<void>
+  updateDailyChallengeProgress: () => Promise<void>
+  completeDailyChallenge: (challengeId: string) => Promise<void>
 }
 
 // Streak multipliers
@@ -43,6 +61,8 @@ export const useGamificationStore = create<GamificationState>()((set, get) => ({
   currentStreak: 0,
   longestStreak: 0,
   coins: 0,
+  streakFreezes: 0,
+  dailyChallenges: [],
   initialized: false,
 
   init: async () => {
@@ -67,12 +87,16 @@ export const useGamificationStore = create<GamificationState>()((set, get) => ({
         set({
           currentStreak: streak.current_streak,
           longestStreak: streak.longest_streak,
+          streakFreezes: streak.streak_freeze_count,
         })
       }
 
       // Load coins
       const coins = await getCoins(userId)
       set({ coins })
+
+      // Load daily challenges
+      await get().getDailyChallenges()
 
       // Update streak on init (check if activity today)
       await get().updateStreakOnActivity()
@@ -253,5 +277,193 @@ export const useGamificationStore = create<GamificationState>()((set, get) => ({
 
     return 1.0
   },
+
+  useStreakFreeze: async () => {
+    const userId = useAuthStore.getState().user?.id
+    if (!userId) return false
+
+    const current = get()
+    if (current.streakFreezes <= 0) return false
+
+    const streak = await getStreak(userId)
+    if (!streak) return false
+
+    // Use a streak freeze
+    const newFreezeCount = current.streakFreezes - 1
+    await updateStreak(userId, {
+      current_streak: streak.current_streak,
+      longest_streak: streak.longest_streak,
+      last_activity_date: streak.last_activity_date,
+      streak_freeze_count: newFreezeCount,
+    })
+
+    set({ streakFreezes: newFreezeCount })
+    return true
+  },
+
+  getDailyChallenges: async () => {
+    const userId = useAuthStore.getState().user?.id
+    if (!userId) return
+
+    const today = new Date().toISOString().split('T')[0]
+    const challenge = getDailyChallengeForDate(today)
+    
+    // Get existing progress
+    const existing = await getDailyChallenges(userId, today)
+    
+    // Find or create challenge record
+    let challengeRecord = existing.find(c => c.challenge_type === challenge.id)
+    
+    if (!challengeRecord) {
+      // Create new challenge
+      await updateDailyChallenge(userId, today, challenge.id, 0, false)
+      challengeRecord = {
+        id: 0,
+        user_id: userId,
+        challenge_date: today,
+        challenge_type: challenge.id,
+        completed: 0,
+        progress: 0,
+        target: challenge.target,
+        reward_coins: challenge.rewardCoins,
+        reward_xp: challenge.rewardXP,
+      }
+    }
+
+    set({
+      dailyChallenges: [{
+        challenge,
+        progress: challengeRecord.progress,
+        completed: challengeRecord.completed === 1,
+        rewardCoins: challengeRecord.reward_coins,
+        rewardXP: challengeRecord.reward_xp,
+      }],
+    })
+  },
+
+  updateDailyChallengeProgress: async () => {
+    const userId = useAuthStore.getState().user?.id
+    if (!userId) return
+
+    const today = new Date().toISOString().split('T')[0]
+    const progressStore = useProgressStore.getState()
+    
+    // Get today's challenge
+    const challenges = get().dailyChallenges
+    if (challenges.length === 0) {
+      await get().getDailyChallenges()
+      return
+    }
+
+    const challenge = challenges[0]
+    if (challenge.completed) return
+
+    // Calculate progress based on challenge type
+    let progress = 0
+    const todayDate = new Date().toISOString().split('T')[0]
+
+    switch (challenge.challenge.type) {
+      case 'complete_lessons':
+        progress = Object.values(progressStore.lessons).filter((l) => {
+          if (!l.completed) return false
+          const completedDate = new Date(l.lastAccessed).toISOString().split('T')[0]
+          return completedDate === todayDate
+        }).length
+        break
+      case 'earn_xp':
+        // Get XP earned today (simplified - would need to track daily XP)
+        progress = Math.floor(progressStore.xp / 100) // Simplified
+        break
+      case 'maintain_streak':
+        progress = get().currentStreak > 0 ? 1 : 0
+        break
+      case 'unlock_achievements':
+        // Get achievements unlocked today
+        const unlockedToday = get().unlockedAchievements.filter((id) => {
+          // Simplified - would need to track unlock dates
+          return true
+        }).length
+        progress = unlockedToday
+        break
+    }
+
+    const completed = progress >= challenge.challenge.target
+    await updateDailyChallenge(userId, today, challenge.challenge.id, progress, completed)
+
+    if (completed && !challenge.completed) {
+      // Award rewards
+      await get().addCoins(challenge.rewardCoins)
+      await progressStore.addXP(challenge.rewardXP)
+      
+      // Update challenge status
+      set({
+        dailyChallenges: [{
+          ...challenge,
+          progress,
+          completed: true,
+        }],
+      })
+    } else {
+      set({
+        dailyChallenges: [{
+          ...challenge,
+          progress,
+        }],
+      })
+    }
+  },
+
+  completeDailyChallenge: async (challengeId: string) => {
+    const userId = useAuthStore.getState().user?.id
+    if (!userId) return
+
+    const today = new Date().toISOString().split('T')[0]
+    const challenge = get().dailyChallenges.find(c => c.challenge.id === challengeId)
+    
+    if (!challenge || challenge.completed) return
+
+    // Mark as completed
+    await updateDailyChallenge(userId, today, challengeId, challenge.challenge.target, true)
+    
+    // Award rewards
+    await get().addCoins(challenge.rewardCoins)
+    const progressStore = useProgressStore.getState()
+    await progressStore.addXP(challenge.rewardXP)
+
+    set({
+      dailyChallenges: get().dailyChallenges.map(c =>
+        c.challenge.id === challengeId ? { ...c, completed: true, progress: c.challenge.target } : c
+      ),
+    })
+  },
 }))
+
+// Auto-update leaderboard when stats change
+export function updateLeaderboardOnChange() {
+  const userId = useAuthStore.getState().user?.id
+  if (!userId) return
+
+  const progressStore = useProgressStore.getState()
+  const gamificationStore = useGamificationStore.getState()
+  const user = useAuthStore.getState().user
+
+  if (!user) return
+
+  // Import and update leaderboard
+  import('../db/gamificationDb').then(({ updateLeaderboardEntry }) => {
+    // Get languages mastered
+    progressStore.getAllLanguageProgress().then((languages) => {
+      const languagesMastered = languages.filter(l => l.completed).length
+      
+      updateLeaderboardEntry(userId, {
+        name: user.name,
+        xp: progressStore.xp,
+        level: progressStore.level,
+        languagesMastered,
+        achievementsUnlocked: gamificationStore.unlockedAchievements.length,
+        currentStreak: gamificationStore.currentStreak,
+      })
+    })
+  })
+}
 

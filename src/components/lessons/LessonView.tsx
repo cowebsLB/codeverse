@@ -4,6 +4,8 @@ import { useProgressStore } from '../../store/progressStore'
 import { useEffect, useState } from 'react'
 import ProgressBar from '../ui/ProgressBar'
 import CodeEditor from './CodeEditor'
+import AchievementNotification from '../gamification/AchievementNotification'
+import { useGamificationStore } from '../../store/gamificationStore'
 
 export default function LessonView() {
   const { lessonId } = useParams<{ lessonId: string }>()
@@ -12,6 +14,8 @@ export default function LessonView() {
   const { updateProgress, getProgress } = useProgressStore()
   const [currentProgress, setCurrentProgress] = useState(0)
   const [completed, setCompleted] = useState(false)
+  const [newlyUnlockedAchievements, setNewlyUnlockedAchievements] = useState<string[]>([])
+  const [currentNotificationIndex, setCurrentNotificationIndex] = useState(0)
 
   useEffect(() => {
     if (lesson) {
@@ -470,9 +474,38 @@ export default function LessonView() {
 
 
   const handleComplete = async () => {
+    if (completed) return // Already completed
+    
     setCurrentProgress(100)
     setCompleted(true)
+    
+    // Update progress (this triggers achievement checking in progressStore)
     await updateProgress(lesson.id, 100, true)
+    
+    // Check for newly unlocked achievements
+    const gamificationStore = useGamificationStore.getState()
+    const newlyUnlocked = await gamificationStore.checkAndUnlockAchievements()
+    
+    // Trigger celebration for lesson completion
+    const { celebrateLessonCompletion } = await import('../../utils/celebration')
+    celebrateLessonCompletion()
+    
+    // Show achievement notifications
+    if (newlyUnlocked.length > 0) {
+      setNewlyUnlockedAchievements(newlyUnlocked)
+      setCurrentNotificationIndex(0)
+      
+      // Celebrate each achievement based on rarity
+      const { celebrateAchievement } = await import('../../utils/celebration')
+      const { getAchievementById } = await import('../../data/achievements')
+      
+      newlyUnlocked.forEach((achievementId) => {
+        const achievement = getAchievementById(achievementId)
+        if (achievement) {
+          celebrateAchievement(achievement.rarity)
+        }
+      })
+    }
   }
 
   // Get next lesson in the same language
@@ -1091,8 +1124,25 @@ export default function LessonView() {
     )
   }
 
+  // Handle achievement notification close
+  const handleNotificationClose = () => {
+    if (currentNotificationIndex < newlyUnlockedAchievements.length - 1) {
+      setCurrentNotificationIndex(currentNotificationIndex + 1)
+    } else {
+      setNewlyUnlockedAchievements([])
+      setCurrentNotificationIndex(0)
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gray-900">
+      {/* Achievement Notifications */}
+      {newlyUnlockedAchievements.length > 0 && (
+        <AchievementNotification
+          achievementId={newlyUnlockedAchievements[currentNotificationIndex]}
+          onClose={handleNotificationClose}
+        />
+      )}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Lesson Header */}
         <div className="bg-gray-800 border border-gray-700 rounded-lg shadow-lg p-6 mb-8">
