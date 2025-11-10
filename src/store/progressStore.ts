@@ -81,8 +81,10 @@ export const useProgressStore = create<ProgressState>()((set, get) => ({
           if (progress) {
             if (progress.completed === 1) {
               totalXP += XP_PER_LESSON_COMPLETION
+            } else {
+              // Only add progress XP if not completed (to avoid double counting)
+              totalXP += Math.round(progress.progress * XP_PER_PROGRESS_POINT)
             }
-            totalXP += Math.round(progress.progress * XP_PER_PROGRESS_POINT)
           }
         }
         
@@ -110,6 +112,12 @@ export const useProgressStore = create<ProgressState>()((set, get) => ({
       }
       
       const clampedProgress = Math.min(100, Math.max(0, progress))
+      
+      // Check database BEFORE updating to see if lesson was already completed
+      const dbProgressBefore = await getProgressDb(userId, lessonId)
+      const wasAlreadyCompleted = dbProgressBefore?.completed === 1
+      
+      // Update database
       await updateProgressDb(userId, lessonId, clampedProgress, completed)
       
       // Update local state
@@ -128,13 +136,15 @@ export const useProgressStore = create<ProgressState>()((set, get) => ({
       // Update language progress and XP
       const lesson = lessons.find((l) => l.id === lessonId)
       if (lesson) {
+        
         // Calculate XP gain
         const currentState = get()
-        const previousProgress = currentState.lessons[lessonId]?.progress || 0
+        const previousProgress = currentState.lessons[lessonId]?.progress || dbProgressBefore?.progress || 0
         const progressDiff = clampedProgress - previousProgress
         const xpGain = Math.round(progressDiff * XP_PER_PROGRESS_POINT)
         
-        if (completed && !currentState.lessons[lessonId]?.completed) {
+        // Only award XP and coins if this is a NEW completion (not already completed)
+        if (completed && !wasAlreadyCompleted) {
           // Bonus XP for completing a lesson
           await get().addXP(XP_PER_LESSON_COMPLETION + xpGain)
           
@@ -148,12 +158,15 @@ export const useProgressStore = create<ProgressState>()((set, get) => ({
           // Update leaderboard
           const { updateLeaderboardOnChange } = await import('./gamificationStore')
           updateLeaderboardOnChange()
-        } else if (xpGain > 0) {
+        } else if (xpGain > 0 && !wasAlreadyCompleted) {
+          // Only add XP if lesson wasn't already completed
           await get().addXP(xpGain)
         }
 
-        // Recalculate language progress
-        await get().getLanguageProgress(lesson.subject)
+        // Recalculate language progress (don't await to avoid blocking)
+        get().getLanguageProgress(lesson.subject).catch((error) => {
+          console.error('Failed to recalculate language progress:', error)
+        })
       }
     } catch (error) {
       console.error('Failed to update progress:', error)

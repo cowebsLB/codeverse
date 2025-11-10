@@ -6,15 +6,40 @@ export default function DailyChallengesSection() {
   const { dailyChallenges, getDailyChallenges, updateDailyChallengeProgress, completeDailyChallenge } = useGamificationStore()
 
   useEffect(() => {
-    getDailyChallenges()
-  }, [getDailyChallenges])
+    const loadChallenges = async () => {
+      try {
+        await getDailyChallenges()
+      } catch (error) {
+        console.error('Failed to load daily challenges:', error)
+      }
+    }
+    loadChallenges()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   useEffect(() => {
-    // Update progress when challenges are loaded
-    if (dailyChallenges.length > 0) {
-      updateDailyChallengeProgress()
+    // Update progress when challenges are loaded (only once)
+    if (dailyChallenges.length > 0 && !dailyChallenges[0]?.completed) {
+      let cancelled = false
+      const updateProgress = async () => {
+        try {
+          if (!cancelled) {
+            await updateDailyChallengeProgress()
+          }
+        } catch (error) {
+          if (!cancelled) {
+            console.error('Failed to update daily challenge progress:', error)
+          }
+        }
+      }
+      updateProgress()
+      
+      return () => {
+        cancelled = true
+      }
     }
-  }, [dailyChallenges, updateDailyChallengeProgress])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dailyChallenges.length])
 
   if (dailyChallenges.length === 0) {
     return (

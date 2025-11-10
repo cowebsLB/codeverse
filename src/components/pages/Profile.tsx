@@ -11,12 +11,10 @@ import DailyChallengesSection from '../gamification/DailyChallengesSection'
 import StreakFreezeButton from '../gamification/StreakFreezeButton'
 import ShareButton from '../gamification/ShareButton'
 import Leaderboard from '../gamification/Leaderboard'
-import UnlockablesShop from '../gamification/UnlockablesShop'
-import PowerUpShop from '../gamification/PowerUpShop'
 import StatisticsCard from '../gamification/StatisticsCard'
 
 export default function Profile() {
-  const { user } = useAuthStore()
+  const { user, initialized: authInitialized } = useAuthStore()
   const getOverallProgress = useProgressStore((state) => state.getOverallProgress)
   const getAllLanguageProgress = useProgressStore((state) => state.getAllLanguageProgress)
   const getProgress = useProgressStore((state) => state.getProgress)
@@ -26,6 +24,8 @@ export default function Profile() {
   const currentStreak = useGamificationStore((state) => state.currentStreak)
   const longestStreak = useGamificationStore((state) => state.longestStreak)
   const unlockedAchievements = useGamificationStore((state) => state.unlockedAchievements)
+  const progressInitialized = useProgressStore((state) => state.initialized)
+  const gamificationInitialized = useGamificationStore((state) => state.initialized)
   const [overallProgress, setOverallProgress] = useState(0)
   const [languagesProgress, setLanguagesProgress] = useState<LanguageProgress[]>([])
   const [completedLessons, setCompletedLessons] = useState<Lesson[]>([])
@@ -59,32 +59,72 @@ export default function Profile() {
   }
 
   useEffect(() => {
+    // Wait for stores to initialize before loading data
+    if (!authInitialized || !progressInitialized || !gamificationInitialized) {
+      return
+    }
+
+    let cancelled = false
+
     const loadData = async () => {
-      const progress = await getOverallProgress()
-      setOverallProgress(progress)
+      try {
+        const progress = await getOverallProgress()
+        if (cancelled) return
+        setOverallProgress(progress)
 
-      const languages = await getAllLanguageProgress()
-      setLanguagesProgress(languages)
+        const languages = await getAllLanguageProgress()
+        if (cancelled) return
+        setLanguagesProgress(languages)
 
-      // Get all completed lessons
-      const allLessons = lessons.filter((l) => (l.order ?? 0) > 0)
-      setTotalLessons(allLessons.length)
-      
-      const completed: Lesson[] = []
-      for (const lesson of allLessons) {
-        const lessonProgress = await getProgress(lesson.id)
-        if (lessonProgress?.completed) {
-          completed.push(lesson)
+        // Get all completed lessons
+        const allLessons = lessons.filter((l) => (l.order ?? 0) > 0)
+        setTotalLessons(allLessons.length)
+        
+        // Batch load lesson progress to avoid blocking
+        const completed: Lesson[] = []
+        const batchSize = 10
+        for (let i = 0; i < allLessons.length; i += batchSize) {
+          if (cancelled) return
+          
+          const batch = allLessons.slice(i, i + batchSize)
+          await Promise.all(
+            batch.map(async (lesson) => {
+              try {
+                const lessonProgress = await getProgress(lesson.id)
+                if (!cancelled && lessonProgress?.completed) {
+                  completed.push(lesson)
+                }
+              } catch (error) {
+                if (!cancelled) {
+                  console.error(`Failed to get progress for lesson ${lesson.id}:`, error)
+                }
+              }
+            })
+          )
+          // Yield to browser to prevent blocking
+          await new Promise(resolve => setTimeout(resolve, 0))
+        }
+        
+        if (!cancelled) {
+          setCompletedLessons(completed)
+
+          // Get completed languages
+          const completedLangs = languages.filter((lang) => lang.completed)
+          setCompletedLanguages(completedLangs)
+        }
+      } catch (error) {
+        if (!cancelled) {
+          console.error('Failed to load profile data:', error)
         }
       }
-      setCompletedLessons(completed)
-
-      // Get completed languages
-      const completedLangs = languages.filter((lang) => lang.completed)
-      setCompletedLanguages(completedLangs)
     }
+    
     loadData()
-  }, [getOverallProgress, getAllLanguageProgress, getProgress])
+    
+    return () => {
+      cancelled = true
+    }
+  }, [authInitialized, progressInitialized, gamificationInitialized])
 
   const getInitials = (name: string) => {
     return name
@@ -93,6 +133,18 @@ export default function Profile() {
       .join('')
       .toUpperCase()
       .slice(0, 2)
+  }
+
+  // Show loading state if stores aren't initialized
+  if (!authInitialized || !progressInitialized || !gamificationInitialized) {
+    return (
+      <div className="min-h-screen bg-gray-900 py-12 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-500 mx-auto"></div>
+          <p className="mt-4 text-gray-400 font-body">Loading profile...</p>
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -230,15 +282,6 @@ export default function Profile() {
               <Leaderboard />
             </div>
 
-            {/* Power-Up Shop */}
-            <div className="mb-8">
-              <PowerUpShop />
-            </div>
-
-            {/* Unlockables Shop */}
-            <div className="mb-8">
-              <UnlockablesShop />
-            </div>
 
             {/* Achievements Section */}
             <div className="bg-gray-700 rounded-lg p-6 mb-8">
@@ -362,12 +405,18 @@ export default function Profile() {
             {/* Quick Actions */}
             <div className="bg-gray-700 rounded-lg p-6">
               <h3 className="text-xl font-bold font-heading text-white mb-4">Quick Actions</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <Link
                   to="/study-program"
                   className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all font-medium font-heading text-center"
                 >
                   Continue Learning
+                </Link>
+                <Link
+                  to="/shop"
+                  className="bg-gradient-to-r from-yellow-600 to-orange-600 text-white px-6 py-3 rounded-lg hover:from-yellow-700 hover:to-orange-700 transition-all font-medium font-heading text-center"
+                >
+                  🛒 Shop
                 </Link>
                 <Link
                   to="/settings"

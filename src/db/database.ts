@@ -175,10 +175,21 @@ export function saveDatabase() {
   try {
     const data = db.export()
     const uint8Array = new Uint8Array(data)
-    const base64 = btoa(String.fromCharCode(...uint8Array))
+    
+    // Handle large databases by chunking the conversion
+    // btoa can fail for very large arrays, so we convert in chunks
+    let binary = ''
+    const chunkSize = 8192
+    for (let i = 0; i < uint8Array.length; i += chunkSize) {
+      const chunk = uint8Array.slice(i, i + chunkSize)
+      binary += String.fromCharCode.apply(null, Array.from(chunk))
+    }
+    
+    const base64 = btoa(binary)
     localStorage.setItem('codeverse_db', base64)
   } catch (error) {
     console.error('Failed to save database:', error)
+    // Don't throw - database save failures shouldn't crash the app
   }
 }
 
@@ -219,7 +230,13 @@ export async function executeUpdate(sql: string, params: any[] = []): Promise<vo
     throw new Error('Database not initialized')
   }
 
-  db.run(sql, params)
-  saveDatabase()
+  try {
+    db.run(sql, params)
+    // Save database after updates
+    saveDatabase()
+  } catch (error) {
+    console.error('Database update error:', error, 'SQL:', sql, 'Params:', params)
+    throw error
+  }
 }
 

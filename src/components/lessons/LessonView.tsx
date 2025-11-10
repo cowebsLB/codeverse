@@ -19,12 +19,24 @@ export default function LessonView() {
 
   useEffect(() => {
     if (lesson) {
+      let cancelled = false
       getProgress(lesson.id).then((progress) => {
-        setCurrentProgress(progress?.progress || 0)
-        setCompleted(progress?.completed || false)
+        if (!cancelled) {
+          setCurrentProgress(progress?.progress || 0)
+          setCompleted(progress?.completed || false)
+        }
+      }).catch((error) => {
+        if (!cancelled) {
+          console.error('Failed to load lesson progress:', error)
+        }
       })
+      
+      return () => {
+        cancelled = true
+      }
     }
-  }, [lesson, getProgress])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lesson?.id])
 
   if (!lesson) {
     return (

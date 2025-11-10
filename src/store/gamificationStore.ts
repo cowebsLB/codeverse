@@ -12,9 +12,8 @@ import {
   spendCoins,
   getDailyChallenges,
   updateDailyChallenge,
-  DailyChallenge as DailyChallengeRecord,
 } from '../db/gamificationDb'
-import { achievements, Achievement } from '../data/achievements'
+import { achievements } from '../data/achievements'
 import { getDailyChallengeForDate, DailyChallenge } from '../data/dailyChallenges'
 import { updateUserStats } from '../db/userStatsDb'
 
@@ -183,52 +182,70 @@ export const useGamificationStore = create<GamificationState>()((set, get) => ({
     const userId = useAuthStore.getState().user?.id
     if (!userId) return
 
-    const today = new Date().toISOString().split('T')[0]
-    const streak = await getStreak(userId)
+    try {
+      const today = new Date().toISOString().split('T')[0]
+      const streak = await getStreak(userId)
 
-    if (!streak) {
-      // First activity - start streak
-      await updateStreak(userId, {
-        current_streak: 1,
-        longest_streak: 1,
-        last_activity_date: today,
-      })
-      set({ currentStreak: 1, longestStreak: 1 })
-      return
-    }
+      if (!streak) {
+        // First activity - start streak
+        await updateStreak(userId, {
+          current_streak: 1,
+          longest_streak: 1,
+          last_activity_date: today,
+          streak_freeze_count: 0,
+        })
+        set({ currentStreak: 1, longestStreak: 1, streakFreezes: 0 })
+        return
+      }
 
-    const lastActivity = streak.last_activity_date
-    const currentStreak = streak.current_streak
+      const lastActivity = streak.last_activity_date
+      const currentStreak = streak.current_streak
+      let streakFreezeCount = streak.streak_freeze_count
 
-    if (lastActivity === today) {
-      // Already active today - no change
-      set({ currentStreak, longestStreak: streak.longest_streak })
-      return
-    }
+      if (lastActivity === today) {
+        // Already active today - no change
+        set({ currentStreak, longestStreak: streak.longest_streak, streakFreezes: streakFreezeCount })
+        return
+      }
 
-    // Check if yesterday
-    const yesterday = new Date()
-    yesterday.setDate(yesterday.getDate() - 1)
-    const yesterdayStr = yesterday.toISOString().split('T')[0]
+      // Check if yesterday
+      const yesterday = new Date()
+      yesterday.setDate(yesterday.getDate() - 1)
+      const yesterdayStr = yesterday.toISOString().split('T')[0]
 
-    if (lastActivity === yesterdayStr) {
-      // Continue streak
-      const newStreak = currentStreak + 1
-      const newLongest = Math.max(newStreak, streak.longest_streak)
-      await updateStreak(userId, {
-        current_streak: newStreak,
-        longest_streak: newLongest,
-        last_activity_date: today,
-      })
-      set({ currentStreak: newStreak, longestStreak: newLongest })
-    } else {
-      // Streak broken - start new streak
-      await updateStreak(userId, {
-        current_streak: 1,
-        longest_streak: streak.longest_streak, // Keep longest
-        last_activity_date: today,
-      })
-      set({ currentStreak: 1, longestStreak: streak.longest_streak })
+      if (lastActivity === yesterdayStr) {
+        // Continue streak
+        const newStreak = currentStreak + 1
+        const newLongest = Math.max(newStreak, streak.longest_streak)
+        await updateStreak(userId, {
+          current_streak: newStreak,
+          longest_streak: newLongest,
+          last_activity_date: today,
+          streak_freeze_count: streakFreezeCount,
+        })
+        set({ currentStreak: newStreak, longestStreak: newLongest, streakFreezes: streakFreezeCount })
+      } else if (streakFreezeCount > 0) {
+        // Use a streak freeze
+        streakFreezeCount--
+        await updateStreak(userId, {
+          current_streak: currentStreak, // Keep current streak
+          longest_streak: streak.longest_streak,
+          last_activity_date: today,
+          streak_freeze_count: streakFreezeCount,
+        })
+        set({ currentStreak, longestStreak: streak.longest_streak, streakFreezes: streakFreezeCount })
+      } else {
+        // Streak broken - start new streak
+        await updateStreak(userId, {
+          current_streak: 1,
+          longest_streak: streak.longest_streak, // Keep longest
+          last_activity_date: today,
+          streak_freeze_count: 0,
+        })
+        set({ currentStreak: 1, longestStreak: streak.longest_streak, streakFreezes: 0 })
+      }
+    } catch (error) {
+      console.error('Failed to update streak:', error)
     }
   },
 
@@ -236,30 +253,43 @@ export const useGamificationStore = create<GamificationState>()((set, get) => ({
     const userId = useAuthStore.getState().user?.id
     if (!userId) return
 
-    await addCoins(userId, amount)
-    const newCoins = get().coins + amount
-    set({ coins: newCoins })
+    try {
+      await addCoins(userId, amount)
+      const newCoins = get().coins + amount
+      set({ coins: newCoins })
 
-    // Update user stats
-    const progressStore = useProgressStore.getState()
-    await updateUserStats(userId, progressStore.xp, progressStore.level, newCoins)
+      // Update user stats (don't await to avoid blocking)
+      const progressStore = useProgressStore.getState()
+      updateUserStats(userId, progressStore.xp, progressStore.level, newCoins).catch((error) => {
+        console.error('Failed to update user stats:', error)
+      })
+    } catch (error) {
+      console.error('Failed to add coins:', error)
+    }
   },
 
   spendCoins: async (amount: number) => {
     const userId = useAuthStore.getState().user?.id
     if (!userId) return false
 
-    const success = await spendCoins(userId, amount)
-    if (success) {
-      const newCoins = get().coins - amount
-      set({ coins: newCoins })
+    try {
+      const success = await spendCoins(userId, amount)
+      if (success) {
+        const newCoins = get().coins - amount
+        set({ coins: newCoins })
 
-      // Update user stats
-      const progressStore = useProgressStore.getState()
-      await updateUserStats(userId, progressStore.xp, progressStore.level, newCoins)
+        // Update user stats (don't await to avoid blocking)
+        const progressStore = useProgressStore.getState()
+        updateUserStats(userId, progressStore.xp, progressStore.level, newCoins).catch((error) => {
+          console.error('Failed to update user stats:', error)
+        })
+      }
+
+      return success
+    } catch (error) {
+      console.error('Failed to spend coins:', error)
+      return false
     }
-
-    return success
   },
 
   getStreakMultiplier: () => {
@@ -357,6 +387,14 @@ export const useGamificationStore = create<GamificationState>()((set, get) => ({
 
     const challenge = challenges[0]
     if (challenge.completed) return
+    
+    // Prevent infinite loops by checking if update is already in progress
+    const lastUpdate = (get() as any).lastChallengeUpdate
+    const now = Date.now()
+    if (lastUpdate && now - lastUpdate < 1000) {
+      return // Skip if updated less than 1 second ago
+    }
+    (get() as any).lastChallengeUpdate = now
 
     // Calculate progress based on challenge type
     let progress = 0
@@ -378,12 +416,8 @@ export const useGamificationStore = create<GamificationState>()((set, get) => ({
         progress = get().currentStreak > 0 ? 1 : 0
         break
       case 'unlock_achievements':
-        // Get achievements unlocked today
-        const unlockedToday = get().unlockedAchievements.filter((id) => {
-          // Simplified - would need to track unlock dates
-          return true
-        }).length
-        progress = unlockedToday
+        // Get achievements unlocked today (simplified - would need to track unlock dates)
+        progress = get().unlockedAchievements.length
         break
     }
 

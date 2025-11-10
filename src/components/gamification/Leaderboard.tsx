@@ -11,21 +11,46 @@ export default function Leaderboard() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    loadLeaderboard()
-  }, [sortBy])
-
-  const loadLeaderboard = async () => {
-    setLoading(true)
-    const leaderboard = await getLeaderboard(100, sortBy)
-    setEntries(leaderboard)
+    if (!user) return
     
-    if (user?.id) {
-      const rank = await getUserRank(user.id, sortBy)
-      setUserRank(rank)
+    let cancelled = false
+    
+    const load = async () => {
+      setLoading(true)
+      try {
+        const leaderboard = await getLeaderboard(100, sortBy)
+        if (!cancelled) {
+          setEntries(leaderboard)
+        }
+        
+        if (!cancelled && user?.id) {
+          const rank = await getUserRank(user.id, sortBy)
+          if (!cancelled) {
+            setUserRank(rank)
+          }
+        }
+      } catch (error) {
+        if (!cancelled) {
+          console.error('Failed to load leaderboard:', error)
+          setEntries([])
+          setUserRank(null)
+        }
+      } finally {
+        if (!cancelled) {
+          setLoading(false)
+        }
+      }
     }
     
-    setLoading(false)
-  }
+    load()
+    
+    return () => {
+      cancelled = true
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sortBy, user?.id])
+
+  // loadLeaderboard is now inlined in useEffect to prevent duplicate calls
 
   const getRankIcon = (rank: number) => {
     if (rank === 1) return '🥇'

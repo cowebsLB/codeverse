@@ -11,14 +11,33 @@ export default function PowerUpShop() {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    loadPowerUps()
-  }, [])
-
-  const loadPowerUps = async () => {
     if (!user?.id) return
-    const powerUps = await getPowerUps(user.id)
-    setUserPowerUps(powerUps)
-  }
+    
+    let cancelled = false
+    
+    const load = async () => {
+      try {
+        const powerUps = await getPowerUps(user.id)
+        if (!cancelled) {
+          setUserPowerUps(powerUps)
+        }
+      } catch (error) {
+        if (!cancelled) {
+          console.error('Failed to load power-ups:', error)
+          setUserPowerUps({})
+        }
+      }
+    }
+    
+    load()
+    
+    return () => {
+      cancelled = true
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.id])
+
+  // loadPowerUps is now inlined in useEffect to prevent duplicate calls
 
   const handlePurchase = async (powerUp: PowerUp) => {
     if (!user?.id) return
@@ -55,36 +74,51 @@ export default function PowerUpShop() {
       return
     }
 
-    const success = await usePowerUp(user.id, powerUp.id)
-    
-    if (success) {
-      await loadPowerUps()
+    try {
+      const success = await usePowerUp(user.id, powerUp.id)
       
-      // Apply power-up effect
-      switch (powerUp.type) {
-        case 'xp_boost':
-          // Would need to implement XP boost system
-          alert(`${powerUp.name} activated! XP gain is now ${powerUp.effect.multiplier}x for ${powerUp.effect.duration} minutes.`)
-          break
-        case 'coin_boost':
-          // Would need to implement coin boost system
-          alert(`${powerUp.name} activated! Coin earnings are now ${powerUp.effect.multiplier}x for ${powerUp.effect.duration} minutes.`)
-          break
-        case 'streak_freeze':
-          // Use streak freeze
-          const gamificationStore = useGamificationStore.getState()
-          await gamificationStore.useStreakFreeze()
-          alert(`${powerUp.name} used! Your streak is protected.`)
-          break
-        case 'hint':
-          alert(`${powerUp.name} used! Check the lesson for hints.`)
-          break
-        case 'time_extension':
-          alert(`${powerUp.name} used! You have ${powerUp.effect.amount} more minutes.`)
-          break
+      if (success) {
+        // Reload power-ups
+        try {
+          const powerUps = await getPowerUps(user.id)
+          setUserPowerUps(powerUps)
+        } catch (error) {
+          console.error('Failed to reload power-ups:', error)
+        }
+        
+        // Apply power-up effect
+        switch (powerUp.type) {
+          case 'xp_boost':
+            // Would need to implement XP boost system
+            alert(`${powerUp.name} activated! XP gain is now ${powerUp.effect.multiplier}x for ${powerUp.effect.duration} minutes.`)
+            break
+          case 'coin_boost':
+            // Would need to implement coin boost system
+            alert(`${powerUp.name} activated! Coin earnings are now ${powerUp.effect.multiplier}x for ${powerUp.effect.duration} minutes.`)
+            break
+          case 'streak_freeze':
+            // Use streak freeze
+            const gamificationStore = useGamificationStore.getState()
+            const freezeSuccess = await gamificationStore.useStreakFreeze()
+            if (freezeSuccess) {
+              alert(`${powerUp.name} used! Your streak is protected.`)
+            } else {
+              alert('Failed to use streak freeze!')
+            }
+            break
+          case 'hint':
+            alert(`${powerUp.name} used! Check the lesson for hints.`)
+            break
+          case 'time_extension':
+            alert(`${powerUp.name} used! You have ${powerUp.effect.amount} more minutes.`)
+            break
+        }
+      } else {
+        alert('Failed to use power-up!')
       }
-    } else {
-      alert('Failed to use power-up!')
+    } catch (error) {
+      console.error('Failed to use power-up:', error)
+      alert('Failed to use power-up! Please try again.')
     }
   }
 

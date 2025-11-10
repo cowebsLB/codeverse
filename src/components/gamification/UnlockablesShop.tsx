@@ -16,27 +16,55 @@ export default function UnlockablesShop() {
   const [lessonsCompleted, setLessonsCompleted] = useState(0)
 
   useEffect(() => {
-    loadUnlockedItems()
-    loadLanguagesMastered()
-  }, [])
+    // Wait for stores to initialize before loading data
+    if (!user?.id) return
+    
+    let cancelled = false
+    
+    const load = async () => {
+      await Promise.all([
+        loadUnlockedItems(),
+        loadLanguagesMastered()
+      ])
+    }
+    
+    load()
+    
+    return () => {
+      cancelled = true
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.id])
 
   const loadUnlockedItems = async () => {
     if (!user?.id) return
-    const unlocked = await getUnlockedItems(user.id)
-    setUnlockedItems(unlocked)
-    
-    const active = await getActiveUnlockables(user.id)
-    setActiveItems(active)
+    try {
+      const unlocked = await getUnlockedItems(user.id)
+      setUnlockedItems(unlocked)
+      
+      const active = await getActiveUnlockables(user.id)
+      setActiveItems(active)
+    } catch (error) {
+      console.error('Failed to load unlockables:', error)
+      setUnlockedItems([])
+      setActiveItems([])
+    }
   }
 
   const loadLanguagesMastered = async () => {
-    const languages = await getAllLanguageProgress()
-    const mastered = languages.filter(l => l.completed).length
-    setLanguagesMastered(mastered)
-    
-    // Calculate completed lessons
-    const completed = languages.reduce((sum, lang) => sum + lang.completedLessons, 0)
-    setLessonsCompleted(completed)
+    try {
+      const languages = await getAllLanguageProgress()
+      const mastered = languages.filter(l => l.completed).length
+      setLanguagesMastered(mastered)
+      
+      // Calculate completed lessons
+      const completed = languages.reduce((sum, lang) => sum + lang.completedLessons, 0)
+      setLessonsCompleted(completed)
+    } catch (error) {
+      console.error('Failed to load languages:', error)
+      setLanguagesMastered(0)
+      setLessonsCompleted(0)
+    }
   }
 
   const handleUnlock = async (unlockable: Unlockable) => {

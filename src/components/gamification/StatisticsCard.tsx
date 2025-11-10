@@ -13,23 +13,46 @@ interface Statistic {
 export default function StatisticsCard() {
   const { xp, level, getAllLanguageProgress } = useProgressStore()
   const { coins, currentStreak, longestStreak, unlockedAchievements } = useGamificationStore()
-  const [languagesProgress, setLanguagesProgress] = useState<any[]>([])
+  const [languagesProgress, setLanguagesProgress] = useState<Awaited<ReturnType<typeof getAllLanguageProgress>>>([])
   const [stats, setStats] = useState<Statistic[]>([])
 
   useEffect(() => {
-    loadStats()
-  }, [])
-
-  const loadStats = async () => {
-    const languages = await getAllLanguageProgress()
-    setLanguagesProgress(languages)
+    let cancelled = false
     
-    const completedLanguages = languages.filter(l => l.completed).length
+    const load = async () => {
+      try {
+        const languages = await getAllLanguageProgress()
+        if (!cancelled) {
+          await loadStats(languages)
+        }
+      } catch (error) {
+        if (!cancelled) {
+          console.error('Failed to load statistics:', error)
+          setStats([])
+        }
+      }
+    }
+    
+    load()
+    
+    return () => {
+      cancelled = true
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [xp, level, coins, currentStreak, longestStreak, unlockedAchievements.length])
+
+  const loadStats = async (languages: Awaited<ReturnType<typeof getAllLanguageProgress>> = []) => {
+    try {
+      // If languages not provided, fetch them
+      const langData = languages.length > 0 ? languages : await getAllLanguageProgress()
+      setLanguagesProgress(langData)
+    
+    const completedLanguages = langData.filter(l => l.completed).length
     const totalLessons = lessons.filter(l => (l.order ?? 0) > 0).length
-    const completedLessons = languages.reduce((sum, lang) => sum + lang.completedLessons, 0)
-    const totalLanguages = languages.length
-    const averageProgress = languages.length > 0 
-      ? Math.round(languages.reduce((sum, lang) => sum + lang.progress, 0) / languages.length)
+    const completedLessons = langData.reduce((sum, lang) => sum + lang.completedLessons, 0)
+    const totalLanguages = langData.length
+    const averageProgress = langData.length > 0 
+      ? Math.round(langData.reduce((sum, lang) => sum + lang.progress, 0) / langData.length)
       : 0
     
     const totalXP = xp
@@ -52,6 +75,10 @@ export default function StatisticsCard() {
       { label: 'Average Progress', value: `${averageProgress}%`, icon: '📈', color: 'text-purple-300' },
       { label: 'Completion Rate', value: totalLessons > 0 ? `${Math.round((completedLessons / totalLessons) * 100)}%` : '0%', icon: '🎯', color: 'text-pink-400' },
     ])
+    } catch (error) {
+      console.error('Failed to load statistics:', error)
+      setStats([])
+    }
   }
 
   return (
