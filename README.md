@@ -158,7 +158,7 @@ The project includes a GitHub Actions workflow for automated deployment:
 
 ## Project Structure
 
-```
+```text
 src/
 ├── components/
 │   ├── auth/                    # Login and registration
