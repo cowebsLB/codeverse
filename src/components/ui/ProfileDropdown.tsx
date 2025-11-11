@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../../store/authStore'
 import { useProgressStore } from '../../store/progressStore'
 import { useGamificationStore } from '../../store/gamificationStore'
+import { FaFire, FaCoins } from 'react-icons/fa'
 
 export default function ProfileDropdown() {
   const [isOpen, setIsOpen] = useState(false)
@@ -72,7 +73,6 @@ export default function ProfileDropdown() {
           <div className="py-1">
             <div className="px-4 py-3 border-b border-gray-700">
               <p className="text-sm font-medium text-white font-body">{user?.name}</p>
-              <p className="text-sm text-gray-400 font-code">{user?.email}</p>
               <div className="flex items-center gap-2 mt-2 flex-wrap">
                 <span className="text-xs text-indigo-400 font-code font-bold">Level {level}</span>
                 <span className="text-xs text-gray-500">•</span>
@@ -80,13 +80,13 @@ export default function ProfileDropdown() {
                 {currentStreak > 0 && (
                   <>
                     <span className="text-xs text-gray-500">•</span>
-                    <span className="text-xs text-orange-400 font-code">🔥 {currentStreak}</span>
+                    <span className="text-xs text-orange-400 font-code flex items-center gap-1"><FaFire className="inline" /> {currentStreak}</span>
                   </>
                 )}
                 {coins > 0 && (
                   <>
                     <span className="text-xs text-gray-500">•</span>
-                    <span className="text-xs text-yellow-500 font-code">💰 {coins}</span>
+                    <span className="text-xs text-yellow-500 font-code flex items-center gap-1"><FaCoins className="inline" /> {coins}</span>
                   </>
                 )}
               </div>

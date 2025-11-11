@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Achievement } from '../../data/achievements'
 import { getAchievementById } from '../../data/achievements'
+import { getIconFromEmoji } from '../../utils/iconMapper'
 
 interface AchievementNotificationProps {
   achievementId: string | null
@@ -39,7 +40,7 @@ export default function AchievementNotification({ achievementId, onClose }: Achi
     >
       <div className={`rounded-lg border-2 p-4 shadow-xl ${rarityColors[achievement.rarity]}`}>
         <div className="flex items-center gap-3">
-          <div className="text-4xl">{achievement.icon}</div>
+          {getIconFromEmoji(achievement.icon, 'text-4xl')}
           <div>
             <p className="text-white font-bold font-heading">Achievement Unlocked!</p>
             <p className="text-gray-300 font-body">{achievement.name}</p>

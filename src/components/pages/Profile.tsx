@@ -12,6 +12,9 @@ import StreakFreezeButton from '../gamification/StreakFreezeButton'
 import ShareButton from '../gamification/ShareButton'
 import Leaderboard from '../gamification/Leaderboard'
 import StatisticsCard from '../gamification/StatisticsCard'
+import { FaFire, FaCoins, FaTrophy, FaCheckCircle, FaShoppingCart, FaGift } from 'react-icons/fa'
+import { getIconFromEmoji } from '../../utils/iconMapper'
+import LanguageLogo from '../ui/LanguageLogo'
 
 export default function Profile() {
   const { user, initialized: authInitialized } = useAuthStore()
@@ -217,11 +220,11 @@ export default function Profile() {
                   </div>
                   <div className="grid grid-cols-2 gap-4 pt-4 border-t border-gray-600">
                     <div>
-                      <div className="text-3xl font-bold font-heading text-orange-400"><span className="mr-1">🔥</span> {currentStreak}</div>
+                      <div className="text-3xl font-bold font-heading text-orange-400 flex items-center gap-1"><FaFire className="inline" /> {currentStreak}</div>
                       <div className="text-gray-400 font-body text-sm">Current Streak</div>
                     </div>
                     <div>
-                      <div className="text-3xl font-bold font-heading text-yellow-500"><span className="mr-1">💰</span> {coins}</div>
+                      <div className="text-3xl font-bold font-heading text-yellow-500 flex items-center gap-1"><FaCoins className="inline" /> {coins}</div>
                       <div className="text-gray-400 font-body text-sm">Coins</div>
                     </div>
                   </div>
@@ -235,7 +238,7 @@ export default function Profile() {
                       <div>
                         <div className="flex items-center justify-between mb-2">
                           <span className="text-gray-300 font-body">Current Streak</span>
-                          <span className="text-orange-400 font-code font-bold"><span className="mr-1">🔥</span> {currentStreak} days</span>
+                          <span className="text-orange-400 font-code font-bold flex items-center gap-1"><FaFire className="inline" /> {currentStreak} days</span>
                         </div>
                         {currentStreak > 0 && (
                           <div className="text-xs text-gray-400 font-body">
@@ -246,7 +249,7 @@ export default function Profile() {
                       <div>
                         <div className="flex items-center justify-between mb-2">
                           <span className="text-gray-300 font-body">Coins</span>
-                          <span className="text-yellow-500 font-code font-bold"><span className="mr-1">💰</span> {coins}</span>
+                          <span className="text-yellow-500 font-code font-bold flex items-center gap-1"><FaCoins className="inline" /> {coins}</span>
                         </div>
                       </div>
                       <div>
@@ -287,7 +290,7 @@ export default function Profile() {
             <div className="bg-gray-700 rounded-lg p-6 mb-8">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-xl font-bold font-heading text-white">
-                  <span className="mr-2">🏆</span> Achievements ({unlockedAchievements.length} of {achievements.length})
+                  <FaTrophy className="inline mr-2" /> Achievements ({unlockedAchievements.length} of {achievements.length})
                 </h3>
                 <ShareButton
                   data={{
@@ -337,7 +340,7 @@ export default function Profile() {
             {completedLanguages.length > 0 && (
               <div className="bg-gray-700 rounded-lg p-6 mb-8">
                 <h3 className="text-xl font-bold font-heading text-white mb-4">
-                  🎉 Languages Mastered ({completedLanguages.length})
+                  <FaGift className="inline mr-2" /> Languages Mastered ({completedLanguages.length})
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   {completedLanguages.map((lang) => (
@@ -347,10 +350,10 @@ export default function Profile() {
                     >
                       <div className="flex items-center justify-between mb-2">
                         <h4 className="text-lg font-bold font-heading text-white">{lang.name}</h4>
-                        <span className="text-2xl">✅</span>
+                        <FaCheckCircle className="text-2xl" />
                       </div>
                       <div className="flex items-center gap-2 mb-2">
-                        <span>{getDifficultyIcon(lang.difficulty)}</span>
+                        {getIconFromEmoji(getDifficultyIcon(lang.difficulty), 'text-xl')}
                         <span className="text-sm text-gray-400 font-body">{lang.difficulty}</span>
                       </div>
                       <div className="text-sm text-gray-400 font-body">
@@ -369,7 +372,7 @@ export default function Profile() {
             {completedLessons.length > 0 && (
               <div className="bg-gray-700 rounded-lg p-6 mb-8">
                 <h3 className="text-xl font-bold font-heading text-white mb-4">
-                  ✅ Completed Lessons ({completedLessons.length})
+                  <FaCheckCircle className="inline mr-2" /> Completed Lessons ({completedLessons.length})
                 </h3>
                 <div className="space-y-2 max-h-96 overflow-y-auto">
                   {completedLessons.map((lesson) => (
@@ -383,7 +386,8 @@ export default function Profile() {
                           <h4 className="text-lg font-bold font-heading text-white mb-1">{lesson.title}</h4>
                           <p className="text-sm text-gray-400 font-body line-clamp-1">{lesson.description}</p>
                           <div className="flex items-center gap-2 mt-2">
-                            <span className="px-2 py-1 rounded text-xs font-code bg-indigo-900/30 text-indigo-400 border border-indigo-700">
+                            <span className="flex items-center gap-1 px-2 py-1 rounded text-xs font-code bg-indigo-900/30 text-indigo-400 border border-indigo-700">
+                              <LanguageLogo languageName={lesson.subject} size={14} />
                               {lesson.subject}
                             </span>
                             <span className="px-2 py-1 rounded text-xs font-code bg-gray-600 text-gray-300">
@@ -394,7 +398,7 @@ export default function Profile() {
                             </span>
                           </div>
                         </div>
-                        <div className="ml-4 text-2xl">✅</div>
+                        <FaCheckCircle className="ml-4 text-2xl" />
                       </div>
                     </Link>
                   ))}
@@ -416,7 +420,7 @@ export default function Profile() {
                   to="/shop"
                   className="bg-gradient-to-r from-yellow-600 to-orange-600 text-white px-6 py-3 rounded-lg hover:from-yellow-700 hover:to-orange-700 transition-all font-medium font-heading text-center"
                 >
-                  🛒 Shop
+                  <FaShoppingCart className="inline mr-2" /> Shop
                 </Link>
                 <Link
                   to="/settings"

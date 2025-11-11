@@ -36,6 +36,13 @@ export default function Navbar() {
                 >
                   Shop
                 </Link>
+                <Link
+                  to="/languages"
+                  className="text-gray-300 hover:text-indigo-400 font-body transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-800 rounded px-2 py-1"
+                  aria-label="Navigate to languages"
+                >
+                  Languages
+                </Link>
               </div>
             )}
           </div>

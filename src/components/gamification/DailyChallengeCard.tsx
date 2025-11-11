@@ -1,4 +1,6 @@
 import { DailyChallengeProgress } from '../../store/gamificationStore'
+import { FaCheckCircle, FaCoins, FaStar, FaGift } from 'react-icons/fa'
+import { getIconFromEmoji } from '../../utils/iconMapper'
 
 interface DailyChallengeCardProps {
   challenge: DailyChallengeProgress
@@ -12,14 +14,14 @@ export default function DailyChallengeCard({ challenge, onComplete }: DailyChall
     <div className={`bg-gray-800 border-2 rounded-lg p-4 ${challenge.completed ? 'border-green-500' : 'border-gray-700'}`}>
       <div className="flex items-start justify-between mb-3">
         <div className="flex items-center gap-3">
-          <span className="text-3xl">{challenge.challenge.icon}</span>
+          {getIconFromEmoji(challenge.challenge.icon, 'text-3xl')}
           <div>
             <h3 className="text-lg font-bold font-heading text-white">{challenge.challenge.name}</h3>
             <p className="text-sm text-gray-400 font-body">{challenge.challenge.description}</p>
           </div>
         </div>
         {challenge.completed && (
-          <span className="text-2xl">✅</span>
+          <FaCheckCircle className="text-2xl text-green-500" />
         )}
       </div>
       
@@ -45,8 +47,8 @@ export default function DailyChallengeCard({ challenge, onComplete }: DailyChall
       {!challenge.completed && (
         <div className="flex items-center justify-between pt-3 border-t border-gray-700">
           <div className="flex items-center gap-4 text-sm">
-            <span className="text-yellow-400 font-code">💰 +{challenge.rewardCoins} coins</span>
-            <span className="text-indigo-400 font-code">⭐ +{challenge.rewardXP} XP</span>
+            <span className="text-yellow-400 font-code flex items-center gap-1"><FaCoins className="inline" /> +{challenge.rewardCoins} coins</span>
+            <span className="text-indigo-400 font-code flex items-center gap-1"><FaStar className="inline" /> +{challenge.rewardXP} XP</span>
           </div>
           {challenge.progress >= challenge.challenge.target && onComplete && (
             <button
@@ -61,7 +63,7 @@ export default function DailyChallengeCard({ challenge, onComplete }: DailyChall
 
       {challenge.completed && (
         <div className="pt-3 border-t border-gray-700">
-          <p className="text-sm text-green-400 font-code text-center">Challenge Completed! 🎉</p>
+          <p className="text-sm text-green-400 font-code text-center flex items-center justify-center gap-1">Challenge Completed! <FaGift className="inline" /></p>
         </div>
       )}
     </div>

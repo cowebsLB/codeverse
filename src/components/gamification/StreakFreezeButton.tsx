@@ -1,5 +1,6 @@
 import { useGamificationStore } from '../../store/gamificationStore'
 import { useState } from 'react'
+import { FaSnowflake } from 'react-icons/fa'
 
 export default function StreakFreezeButton() {
   const { streakFreezes, useStreakFreeze } = useGamificationStore()
@@ -25,7 +26,7 @@ export default function StreakFreezeButton() {
     return (
       <div className="bg-gray-800 border border-gray-700 rounded-lg p-4">
         <div className="flex items-center gap-3">
-          <span className="text-2xl">❄️</span>
+          <FaSnowflake className="text-2xl" />
           <div>
             <h3 className="text-sm font-bold font-heading text-white">Streak Freeze</h3>
             <p className="text-xs text-gray-400 font-body">No freezes available</p>
@@ -39,7 +40,7 @@ export default function StreakFreezeButton() {
     <div className="bg-gray-800 border-2 border-blue-500 rounded-lg p-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <span className="text-2xl">❄️</span>
+          <FaSnowflake className="text-2xl" />
           <div>
             <h3 className="text-sm font-bold font-heading text-white">Streak Freeze</h3>
             <p className="text-xs text-gray-400 font-body">{streakFreezes} available</p>

@@ -2,11 +2,12 @@ import { useProgressStore } from '../../store/progressStore'
 import { useGamificationStore } from '../../store/gamificationStore'
 import { useEffect, useState } from 'react'
 import { lessons } from '../../data/lessons'
+import { FaStar, FaChartBar, FaBullseye, FaCoins, FaFire, FaTrophy, FaBolt, FaMedal, FaGlobe, FaBook, FaCheckCircle, FaBookOpen, FaChartLine } from 'react-icons/fa'
 
 interface Statistic {
   label: string
   value: string | number
-  icon: string
+  icon: React.ReactNode
   color: string
 }
 
@@ -60,20 +61,20 @@ export default function StatisticsCard() {
     const streakMultiplier = currentStreak >= 7 ? 1.5 : currentStreak >= 14 ? 2.0 : currentStreak >= 30 ? 2.5 : 1.0
     
     setStats([
-      { label: 'Total XP', value: totalXP.toLocaleString(), icon: '⭐', color: 'text-yellow-400' },
-      { label: 'Current Level', value: level, icon: '📊', color: 'text-indigo-400' },
-      { label: 'XP to Next Level', value: xpToNextLevel, icon: '🎯', color: 'text-purple-400' },
-      { label: 'Coins Earned', value: coins.toLocaleString(), icon: '💰', color: 'text-yellow-500' },
-      { label: 'Current Streak', value: `${currentStreak} days`, icon: '🔥', color: 'text-orange-400' },
-      { label: 'Longest Streak', value: `${longestStreak} days`, icon: '🏆', color: 'text-red-400' },
-      { label: 'Streak Multiplier', value: `${streakMultiplier}x`, icon: '⚡', color: 'text-blue-400' },
-      { label: 'Achievements', value: `${unlockedAchievements.length}`, icon: '🎖️', color: 'text-green-400' },
-      { label: 'Languages Mastered', value: completedLanguages, icon: '🌐', color: 'text-cyan-400' },
-      { label: 'Total Languages', value: totalLanguages, icon: '📚', color: 'text-indigo-300' },
-      { label: 'Lessons Completed', value: completedLessons, icon: '✅', color: 'text-green-300' },
-      { label: 'Total Lessons', value: totalLessons, icon: '📖', color: 'text-gray-300' },
-      { label: 'Average Progress', value: `${averageProgress}%`, icon: '📈', color: 'text-purple-300' },
-      { label: 'Completion Rate', value: totalLessons > 0 ? `${Math.round((completedLessons / totalLessons) * 100)}%` : '0%', icon: '🎯', color: 'text-pink-400' },
+      { label: 'Total XP', value: totalXP.toLocaleString(), icon: <FaStar className="text-2xl" />, color: 'text-yellow-400' },
+      { label: 'Current Level', value: level, icon: <FaChartBar className="text-2xl" />, color: 'text-indigo-400' },
+      { label: 'XP to Next Level', value: xpToNextLevel, icon: <FaBullseye className="text-2xl" />, color: 'text-purple-400' },
+      { label: 'Coins Earned', value: coins.toLocaleString(), icon: <FaCoins className="text-2xl" />, color: 'text-yellow-500' },
+      { label: 'Current Streak', value: `${currentStreak} days`, icon: <FaFire className="text-2xl" />, color: 'text-orange-400' },
+      { label: 'Longest Streak', value: `${longestStreak} days`, icon: <FaTrophy className="text-2xl" />, color: 'text-red-400' },
+      { label: 'Streak Multiplier', value: `${streakMultiplier}x`, icon: <FaBolt className="text-2xl" />, color: 'text-blue-400' },
+      { label: 'Achievements', value: `${unlockedAchievements.length}`, icon: <FaMedal className="text-2xl" />, color: 'text-green-400' },
+      { label: 'Languages Mastered', value: completedLanguages, icon: <FaGlobe className="text-2xl" />, color: 'text-cyan-400' },
+      { label: 'Total Languages', value: totalLanguages, icon: <FaBook className="text-2xl" />, color: 'text-indigo-300' },
+      { label: 'Lessons Completed', value: completedLessons, icon: <FaCheckCircle className="text-2xl" />, color: 'text-green-300' },
+      { label: 'Total Lessons', value: totalLessons, icon: <FaBookOpen className="text-2xl" />, color: 'text-gray-300' },
+      { label: 'Average Progress', value: `${averageProgress}%`, icon: <FaChartLine className="text-2xl" />, color: 'text-purple-300' },
+      { label: 'Completion Rate', value: totalLessons > 0 ? `${Math.round((completedLessons / totalLessons) * 100)}%` : '0%', icon: <FaBullseye className="text-2xl" />, color: 'text-pink-400' },
     ])
     } catch (error) {
       console.error('Failed to load statistics:', error)
@@ -83,8 +84,8 @@ export default function StatisticsCard() {
 
   return (
     <div className="bg-gray-800 border border-gray-700 rounded-lg p-6">
-      <h3 className="text-xl font-bold font-heading text-white mb-4">
-        <span className="mr-2">📊</span> Detailed Statistics
+      <h3 className="text-xl font-bold font-heading text-white mb-4 flex items-center gap-2">
+        <FaChartBar className="inline" /> Detailed Statistics
       </h3>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
         {stats.map((stat, index) => (
@@ -93,7 +94,7 @@ export default function StatisticsCard() {
             className="bg-gray-700 border border-gray-600 rounded-lg p-4 hover:border-indigo-500 transition-all"
           >
             <div className="flex items-center gap-2 mb-2">
-              <span className="text-2xl">{stat.icon}</span>
+              <div className={stat.color}>{stat.icon}</div>
               <div className={`text-2xl font-bold font-heading ${stat.color}`}>
                 {stat.value}
               </div>

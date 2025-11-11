@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Lesson } from '../../data/lessons'
 import { useProgressStore } from '../../store/progressStore'
 import ProgressBar from '../ui/ProgressBar'
+import LanguageLogo from '../ui/LanguageLogo'
 
 interface LessonCardProps {
   lesson: Lesson
@@ -99,13 +100,12 @@ export default function LessonCard({ lesson }: LessonCardProps) {
       </div>
       <p className="text-gray-400 mb-4 font-body">{lesson.description}</p>
       <div className="flex flex-wrap gap-2 mb-4">
-        <span
-          className={`px-2 py-1 rounded-full text-xs font-medium font-code ${getSubjectColor(
+        <div className={`flex items-center gap-2 px-2 py-1 rounded-full text-xs font-medium font-code ${getSubjectColor(
             lesson.subject
-          )}`}
-        >
-          {lesson.subject}
-        </span>
+          )}`}>
+          <LanguageLogo languageName={lesson.subject} size={16} />
+          <span>{lesson.subject}</span>
+        </div>
         <span className="px-2 py-1 rounded-full text-xs font-medium font-code bg-gray-700 text-gray-300 border border-gray-600">
           {lesson.estimatedTime} min
         </span>

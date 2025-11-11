@@ -3,6 +3,8 @@ import { useGamificationStore } from '../../store/gamificationStore'
 import { useAuthStore } from '../../store/authStore'
 import { powerUps, PowerUp } from '../../data/powerUps'
 import { getPowerUps, addPowerUp, usePowerUp } from '../../db/gamificationDb'
+import { FaBolt, FaCoins } from 'react-icons/fa'
+import { getIconFromEmoji } from '../../utils/iconMapper'
 
 export default function PowerUpShop() {
   const { user } = useAuthStore()
@@ -126,8 +128,8 @@ export default function PowerUpShop() {
 
   return (
     <div className="bg-gray-800 border border-gray-700 rounded-lg p-6">
-      <h3 className="text-xl font-bold font-heading text-white mb-4">
-        <span className="mr-2">⚡</span> Power-Up Shop
+      <h3 className="text-xl font-bold font-heading text-white mb-4 flex items-center gap-2">
+        <FaBolt className="inline" /> Power-Up Shop
       </h3>
       
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -142,7 +144,7 @@ export default function PowerUpShop() {
             >
               <div className="flex items-start justify-between mb-3">
                 <div className="flex items-center gap-2">
-                  <span className="text-2xl">{powerUp.icon}</span>
+                  {getIconFromEmoji(powerUp.icon, 'text-2xl')}
                   <div>
                     <h4 className="text-sm font-bold font-heading text-white">{powerUp.name}</h4>
                     <p className="text-xs text-gray-400 font-body">{powerUp.description}</p>
@@ -152,7 +154,7 @@ export default function PowerUpShop() {
               
               <div className="flex items-center justify-between mt-3 pt-3 border-t border-gray-600">
                 <div>
-                  <div className="text-xs text-yellow-400 font-code mb-1">💰 {powerUp.cost} coins</div>
+                  <div className="text-xs text-yellow-400 font-code mb-1 flex items-center gap-1"><FaCoins className="inline" /> {powerUp.cost} coins</div>
                   {quantity > 0 && (
                     <div className="text-xs text-indigo-400 font-code">Owned: {quantity}</div>
                   )}

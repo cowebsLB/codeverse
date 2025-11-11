@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { ShareableData, shareToTwitter, shareToFacebook, shareToLinkedIn, shareToReddit, copyToClipboard, generateShareText, shareNative } from '../../utils/socialSharing'
+import { FaShare, FaMobileAlt, FaTwitter, FaFacebook, FaLinkedin, FaReddit, FaCheckCircle, FaCopy } from 'react-icons/fa'
 
 interface ShareButtonProps {
   data: ShareableData
@@ -45,7 +46,7 @@ export default function ShareButton({ data, className = '' }: ShareButtonProps) 
         onClick={() => setShowMenu(!showMenu)}
         className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-4 py-2 rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all font-medium text-sm flex items-center gap-2"
       >
-        <span>📤</span>
+        <FaShare className="inline" />
         Share
       </button>
 
@@ -62,39 +63,39 @@ export default function ShareButton({ data, className = '' }: ShareButtonProps) 
                   onClick={() => handleShare('native')}
                   className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white transition-colors font-body"
                 >
-                  📱 Share via...
+                  <FaMobileAlt className="inline mr-2" /> Share via...
                 </button>
               )}
               <button
                 onClick={() => handleShare('twitter')}
                 className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white transition-colors font-body"
               >
-                🐦 Twitter
+                <FaTwitter className="inline mr-2" /> Twitter
               </button>
               <button
                 onClick={() => handleShare('facebook')}
                 className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white transition-colors font-body"
               >
-                📘 Facebook
+                <FaFacebook className="inline mr-2" /> Facebook
               </button>
               <button
                 onClick={() => handleShare('linkedin')}
                 className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white transition-colors font-body"
               >
-                💼 LinkedIn
+                <FaLinkedin className="inline mr-2" /> LinkedIn
               </button>
               <button
                 onClick={() => handleShare('reddit')}
                 className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white transition-colors font-body"
               >
-                🤖 Reddit
+                <FaReddit className="inline mr-2" /> Reddit
               </button>
               <div className="border-t border-gray-700 my-1"></div>
               <button
                 onClick={() => handleShare('copy')}
                 className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white transition-colors font-body"
               >
-                {copied ? '✅ Copied!' : '📋 Copy Link'}
+                {copied ? <><FaCheckCircle className="inline mr-2" /> Copied!</> : <><FaCopy className="inline mr-2" /> Copy Link</>}
               </button>
             </div>
           </div>

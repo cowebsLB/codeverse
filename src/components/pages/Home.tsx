@@ -3,6 +3,7 @@ import { useAuthStore } from '../../store/authStore'
 import { useProgressStore } from '../../store/progressStore'
 import { useEffect, useState } from 'react'
 import { lessons } from '../../data/lessons'
+import { FaBullseye, FaChartBar, FaRocket } from 'react-icons/fa'
 
 export default function Home() {
   const { user } = useAuthStore()
@@ -71,7 +72,7 @@ export default function Home() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-gray-800 border border-gray-700 p-8 rounded-lg shadow-lg hover:border-indigo-500 transition-colors">
-              <div className="text-5xl mb-4">🎯</div>
+              <FaBullseye className="text-5xl mb-4 mx-auto" />
               <h3 className="text-2xl font-bold font-heading text-white mb-4">
                 Interactive 3D Learning
               </h3>
@@ -80,7 +81,7 @@ export default function Home() {
               </p>
             </div>
             <div className="bg-gray-800 border border-gray-700 p-8 rounded-lg shadow-lg hover:border-indigo-500 transition-colors">
-              <div className="text-5xl mb-4">📊</div>
+              <FaChartBar className="text-5xl mb-4 mx-auto" />
               <h3 className="text-2xl font-bold font-heading text-white mb-4">
                 Track Your Progress
               </h3>
@@ -89,7 +90,7 @@ export default function Home() {
               </p>
             </div>
             <div className="bg-gray-800 border border-gray-700 p-8 rounded-lg shadow-lg hover:border-indigo-500 transition-colors">
-              <div className="text-5xl mb-4">🚀</div>
+              <FaRocket className="text-5xl mb-4 mx-auto" />
               <h3 className="text-2xl font-bold font-heading text-white mb-4">
                 Learn at Your Pace
               </h3>

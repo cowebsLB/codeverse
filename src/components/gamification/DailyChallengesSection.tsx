@@ -1,6 +1,7 @@
 import { useGamificationStore } from '../../store/gamificationStore'
 import { useEffect } from 'react'
 import DailyChallengeCard from './DailyChallengeCard'
+import { FaCalendar } from 'react-icons/fa'
 
 export default function DailyChallengesSection() {
   const { dailyChallenges, getDailyChallenges, updateDailyChallengeProgress, completeDailyChallenge } = useGamificationStore()
@@ -52,8 +53,8 @@ export default function DailyChallengesSection() {
 
   return (
     <div className="bg-gray-800 border border-gray-700 rounded-lg p-6">
-      <h3 className="text-xl font-bold font-heading text-white mb-4">
-        <span className="mr-2">📅</span> Daily Challenges
+      <h3 className="text-xl font-bold font-heading text-white mb-4 flex items-center gap-2">
+        <FaCalendar className="inline" /> Daily Challenges
       </h3>
       <div className="space-y-4">
         {dailyChallenges.map((challenge, index) => (

@@ -3,6 +3,8 @@ import { lessons } from '../../data/lessons'
 import { useProgressStore, LanguageProgress, LanguageTrack } from '../../store/progressStore'
 import { useEffect, useState, useMemo } from 'react'
 import { getDifficultyIcon, getLanguagesByTrack, getLanguageConfig } from '../../data/languages'
+import { FaGlobe, FaMobileAlt, FaServer, FaLock, FaCheckCircle } from 'react-icons/fa'
+import { getIconFromEmoji } from '../../utils/iconMapper'
 
 export default function StudyProgram() {
   const getAllLanguageProgress = useProgressStore((state) => state.getAllLanguageProgress)
@@ -88,20 +90,20 @@ export default function StudyProgram() {
   }
 
   // Track configuration
-  const trackConfig: Record<LanguageTrack, { name: string; icon: string; color: string }> = {
+  const trackConfig: Record<LanguageTrack, { name: string; icon: React.ReactNode; color: string }> = {
     Web: {
       name: 'Web Development',
-      icon: '🌐',
+      icon: <FaGlobe className="text-2xl" />,
       color: 'from-blue-600 to-cyan-600',
     },
     Mobile: {
       name: 'Mobile Development',
-      icon: '📱',
+      icon: <FaMobileAlt className="text-2xl" />,
       color: 'from-purple-600 to-pink-600',
     },
     Systems: {
       name: 'Systems Programming',
-      icon: '⚙️',
+      icon: <FaServer className="text-2xl" />,
       color: 'from-orange-600 to-red-600',
     },
   }
@@ -181,7 +183,7 @@ export default function StudyProgram() {
                     const colorGradient = getLanguageColor(langProgress.id)
                     const previousLang = getPreviousLanguageInTrack(langProgress, trackLanguages)
                     const isLocked = !langProgress.unlocked
-                    const difficultyIcon = getDifficultyIcon(langProgress.difficulty)
+                    const difficultyIcon = getIconFromEmoji(getDifficultyIcon(langProgress.difficulty), 'text-xl')
                     
                     // Debug: Log language info
                     console.log('Language:', langProgress.id, 'unlocked:', langProgress.unlocked, 'lessons:', languageLessons.length)
@@ -237,7 +239,7 @@ export default function StudyProgram() {
                             }}
                           >
                             <div className="text-center">
-                              <div className="text-6xl mb-4 animate-spin">🔒</div>
+                              <FaLock className="text-6xl mb-4 animate-spin mx-auto" />
                               <p className="text-white font-heading font-bold mb-2">Locked</p>
                               {previousLang && (
                                 <p className="text-gray-400 font-body text-sm">
@@ -251,7 +253,7 @@ export default function StudyProgram() {
                         {/* Completed Effect */}
                         {langProgress.completed && (
                           <div className="absolute top-2 right-2 z-10">
-                            <div className="text-3xl animate-bounce">✅</div>
+                            <FaCheckCircle className="text-3xl animate-bounce" />
                           </div>
                         )}
 

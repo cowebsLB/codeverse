@@ -1,4 +1,6 @@
 import { Achievement, AchievementRarity } from '../../data/achievements'
+import { FaLock } from 'react-icons/fa'
+import { getIconFromEmoji } from '../../utils/iconMapper'
 
 interface AchievementBadgeProps {
   achievement: Achievement
@@ -30,10 +32,10 @@ export default function AchievementBadge({ achievement, unlocked, size = 'md' }:
       } ${sizeClass}`}
       title={unlocked ? achievement.name : 'Locked'}
     >
-      <span className={unlocked ? '' : 'grayscale'}>{achievement.icon}</span>
+      <span className={unlocked ? '' : 'grayscale'}>{getIconFromEmoji(achievement.icon, sizeClass)}</span>
       {!unlocked && (
         <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-gray-600 text-xs">🔒</span>
+          <FaLock className="text-gray-600 text-xs" />
         </div>
       )}
     </div>

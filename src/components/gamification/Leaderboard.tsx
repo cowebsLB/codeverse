@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useAuthStore } from '../../store/authStore'
 import { LeaderboardEntry, getLeaderboard, getUserRank } from '../../db/gamificationDb'
 import ShareButton from './ShareButton'
+import { FaTrophy, FaFire, FaMedal } from 'react-icons/fa'
 
 export default function Leaderboard() {
   const { user } = useAuthStore()
@@ -53,9 +54,9 @@ export default function Leaderboard() {
   // loadLeaderboard is now inlined in useEffect to prevent duplicate calls
 
   const getRankIcon = (rank: number) => {
-    if (rank === 1) return '🥇'
-    if (rank === 2) return '🥈'
-    if (rank === 3) return '🥉'
+    if (rank === 1) return <FaMedal className="inline text-yellow-500" />
+    if (rank === 2) return <FaMedal className="inline text-gray-400" />
+    if (rank === 3) return <FaMedal className="inline text-orange-600" />
     return `#${rank}`
   }
 
@@ -71,8 +72,8 @@ export default function Leaderboard() {
   return (
     <div className="bg-gray-800 border border-gray-700 rounded-lg p-6">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-xl font-bold font-heading text-white">
-          <span className="mr-2">🏆</span> Global Leaderboard
+        <h3 className="text-xl font-bold font-heading text-white flex items-center gap-2">
+          <FaTrophy className="inline" /> Global Leaderboard
         </h3>
         <div className="flex items-center gap-2">
           <select
@@ -139,7 +140,7 @@ export default function Leaderboard() {
                       <span>•</span>
                       <span>{entry.total_xp} XP</span>
                       <span>•</span>
-                      <span>🔥 {entry.current_streak}</span>
+                      <span className="flex items-center gap-1"><FaFire className="inline" /> {entry.current_streak}</span>
                     </div>
                   </div>
                 </div>
@@ -147,7 +148,7 @@ export default function Leaderboard() {
                   <div className="text-sm font-bold font-heading text-indigo-400">
                     {sortBy === 'xp' && `${entry.total_xp} XP`}
                     {sortBy === 'level' && `Level ${entry.level}`}
-                    {sortBy === 'streak' && `🔥 ${entry.current_streak}`}
+                    {sortBy === 'streak' && <span className="flex items-center gap-1"><FaFire className="inline" /> {entry.current_streak}</span>}
                   </div>
                   <div className="text-xs text-gray-400 font-code mt-1">
                     {entry.languages_mastered} languages • {entry.achievements_unlocked} achievements

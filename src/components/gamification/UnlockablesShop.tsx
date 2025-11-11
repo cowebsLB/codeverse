@@ -5,6 +5,8 @@ import { useAuthStore } from '../../store/authStore'
 import { unlockables, Unlockable, checkUnlockableRequirement } from '../../data/unlockables'
 import { getUnlockedItems, unlockItem, setActiveUnlockable, getActiveUnlockables } from '../../db/gamificationDb'
 import ShareButton from './ShareButton'
+import { FaGift, FaCoins } from 'react-icons/fa'
+import { getIconFromEmoji } from '../../utils/iconMapper'
 
 export default function UnlockablesShop() {
   const { user } = useAuthStore()
@@ -142,8 +144,8 @@ export default function UnlockablesShop() {
 
   return (
     <div className="bg-gray-800 border border-gray-700 rounded-lg p-6">
-      <h3 className="text-xl font-bold font-heading text-white mb-4">
-        <span className="mr-2">🎁</span> Unlockables Shop
+      <h3 className="text-xl font-bold font-heading text-white mb-4 flex items-center gap-2">
+        <FaGift className="inline" /> Unlockables Shop
       </h3>
       
       <div className="space-y-6">
@@ -171,7 +173,7 @@ export default function UnlockablesShop() {
                   >
                     <div className="flex items-start justify-between mb-2">
                       <div className="flex items-center gap-2">
-                        <span className="text-2xl">{unlockable.icon}</span>
+                        {getIconFromEmoji(unlockable.icon, 'text-2xl')}
                         <div>
                           <h5 className="text-sm font-bold font-heading text-white">{unlockable.name}</h5>
                           <p className="text-xs text-gray-400 font-body">{unlockable.description}</p>
@@ -184,7 +186,7 @@ export default function UnlockablesShop() {
                     
                     <div className="flex items-center justify-between mt-3 pt-3 border-t border-gray-600">
                       {unlockable.cost > 0 ? (
-                        <span className="text-xs text-yellow-400 font-code">💰 {unlockable.cost} coins</span>
+                        <span className="text-xs text-yellow-400 font-code flex items-center gap-1"><FaCoins className="inline" /> {unlockable.cost} coins</span>
                       ) : (
                         <span className="text-xs text-indigo-400 font-code">Free</span>
                       )}

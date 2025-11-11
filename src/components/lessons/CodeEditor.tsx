@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react'
 import Editor from '@monaco-editor/react'
 import { CodeChallenge } from '../../data/lessons'
+import { FaCheckCircle, FaTimesCircle } from 'react-icons/fa'
 
 interface CodeEditorProps {
   challenge: CodeChallenge
@@ -135,7 +136,7 @@ export default function CodeEditor({ challenge, onCodeChange, onValidate, isComp
           <div className="flex items-center gap-2">
             {validationResult.isValid ? (
               <>
-                <span className="text-2xl">✅</span>
+                <FaCheckCircle className="text-2xl" />
                 <div>
                   <p className="font-bold font-heading">Correct!</p>
                   <p className="text-sm font-body">Great job! You can now proceed to the next lesson.</p>
@@ -143,7 +144,7 @@ export default function CodeEditor({ challenge, onCodeChange, onValidate, isComp
               </>
             ) : (
               <>
-                <span className="text-2xl">❌</span>
+                <FaTimesCircle className="text-2xl" />
                 <div>
                   <p className="font-bold font-heading">Not quite right</p>
                   <p className="text-sm font-body">{validationResult.error || 'Please review the requirements and try again.'}</p>

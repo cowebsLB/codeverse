@@ -63,13 +63,13 @@ export function generateShareText(data: ShareableData): string {
   
   switch (data.type) {
     case 'achievement':
-      return `🏆 I just unlocked "${data.title}" on Codeverse! ${data.description}\n\nCheck out my progress: ${shareUrl}`
+      return `I just unlocked "${data.title}" on Codeverse! ${data.description}\n\nCheck out my progress: ${shareUrl}`
     case 'progress':
-      return `📈 I've made progress on Codeverse! ${data.description}\n\nSee my stats: ${shareUrl}`
+      return `I've made progress on Codeverse! ${data.description}\n\nSee my stats: ${shareUrl}`
     case 'milestone':
-      return `🎉 Milestone reached! ${data.title} - ${data.description}\n\nView my profile: ${shareUrl}`
+      return `Milestone reached! ${data.title} - ${data.description}\n\nView my profile: ${shareUrl}`
     case 'streak':
-      return `🔥 I'm on a ${data.title} day streak on Codeverse! ${data.description}\n\nJoin me: ${shareUrl}`
+      return `I'm on a ${data.title} day streak on Codeverse! ${data.description}\n\nJoin me: ${shareUrl}`
     default:
       return `${data.title} - ${data.description}\n\n${shareUrl}`
   }

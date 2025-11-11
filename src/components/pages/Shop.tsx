@@ -2,6 +2,7 @@ import { useAuthStore } from '../../store/authStore'
 import { useGamificationStore } from '../../store/gamificationStore'
 import PowerUpShop from '../gamification/PowerUpShop'
 import UnlockablesShop from '../gamification/UnlockablesShop'
+import { FaShoppingCart, FaCoins } from 'react-icons/fa'
 
 export default function Shop() {
   const { user, initialized: authInitialized } = useAuthStore()
@@ -26,7 +27,7 @@ export default function Shop() {
         {/* Shop Header */}
         <div className="mb-8">
           <h1 className="text-4xl font-bold font-heading text-white mb-2">
-            <span className="mr-2">🛒</span> Shop
+            <FaShoppingCart className="inline mr-2" /> Shop
           </h1>
           <p className="text-gray-400 font-body text-lg">
             Purchase power-ups and unlockables to enhance your learning experience
@@ -34,7 +35,7 @@ export default function Shop() {
           <div className="mt-4 flex items-center gap-4">
             <div className="bg-gray-800 border border-gray-700 rounded-lg px-6 py-3">
               <div className="flex items-center gap-2">
-                <span className="text-2xl">💰</span>
+                <FaCoins className="text-2xl" />
                 <div>
                   <div className="text-xs text-gray-400 font-body">Your Coins</div>
                   <div className="text-2xl font-bold font-heading text-yellow-500">{coins.toLocaleString()}</div>

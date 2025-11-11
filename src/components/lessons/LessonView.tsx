@@ -6,6 +6,8 @@ import ProgressBar from '../ui/ProgressBar'
 import CodeEditor from './CodeEditor'
 import AchievementNotification from '../gamification/AchievementNotification'
 import { useGamificationStore } from '../../store/gamificationStore'
+import { FaLock } from 'react-icons/fa'
+import LanguageLogo from '../ui/LanguageLogo'
 
 export default function LessonView() {
   const { lessonId } = useParams<{ lessonId: string }>()
@@ -1118,7 +1120,7 @@ export default function LessonView() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-900">
         <div className="text-center max-w-md">
-          <div className="text-6xl mb-4">🔒</div>
+          <FaLock className="text-6xl mb-4 mx-auto" />
           <h2 className="text-2xl font-bold font-heading text-white mb-4">Lesson Locked</h2>
           <p className="text-gray-400 font-body mb-6">
             You must complete the previous lesson before accessing this one.
@@ -1159,8 +1161,11 @@ export default function LessonView() {
         {/* Lesson Header */}
         <div className="bg-gray-800 border border-gray-700 rounded-lg shadow-lg p-6 mb-8">
           <div className="flex justify-between items-start mb-4">
-            <div>
-              <h1 className="text-3xl font-bold font-heading text-white mb-2">{lesson.title}</h1>
+            <div className="flex-1">
+              <div className="flex items-center gap-3 mb-2">
+                <LanguageLogo languageName={lesson.subject} size={32} />
+                <h1 className="text-3xl font-bold font-heading text-white">{lesson.title}</h1>
+              </div>
               <p className="text-gray-400 font-body">{lesson.description}</p>
             </div>
             <button
