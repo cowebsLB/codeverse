@@ -1,0 +1,2010 @@
+export interface LanguageIntroduction {
+  id: string
+  name: string
+  tagline: string
+  description: string
+  whatIsIt: {
+    title: string
+    content: string
+    visual?: string
+  }
+  whyLearn: string[]
+  keyFeatures: {
+    title: string
+    items: Array<{
+      name: string
+      description: string
+      icon?: string
+    }>
+  }
+  quickExample: {
+    title: string
+    code: string
+    explanation: string
+  }
+  useCases: Array<{
+    title: string
+    description: string
+  }>
+  gettingStarted: {
+    title: string
+    steps: Array<{
+      step: number
+      title: string
+      description: string
+    }>
+  }
+  cssExample?: {
+    title: string
+    code: string
+    explanation: string
+  }
+  nextSteps?: {
+    title: string
+    description: string
+    suggestions: Array<{
+      language: string
+      languageId: string
+      description: string
+      icon?: string
+    }>
+  }
+}
+
+export const languageIntroductions: Record<string, LanguageIntroduction> = {
+  HTML: {
+    id: 'HTML',
+    name: 'HTML & CSS',
+    tagline: 'The foundation of every website',
+    description: 'HTML (HyperText Markup Language) and CSS (Cascading Style Sheets) are the building blocks of the web. HTML structures your content, while CSS makes it beautiful.',
+    whatIsIt: {
+      title: 'What is HTML & CSS?',
+      content: 'HTML is the standard markup language for creating web pages. It describes the structure of a webpage. CSS is used to style and layout web pages, controlling colors, fonts, spacing, and more.',
+      visual: 'Think of HTML as the skeleton of a house (structure) and CSS as the paint and decorations (appearance).'
+    },
+    whyLearn: [
+      'Essential for web development - every website uses HTML & CSS',
+      'Easy to learn - perfect starting point for beginners',
+      'See immediate results - build your first webpage in minutes',
+      'Foundation for learning JavaScript and other web technologies',
+      'High demand in the job market'
+    ],
+    keyFeatures: {
+      title: 'Key Features',
+      items: [
+        {
+          name: 'Semantic Structure',
+          description: 'Organize content with meaningful tags like <header>, <nav>, <article>',
+          icon: '📋'
+        },
+        {
+          name: 'Responsive Design',
+          description: 'Create websites that work on phones, tablets, and desktops',
+          icon: '📱'
+        },
+        {
+          name: 'Styling Power',
+          description: 'Control colors, fonts, layouts, animations, and more with CSS',
+          icon: '🎨'
+        },
+        {
+          name: 'Accessibility',
+          description: 'Build websites that everyone can use, including screen readers',
+          icon: '♿'
+        }
+      ]
+    },
+    quickExample: {
+      title: 'Quick Example',
+      code: `<!DOCTYPE html>
+<html>
+<head>
+  <title>My First Page</title>
+  <style>
+    body { font-family: Arial; }
+    h1 { color: blue; }
+  </style>
+</head>
+<body>
+  <h1>Hello, World!</h1>
+  <p>Welcome to HTML!</p>
+</body>
+</html>`,
+      explanation: 'This simple HTML page creates a heading and paragraph. The CSS styles the heading blue and sets the font to Arial. You can edit and preview examples live in our interactive lessons!'
+    },
+    cssExample: {
+      title: 'CSS Magic',
+      code: `.button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 12px 24px;
+  border-radius: 8px;
+  color: white;
+  transition: transform 0.2s;
+}
+
+.button:hover {
+  transform: scale(1.05);
+}`,
+      explanation: 'CSS brings your HTML to life! This example shows a gradient button with a smooth hover effect. CSS controls colors, animations, layouts, and more.'
+    },
+    nextSteps: {
+      title: 'What\'s Next?',
+      description: 'After mastering HTML & CSS, continue your web development journey:',
+      suggestions: [
+        {
+          language: 'JavaScript',
+          languageId: 'JavaScript',
+          description: 'Add interactivity and dynamic behavior to your websites',
+          icon: '⚡'
+        },
+        {
+          language: 'TypeScript',
+          languageId: 'TypeScript',
+          description: 'Build more robust applications with type safety',
+          icon: '🛡️'
+        }
+      ]
+    },
+    useCases: [
+      {
+        title: 'Web Development',
+        description: 'Build websites, web applications, and user interfaces'
+      },
+      {
+        title: 'Email Templates',
+        description: 'Create beautiful, responsive email designs'
+      },
+      {
+        title: 'Documentation',
+        description: 'Format and style technical documentation'
+      },
+      {
+        title: 'Prototyping',
+        description: 'Quickly prototype designs before adding functionality'
+      }
+    ],
+    gettingStarted: {
+      title: 'Getting Started',
+      steps: [
+        {
+          step: 1,
+          title: 'Learn Basic HTML Tags',
+          description: 'Start with <h1>, <p>, <div>, <img>, and <a> tags'
+        },
+        {
+          step: 2,
+          title: 'Understand CSS Selectors',
+          description: 'Learn how to target elements with classes, IDs, and tags'
+        },
+        {
+          step: 3,
+          title: 'Practice Layout',
+          description: 'Master Flexbox and Grid for creating layouts'
+        },
+        {
+          step: 4,
+          title: 'Build Your First Page',
+          description: 'Combine HTML and CSS to create a complete webpage'
+        }
+      ]
+    }
+  },
+  JavaScript: {
+    id: 'JavaScript',
+    name: 'JavaScript',
+    tagline: 'The language that powers the web',
+    description: 'JavaScript is the programming language of the web. It makes websites interactive, dynamic, and responsive. From simple animations to complex web applications, JavaScript brings websites to life.',
+    whatIsIt: {
+      title: 'What is JavaScript?',
+      content: 'JavaScript is a high-level, interpreted programming language that runs in web browsers. It allows you to add interactivity, handle user events, manipulate web pages, and communicate with servers. Unlike HTML (structure) and CSS (styling), JavaScript adds behavior and functionality.',
+      visual: 'Think of JavaScript as the brain of a website - HTML is the skeleton, CSS is the appearance, and JavaScript is what makes it think and react.'
+    },
+    whyLearn: [
+      'Essential for web development - runs in every modern browser',
+      'Versatile - use it for frontend, backend (Node.js), and mobile apps',
+      'Huge ecosystem - millions of libraries and frameworks available',
+      'High demand - one of the most sought-after skills in tech',
+      'See results immediately - test code directly in the browser'
+    ],
+    keyFeatures: {
+      title: 'Key Features',
+      items: [
+        {
+          name: 'Dynamic & Interactive',
+          description: 'Create responsive user interfaces that react to user actions in real-time',
+          icon: '⚡'
+        },
+        {
+          name: 'Event-Driven',
+          description: 'Handle clicks, form submissions, and other user interactions seamlessly',
+          icon: '🖱️'
+        },
+        {
+          name: 'Asynchronous Programming',
+          description: 'Fetch data from APIs, handle multiple tasks without blocking',
+          icon: '🔄'
+        },
+        {
+          name: 'Rich Ecosystem',
+          description: 'Access to frameworks like React, Vue, Angular, and thousands of npm packages',
+          icon: '📦'
+        }
+      ]
+    },
+    quickExample: {
+      title: 'Quick Example',
+      code: `// Interactive button click handler
+const button = document.querySelector('#myButton');
+const counter = { count: 0 };
+
+button.addEventListener('click', () => {
+  counter.count++;
+  button.textContent = \`Clicked \${counter.count} times!\`;
+  console.log('Button clicked!');
+});
+
+// Simple function
+function greet(name) {
+  return \`Hello, \${name}! Welcome to JavaScript.\`;
+}
+
+console.log(greet('Developer'));`,
+      explanation: 'This example shows event handling and functions. JavaScript listens for button clicks and updates the page dynamically. You can edit and preview examples live in our interactive lessons!'
+    },
+    useCases: [
+      {
+        title: 'Web Applications',
+        description: 'Build interactive websites, SPAs, and complex web apps'
+      },
+      {
+        title: 'Frontend Frameworks',
+        description: 'Create modern UIs with React, Vue, Angular, or Svelte'
+      },
+      {
+        title: 'Backend Development',
+        description: 'Build servers and APIs using Node.js'
+      },
+      {
+        title: 'Mobile Apps',
+        description: 'Develop cross-platform apps with React Native or Ionic'
+      }
+    ],
+    gettingStarted: {
+      title: 'Getting Started',
+      steps: [
+        {
+          step: 1,
+          title: 'Learn the Basics',
+          description: 'Master variables, functions, arrays, objects, and control flow'
+        },
+        {
+          step: 2,
+          title: 'DOM Manipulation',
+          description: 'Learn to select and modify HTML elements with JavaScript'
+        },
+        {
+          step: 3,
+          title: 'Event Handling',
+          description: 'Understand how to respond to user interactions and events'
+        },
+        {
+          step: 4,
+          title: 'Async & APIs',
+          description: 'Work with promises, async/await, and fetch data from APIs'
+        }
+      ]
+    },
+    nextSteps: {
+      title: 'What\'s Next?',
+      description: 'After mastering JavaScript, level up your skills:',
+      suggestions: [
+        {
+          language: 'TypeScript',
+          languageId: 'TypeScript',
+          description: 'Add type safety and build more robust applications',
+          icon: '🛡️'
+        },
+        {
+          language: 'Node.js',
+          languageId: 'Node.js',
+          description: 'Use JavaScript on the server side for full-stack development',
+          icon: '🚀'
+        }
+      ]
+    }
+  },
+  Python: {
+    id: 'Python',
+    name: 'Python',
+    tagline: 'Simple, powerful, and versatile',
+    description: 'Python is one of the most beginner-friendly programming languages. Its clean syntax reads like English, making it perfect for learning programming concepts. Yet it\'s powerful enough to build everything from web apps to AI systems.',
+    whatIsIt: {
+      title: 'What is Python?',
+      content: 'Python is a high-level, interpreted programming language known for its simplicity and readability. It emphasizes code readability with its clean syntax, making it ideal for beginners. Python is versatile - used in web development, data science, automation, AI, and more.',
+      visual: 'Think of Python as a Swiss Army knife - simple enough for beginners to learn, but powerful enough for professionals to build complex systems.'
+    },
+    whyLearn: [
+      'Beginner-friendly - syntax reads like English, easy to learn',
+      'Versatile - use it for web, data science, AI, automation, and more',
+      'Huge community - extensive libraries and frameworks available',
+      'High demand - one of the most popular languages in tech',
+      'Great for automation - automate repetitive tasks easily'
+    ],
+    keyFeatures: {
+      title: 'Key Features',
+      items: [
+        {
+          name: 'Readable Syntax',
+          description: 'Clean, simple syntax that reads like English - perfect for beginners',
+          icon: '📖'
+        },
+        {
+          name: 'Versatile',
+          description: 'Use for web development, data science, AI, automation, and scripting',
+          icon: '🔧'
+        },
+        {
+          name: 'Rich Libraries',
+          description: 'Access to powerful libraries like Django, Flask, NumPy, Pandas, TensorFlow',
+          icon: '📚'
+        },
+        {
+          name: 'Rapid Development',
+          description: 'Build applications quickly with less code than other languages',
+          icon: '⚡'
+        }
+      ]
+    },
+    quickExample: {
+      title: 'Quick Example',
+      code: `# Simple and readable Python code
+def greet(name):
+    return f"Hello, {name}! Welcome to Python."
+
+# List comprehension - Pythonic way
+numbers = [1, 2, 3, 4, 5]
+squared = [x ** 2 for x in numbers]
+
+# Working with data
+user = {
+    "name": "Alice",
+    "age": 25,
+    "city": "San Francisco"
+}
+
+print(greet(user["name"]))
+print(f"Squared numbers: {squared}")`,
+      explanation: 'Python code is clean and readable. This example shows functions, list comprehensions, and dictionaries. Notice how it reads almost like English! You can edit and preview examples live in our interactive lessons!'
+    },
+    useCases: [
+      {
+        title: 'Web Development',
+        description: 'Build web apps with Django or Flask frameworks'
+      },
+      {
+        title: 'Data Science',
+        description: 'Analyze data, create visualizations with Pandas and Matplotlib'
+      },
+      {
+        title: 'AI & Machine Learning',
+        description: 'Build AI models with TensorFlow, PyTorch, and scikit-learn'
+      },
+      {
+        title: 'Automation',
+        description: 'Automate tasks, web scraping, and system administration'
+      }
+    ],
+    gettingStarted: {
+      title: 'Getting Started',
+      steps: [
+        {
+          step: 1,
+          title: 'Learn Python Basics',
+          description: 'Master variables, data types, functions, and control structures'
+        },
+        {
+          step: 2,
+          title: 'Work with Data Structures',
+          description: 'Understand lists, dictionaries, tuples, and sets'
+        },
+        {
+          step: 3,
+          title: 'Object-Oriented Programming',
+          description: 'Learn classes, objects, and inheritance in Python'
+        },
+        {
+          step: 4,
+          title: 'Build Projects',
+          description: 'Create real applications using libraries and frameworks'
+        }
+      ]
+    },
+    nextSteps: {
+      title: 'What\'s Next?',
+      description: 'After mastering Python, explore these paths:',
+      suggestions: [
+        {
+          language: 'JavaScript',
+          languageId: 'JavaScript',
+          description: 'Learn web development and build interactive frontends',
+          icon: '🌐'
+        },
+        {
+          language: 'TypeScript',
+          languageId: 'TypeScript',
+          description: 'Add type safety to your JavaScript projects',
+          icon: '🛡️'
+        }
+      ]
+    }
+  },
+  Ruby: {
+    id: 'Ruby',
+    name: 'Ruby',
+    tagline: 'A programmer\'s best friend',
+    description: 'Ruby is a beautiful, elegant programming language designed for developer happiness. It\'s known for its clean syntax and the powerful Ruby on Rails framework, which makes building web applications fast and enjoyable.',
+    whatIsIt: {
+      title: 'What is Ruby?',
+      content: 'Ruby is a dynamic, object-oriented programming language with a focus on simplicity and productivity. It has an elegant syntax that is natural to read and easy to write. Ruby on Rails (Rails) is its famous web framework that revolutionized web development.',
+      visual: 'Think of Ruby as a language designed by developers, for developers - prioritizing human happiness and code elegance over everything else.'
+    },
+    whyLearn: [
+      'Beautiful syntax - code reads like natural language',
+      'Ruby on Rails - powerful framework for rapid web development',
+      'Developer-friendly - designed for programmer happiness',
+      'Great for startups - Rails helps build MVPs quickly',
+      'Active community - friendly and supportive Ruby community'
+    ],
+    keyFeatures: {
+      title: 'Key Features',
+      items: [
+        {
+          name: 'Elegant Syntax',
+          description: 'Clean, readable code that feels natural and expressive',
+          icon: '💎'
+        },
+        {
+          name: 'Ruby on Rails',
+          description: 'Powerful web framework that follows "convention over configuration"',
+          icon: '🚂'
+        },
+        {
+          name: 'Object-Oriented',
+          description: 'Everything is an object - consistent and intuitive design',
+          icon: '🎯'
+        },
+        {
+          name: 'Rapid Development',
+          description: 'Build web applications quickly with Rails\' built-in features',
+          icon: '⚡'
+        }
+      ]
+    },
+    quickExample: {
+      title: 'Quick Example',
+      code: `# Ruby's elegant and readable syntax
+def greet(name)
+  "Hello, #{name}! Welcome to Ruby."
+end
+
+# Working with arrays - Ruby style
+numbers = [1, 2, 3, 4, 5]
+squared = numbers.map { |n| n ** 2 }
+
+# Hashes (like dictionaries)
+user = {
+  name: "Bob",
+  age: 30,
+  city: "Tokyo"
+}
+
+puts greet(user[:name])
+puts "Squared: #{squared}"`,
+      explanation: 'Ruby code is elegant and expressive. Notice how natural it reads! This example shows methods, blocks, and hashes. You can edit and preview examples live in our interactive lessons!'
+    },
+    useCases: [
+      {
+        title: 'Web Development',
+        description: 'Build web applications with Ruby on Rails framework'
+      },
+      {
+        title: 'Startups & MVPs',
+        description: 'Rapidly prototype and build minimum viable products'
+      },
+      {
+        title: 'Scripting',
+        description: 'Automate tasks and write utility scripts'
+      },
+      {
+        title: 'API Development',
+        description: 'Create RESTful APIs and backend services'
+      }
+    ],
+    gettingStarted: {
+      title: 'Getting Started',
+      steps: [
+        {
+          step: 1,
+          title: 'Learn Ruby Basics',
+          description: 'Master variables, methods, blocks, and control flow'
+        },
+        {
+          step: 2,
+          title: 'Understand Objects & Classes',
+          description: 'Learn Ruby\'s object-oriented programming model'
+        },
+        {
+          step: 3,
+          title: 'Explore Ruby on Rails',
+          description: 'Get started with the Rails framework and MVC pattern'
+        },
+        {
+          step: 4,
+          title: 'Build Your First App',
+          description: 'Create a complete web application with Rails'
+        }
+      ]
+    },
+    nextSteps: {
+      title: 'What\'s Next?',
+      description: 'After mastering Ruby, expand your skills:',
+      suggestions: [
+        {
+          language: 'JavaScript',
+          languageId: 'JavaScript',
+          description: 'Add frontend interactivity to your Ruby applications',
+          icon: '⚡'
+        },
+        {
+          language: 'Python',
+          languageId: 'Python',
+          description: 'Explore data science and AI capabilities',
+          icon: '🐍'
+        }
+      ]
+    }
+  },
+  TypeScript: {
+    id: 'TypeScript',
+    name: 'TypeScript',
+    tagline: 'JavaScript with superpowers',
+    description: 'TypeScript is JavaScript with static type checking. It adds type safety to JavaScript, helping you catch errors before they happen and write more maintainable, scalable code. It compiles to plain JavaScript, so it works everywhere JavaScript works.',
+    whatIsIt: {
+      title: 'What is TypeScript?',
+      content: 'TypeScript is a superset of JavaScript that adds static type definitions. Created by Microsoft, it provides optional type checking, better IDE support, and improved code documentation. All valid JavaScript is valid TypeScript, making migration easy.',
+      visual: 'Think of TypeScript as JavaScript with a safety net - it helps you catch bugs during development instead of at runtime, like having a spell-checker for your code.'
+    },
+    whyLearn: [
+      'Type safety - catch errors before they reach production',
+      'Better IDE support - autocomplete, refactoring, and navigation',
+      'Improved code quality - self-documenting code with types',
+      'Industry standard - used by major frameworks like React, Angular, Vue',
+      'Easy migration - gradually adopt TypeScript in existing JavaScript projects'
+    ],
+    keyFeatures: {
+      title: 'Key Features',
+      items: [
+        {
+          name: 'Static Typing',
+          description: 'Define types for variables, functions, and objects to catch errors early',
+          icon: '🛡️'
+        },
+        {
+          name: 'Type Inference',
+          description: 'TypeScript automatically infers types when possible - less code to write',
+          icon: '🧠'
+        },
+        {
+          name: 'Modern JavaScript',
+          description: 'Supports latest ES features and compiles to any JavaScript version',
+          icon: '⚡'
+        },
+        {
+          name: 'Tooling',
+          description: 'Excellent IDE support with IntelliSense, refactoring, and error checking',
+          icon: '🔧'
+        }
+      ]
+    },
+    quickExample: {
+      title: 'Quick Example',
+      code: `// TypeScript adds type safety
+interface User {
+  name: string;
+  age: number;
+  email: string;
+}
+
+function greetUser(user: User): string {
+  return \`Hello, \${user.name}! You are \${user.age} years old.\`;
+}
+
+// TypeScript catches errors at compile time
+const user: User = {
+  name: "Alice",
+  age: 25,
+  email: "alice@example.com"
+};
+
+console.log(greetUser(user));`,
+      explanation: 'TypeScript adds type definitions to catch errors early. Notice the interface and type annotations - they help prevent bugs! You can edit and preview examples live in our interactive lessons!'
+    },
+    useCases: [
+      {
+        title: 'Large Applications',
+        description: 'Build maintainable, scalable applications with type safety'
+      },
+      {
+        title: 'Team Development',
+        description: 'Improve collaboration with self-documenting, type-safe code'
+      },
+      {
+        title: 'Framework Development',
+        description: 'Used by React, Angular, Vue, and other major frameworks'
+      },
+      {
+        title: 'Enterprise Projects',
+        description: 'Industry standard for building robust, production-ready applications'
+      }
+    ],
+    gettingStarted: {
+      title: 'Getting Started',
+      steps: [
+        {
+          step: 1,
+          title: 'Learn TypeScript Basics',
+          description: 'Understand types, interfaces, and type annotations'
+        },
+        {
+          step: 2,
+          title: 'Master Advanced Types',
+          description: 'Learn generics, unions, intersections, and utility types'
+        },
+        {
+          step: 3,
+          title: 'Integrate with Frameworks',
+          description: 'Use TypeScript with React, Vue, or Angular'
+        },
+        {
+          step: 4,
+          title: 'Build Type-Safe Apps',
+          description: 'Create robust applications with full type coverage'
+        }
+      ]
+    },
+    nextSteps: {
+      title: 'What\'s Next?',
+      description: 'After mastering TypeScript, explore these paths:',
+      suggestions: [
+        {
+          language: 'Node.js',
+          languageId: 'Node.js',
+          description: 'Build full-stack applications with TypeScript on the server',
+          icon: '🚀'
+        },
+        {
+          language: 'C#',
+          languageId: 'C#',
+          description: 'Explore another strongly-typed language for enterprise development',
+          icon: '💼'
+        }
+      ]
+    }
+  },
+  'Node.js': {
+    id: 'Node.js',
+    name: 'Node.js',
+    tagline: 'JavaScript everywhere',
+    description: 'Node.js lets you run JavaScript on the server side. Built on Chrome\'s V8 engine, it enables full-stack JavaScript development. Write both frontend and backend code in the same language, making development faster and more efficient.',
+    whatIsIt: {
+      title: 'What is Node.js?',
+      content: 'Node.js is a JavaScript runtime built on Chrome\'s V8 JavaScript engine. It allows you to run JavaScript outside the browser, on servers. Node.js uses an event-driven, non-blocking I/O model, making it perfect for building scalable network applications.',
+      visual: 'Think of Node.js as JavaScript breaking free from the browser - now you can use JavaScript to build servers, APIs, and backend services, not just websites.'
+    },
+    whyLearn: [
+      'Full-stack JavaScript - use one language for frontend and backend',
+      'Fast and scalable - event-driven architecture handles many connections',
+      'Huge ecosystem - access to npm, the largest package registry',
+      'Real-time applications - perfect for chat apps, gaming, and streaming',
+      'Industry standard - used by Netflix, LinkedIn, Uber, and more'
+    ],
+    keyFeatures: {
+      title: 'Key Features',
+      items: [
+        {
+          name: 'Non-Blocking I/O',
+          description: 'Asynchronous operations allow handling thousands of concurrent connections',
+          icon: '⚡'
+        },
+        {
+          name: 'NPM Ecosystem',
+          description: 'Access to millions of packages through npm for rapid development',
+          icon: '📦'
+        },
+        {
+          name: 'Event-Driven',
+          description: 'Efficient handling of I/O operations with event loops',
+          icon: '🔄'
+        },
+        {
+          name: 'Cross-Platform',
+          description: 'Run on Windows, macOS, Linux - write once, run anywhere',
+          icon: '🌐'
+        }
+      ]
+    },
+    quickExample: {
+      title: 'Quick Example',
+      code: `// Simple Node.js server
+const http = require('http');
+
+const server = http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('Hello from Node.js!');
+});
+
+server.listen(3000, () => {
+  console.log('Server running on http://localhost:3000');
+});
+
+// Using Express (popular framework)
+const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => {
+  res.json({ message: 'Welcome to Node.js!' });
+});
+
+app.listen(3000);`,
+      explanation: 'Node.js lets you build servers with JavaScript. This example shows a basic HTTP server. With frameworks like Express, you can build powerful APIs quickly! You can edit and preview examples live in our interactive lessons!'
+    },
+    useCases: [
+      {
+        title: 'API Development',
+        description: 'Build RESTful APIs and microservices with Express or Fastify'
+      },
+      {
+        title: 'Real-Time Apps',
+        description: 'Create chat applications, gaming servers, and live streaming'
+      },
+      {
+        title: 'Full-Stack Development',
+        description: 'Use JavaScript for both frontend and backend in one project'
+      },
+      {
+        title: 'DevOps & Automation',
+        description: 'Build tools, scripts, and automation with Node.js'
+      }
+    ],
+    gettingStarted: {
+      title: 'Getting Started',
+      steps: [
+        {
+          step: 1,
+          title: 'Learn Node.js Basics',
+          description: 'Understand modules, file system, and HTTP servers'
+        },
+        {
+          step: 2,
+          title: 'Explore NPM',
+          description: 'Learn to use and create npm packages'
+        },
+        {
+          step: 3,
+          title: 'Master Express Framework',
+          description: 'Build REST APIs and web applications with Express'
+        },
+        {
+          step: 4,
+          title: 'Build Full-Stack Apps',
+          description: 'Create complete applications with Node.js backend'
+        }
+      ]
+    },
+    nextSteps: {
+      title: 'What\'s Next?',
+      description: 'After mastering Node.js, expand your skills:',
+      suggestions: [
+        {
+          language: 'TypeScript',
+          languageId: 'TypeScript',
+          description: 'Add type safety to your Node.js applications',
+          icon: '🛡️'
+        },
+        {
+          language: 'Go',
+          languageId: 'Go',
+          description: 'Explore high-performance systems programming',
+          icon: '⚡'
+        }
+      ]
+    }
+  },
+  PHP: {
+    id: 'PHP',
+    name: 'PHP',
+    tagline: 'The web\'s workhorse',
+    description: 'PHP is one of the most popular server-side scripting languages, powering millions of websites including WordPress, Facebook, and Wikipedia. It\'s designed for web development, making it easy to create dynamic web pages and interact with databases.',
+    whatIsIt: {
+      title: 'What is PHP?',
+      content: 'PHP (Hypertext Preprocessor) is a server-side scripting language designed for web development. It runs on the server, processes requests, and generates HTML to send to browsers. PHP is especially good at working with databases and creating dynamic content.',
+      visual: 'Think of PHP as the engine behind dynamic websites - while HTML shows static content, PHP generates personalized, database-driven content for each visitor.'
+    },
+    whyLearn: [
+      'Widely used - powers 78% of all websites including WordPress',
+      'Easy to learn - simple syntax, great for beginners',
+      'Database integration - excellent MySQL and PostgreSQL support',
+      'Mature ecosystem - huge community and extensive documentation',
+      'Job opportunities - still in high demand for web development'
+    ],
+    keyFeatures: {
+      title: 'Key Features',
+      items: [
+        {
+          name: 'Server-Side Processing',
+          description: 'Execute code on the server before sending HTML to browsers',
+          icon: '🖥️'
+        },
+        {
+          name: 'Database Integration',
+          description: 'Seamless connection with MySQL, PostgreSQL, and other databases',
+          icon: '🗄️'
+        },
+        {
+          name: 'Content Management',
+          description: 'Power WordPress, Drupal, and other CMS platforms',
+          icon: '📝'
+        },
+        {
+          name: 'Rapid Development',
+          description: 'Quick setup and deployment for web applications',
+          icon: '⚡'
+        }
+      ]
+    },
+    quickExample: {
+      title: 'Quick Example',
+      code: `<?php
+// Simple PHP script
+$name = "World";
+$greeting = "Hello, $name!";
+
+echo $greeting;
+
+// Working with arrays
+$users = ["Alice", "Bob", "Charlie"];
+foreach ($users as $user) {
+    echo "Welcome, $user!";
+}
+
+// Database connection example
+$conn = new mysqli("localhost", "user", "password", "database");
+$result = $conn->query("SELECT * FROM users");
+?>`,
+      explanation: 'PHP makes it easy to create dynamic web pages. This example shows variables, arrays, and database connections. PHP excels at server-side processing! You can edit and preview examples live in our interactive lessons!'
+    },
+    useCases: [
+      {
+        title: 'Content Management',
+        description: 'Power WordPress, Drupal, and custom CMS solutions'
+      },
+      {
+        title: 'E-Commerce',
+        description: 'Build online stores with WooCommerce, Magento, and custom solutions'
+      },
+      {
+        title: 'Web Applications',
+        description: 'Create dynamic websites and web applications with Laravel or Symfony'
+      },
+      {
+        title: 'API Development',
+        description: 'Build RESTful APIs and backend services'
+      }
+    ],
+    gettingStarted: {
+      title: 'Getting Started',
+      steps: [
+        {
+          step: 1,
+          title: 'Learn PHP Basics',
+          description: 'Master variables, arrays, functions, and control structures'
+        },
+        {
+          step: 2,
+          title: 'Work with Databases',
+          description: 'Connect to MySQL/PostgreSQL and perform CRUD operations'
+        },
+        {
+          step: 3,
+          title: 'Explore Frameworks',
+          description: 'Learn Laravel or Symfony for modern PHP development'
+        },
+        {
+          step: 4,
+          title: 'Build Web Apps',
+          description: 'Create complete web applications with PHP'
+        }
+      ]
+    },
+    nextSteps: {
+      title: 'What\'s Next?',
+      description: 'After mastering PHP, expand your skills:',
+      suggestions: [
+        {
+          language: 'JavaScript',
+          languageId: 'JavaScript',
+          description: 'Add frontend interactivity to your PHP applications',
+          icon: '⚡'
+        },
+        {
+          language: 'Python',
+          languageId: 'Python',
+          description: 'Explore modern web frameworks and data science',
+          icon: '🐍'
+        }
+      ]
+    }
+  },
+  Swift: {
+    id: 'Swift',
+    name: 'Swift',
+    tagline: 'Modern, fast, and safe',
+    description: 'Swift is Apple\'s powerful and intuitive programming language for iOS, macOS, watchOS, and tvOS development. Designed to be safe, fast, and expressive, Swift makes building Apple apps easier and more enjoyable than ever before.',
+    whatIsIt: {
+      title: 'What is Swift?',
+      content: 'Swift is a modern, general-purpose programming language developed by Apple. It combines the performance of compiled languages with the simplicity of scripting languages. Swift is designed to be safe by default, preventing common programming errors.',
+      visual: 'Think of Swift as a modern, safer replacement for Objective-C - it\'s like upgrading from a manual car to a modern car with safety features, but still giving you full control.'
+    },
+    whyLearn: [
+      'Apple ecosystem - build apps for iPhone, iPad, Mac, Apple Watch, and Apple TV',
+      'Modern language - clean syntax, type-safe, and easy to read',
+      'High performance - compiled language that runs fast',
+      'Growing demand - iOS development is a lucrative career path',
+      'Safe by default - prevents common bugs with built-in safety features'
+    ],
+    keyFeatures: {
+      title: 'Key Features',
+      items: [
+        {
+          name: 'Type Safety',
+          description: 'Strong typing and optionals prevent null pointer errors and crashes',
+          icon: '🛡️'
+        },
+        {
+          name: 'Modern Syntax',
+          description: 'Clean, expressive code that\'s easy to read and write',
+          icon: '✨'
+        },
+        {
+          name: 'Performance',
+          description: 'Compiled language with performance comparable to Objective-C',
+          icon: '⚡'
+        },
+        {
+          name: 'Playgrounds',
+          description: 'Interactive coding environment for rapid prototyping and learning',
+          icon: '🎮'
+        }
+      ]
+    },
+    quickExample: {
+      title: 'Quick Example',
+      code: `// Swift's clean and safe syntax
+func greet(name: String) -> String {
+    return "Hello, \\(name)! Welcome to Swift."
+}
+
+// Optionals for safe handling
+var username: String? = "Alice"
+if let name = username {
+    print(greet(name: name))
+}
+
+// Modern array operations
+let numbers = [1, 2, 3, 4, 5]
+let squared = numbers.map { $0 * $0 }
+
+print("Squared: \\(squared)")`,
+      explanation: 'Swift code is clean and safe. Notice optionals and modern syntax - they help prevent errors! This example shows functions, optionals, and closures. You can edit and preview examples live in our interactive lessons!'
+    },
+    useCases: [
+      {
+        title: 'iOS Development',
+        description: 'Build native iPhone and iPad applications with UIKit or SwiftUI'
+      },
+      {
+        title: 'macOS Apps',
+        description: 'Create desktop applications for Mac computers'
+      },
+      {
+        title: 'Apple Watch',
+        description: 'Develop apps for Apple Watch with watchOS'
+      },
+      {
+        title: 'Server-Side',
+        description: 'Use Swift on the server with frameworks like Vapor'
+      }
+    ],
+    gettingStarted: {
+      title: 'Getting Started',
+      steps: [
+        {
+          step: 1,
+          title: 'Learn Swift Basics',
+          description: 'Master variables, functions, optionals, and control flow'
+        },
+        {
+          step: 2,
+          title: 'Understand Optionals',
+          description: 'Learn Swift\'s unique optional system for safe code'
+        },
+        {
+          step: 3,
+          title: 'Explore SwiftUI',
+          description: 'Build modern UIs with SwiftUI framework'
+        },
+        {
+          step: 4,
+          title: 'Build iOS Apps',
+          description: 'Create complete iOS applications with Xcode'
+        }
+      ]
+    },
+    nextSteps: {
+      title: 'What\'s Next?',
+      description: 'After mastering Swift, expand your skills:',
+      suggestions: [
+        {
+          language: 'Kotlin',
+          languageId: 'Kotlin',
+          description: 'Learn Android development with Kotlin',
+          icon: '🤖'
+        },
+        {
+          language: 'C#',
+          languageId: 'C#',
+          description: 'Explore cross-platform development with .NET',
+          icon: '💼'
+        }
+      ]
+    }
+  },
+  Kotlin: {
+    id: 'Kotlin',
+    name: 'Kotlin',
+    tagline: 'Modern Android development',
+    description: 'Kotlin is the modern, concise programming language for Android development. It\'s fully interoperable with Java, but with a cleaner syntax and modern features. Google officially supports Kotlin as the preferred language for Android apps.',
+    whatIsIt: {
+      title: 'What is Kotlin?',
+      content: 'Kotlin is a statically-typed programming language developed by JetBrains. It runs on the Java Virtual Machine (JVM) and is fully interoperable with Java. Kotlin is concise, safe, and designed to eliminate common programming errors.',
+      visual: 'Think of Kotlin as a modern, improved version of Java - same power, but with less boilerplate code and better safety features, like upgrading from a feature phone to a smartphone.'
+    },
+    whyLearn: [
+      'Official Android language - Google\'s preferred language for Android',
+      'Concise syntax - write less code than Java with the same functionality',
+      'Null safety - built-in null safety prevents common crashes',
+      'Interoperable - works seamlessly with existing Java code',
+      'Growing ecosystem - used by major apps like Pinterest, Trello, and Evernote'
+    ],
+    keyFeatures: {
+      title: 'Key Features',
+      items: [
+        {
+          name: 'Null Safety',
+          description: 'Built-in null safety prevents NullPointerException crashes',
+          icon: '🛡️'
+        },
+        {
+          name: 'Concise Syntax',
+          description: 'Write less code - Kotlin reduces boilerplate significantly',
+          icon: '✂️'
+        },
+        {
+          name: 'Coroutines',
+          description: 'Built-in support for asynchronous programming with coroutines',
+          icon: '🔄'
+        },
+        {
+          name: 'Interoperability',
+          description: '100% interoperable with Java - use existing Java libraries',
+          icon: '🔗'
+        }
+      ]
+    },
+    quickExample: {
+      title: 'Quick Example',
+      code: `// Kotlin's concise and safe syntax
+fun greet(name: String): String {
+    return "Hello, $name! Welcome to Kotlin."
+}
+
+// Null safety with safe call operator
+val username: String? = "Bob"
+username?.let { 
+    println(greet(it))
+}
+
+// Modern collection operations
+val numbers = listOf(1, 2, 3, 4, 5)
+val squared = numbers.map { it * it }
+
+println("Squared: $squared")
+
+// Data classes - less boilerplate
+data class User(val name: String, val age: Int)`,
+      explanation: 'Kotlin code is concise and safe. Notice null safety and data classes - they make code cleaner! This example shows functions, null safety, and collections. You can edit and preview examples live in our interactive lessons!'
+    },
+    useCases: [
+      {
+        title: 'Android Development',
+        description: 'Build native Android applications with Android SDK'
+      },
+      {
+        title: 'Backend Development',
+        description: 'Create server-side applications with Kotlin/JVM'
+      },
+      {
+        title: 'Multiplatform',
+        description: 'Share code between Android, iOS, and web with Kotlin Multiplatform'
+      },
+      {
+        title: 'Desktop Apps',
+        description: 'Build desktop applications with Kotlin and JavaFX'
+      }
+    ],
+    gettingStarted: {
+      title: 'Getting Started',
+      steps: [
+        {
+          step: 1,
+          title: 'Learn Kotlin Basics',
+          description: 'Master variables, functions, null safety, and control flow'
+        },
+        {
+          step: 2,
+          title: 'Understand Null Safety',
+          description: 'Learn Kotlin\'s null safety system and safe call operators'
+        },
+        {
+          step: 3,
+          title: 'Explore Android SDK',
+          description: 'Get started with Android development and Android Studio'
+        },
+        {
+          step: 4,
+          title: 'Build Android Apps',
+          description: 'Create complete Android applications with Kotlin'
+        }
+      ]
+    },
+    nextSteps: {
+      title: 'What\'s Next?',
+      description: 'After mastering Kotlin, expand your skills:',
+      suggestions: [
+        {
+          language: 'Swift',
+          languageId: 'Swift',
+          description: 'Learn iOS development for cross-platform skills',
+          icon: '🍎'
+        },
+        {
+          language: 'Java',
+          languageId: 'Java',
+          description: 'Deepen your understanding of the JVM ecosystem',
+          icon: '☕'
+        }
+      ]
+    }
+  },
+  'C#': {
+    id: 'C#',
+    name: 'C#',
+    tagline: 'Powerful and versatile',
+    description: 'C# (C-Sharp) is Microsoft\'s modern, object-oriented programming language. It\'s part of the .NET ecosystem and is used for building Windows applications, web services, games with Unity, and cross-platform mobile apps with Xamarin.',
+    whatIsIt: {
+      title: 'What is C#?',
+      content: 'C# is a modern, type-safe, object-oriented programming language developed by Microsoft. It\'s part of the .NET platform and combines the power of C++ with the simplicity of Visual Basic. C# is versatile - used for desktop apps, web services, games, and mobile development.',
+      visual: 'Think of C# as a Swiss Army knife for Microsoft technologies - powerful enough for enterprise applications, yet elegant enough for game development and mobile apps.'
+    },
+    whyLearn: [
+      'Versatile - build desktop, web, mobile, and game applications',
+      'Strong typing - type-safe language prevents many errors',
+      '.NET ecosystem - access to powerful frameworks and libraries',
+      'Game development - Unity game engine uses C#',
+      'Enterprise ready - used by major companies for large-scale applications'
+    ],
+    keyFeatures: {
+      title: 'Key Features',
+      items: [
+        {
+          name: 'Type Safety',
+          description: 'Strong typing and compile-time checking prevent errors',
+          icon: '🛡️'
+        },
+        {
+          name: '.NET Framework',
+          description: 'Access to comprehensive libraries and frameworks',
+          icon: '📚'
+        },
+        {
+          name: 'Cross-Platform',
+          description: 'Build for Windows, Linux, macOS, iOS, and Android',
+          icon: '🌐'
+        },
+        {
+          name: 'Modern Features',
+          description: 'Async/await, LINQ, properties, and more built-in features',
+          icon: '⚡'
+        }
+      ]
+    },
+    quickExample: {
+      title: 'Quick Example',
+      code: `// C#'s clean and powerful syntax
+public class Program {
+    public static string Greet(string name) {
+        return $"Hello, {name}! Welcome to C#.";
+    }
+    
+    public static void Main() {
+        // Working with collections
+        var numbers = new List<int> { 1, 2, 3, 4, 5 };
+        var squared = numbers.Select(n => n * n);
+        
+        // Properties and classes
+        var user = new User {
+            Name = "Charlie",
+            Age = 28
+        };
+        
+        Console.WriteLine(Greet(user.Name));
+        Console.WriteLine($"Squared: {string.Join(", ", squared)}");
+    }
+}
+
+public class User {
+    public string Name { get; set; }
+    public int Age { get; set; }
+}`,
+      explanation: 'C# code is clean and powerful. Notice properties, LINQ, and string interpolation - they make development efficient! This example shows classes, collections, and modern C# features. You can edit and preview examples live in our interactive lessons!'
+    },
+    useCases: [
+      {
+        title: 'Windows Applications',
+        description: 'Build desktop applications with WPF, WinForms, or UWP'
+      },
+      {
+        title: 'Web Development',
+        description: 'Create web apps and APIs with ASP.NET Core'
+      },
+      {
+        title: 'Game Development',
+        description: 'Develop games with Unity game engine'
+      },
+      {
+        title: 'Mobile Apps',
+        description: 'Build cross-platform apps with Xamarin or .NET MAUI'
+      }
+    ],
+    gettingStarted: {
+      title: 'Getting Started',
+      steps: [
+        {
+          step: 1,
+          title: 'Learn C# Basics',
+          description: 'Master variables, classes, methods, and control flow'
+        },
+        {
+          step: 2,
+          title: 'Understand OOP',
+          description: 'Learn object-oriented programming concepts in C#'
+        },
+        {
+          step: 3,
+          title: 'Explore .NET',
+          description: 'Get familiar with .NET framework and libraries'
+        },
+        {
+          step: 4,
+          title: 'Build Applications',
+          description: 'Create desktop, web, or mobile applications'
+        }
+      ]
+    },
+    nextSteps: {
+      title: 'What\'s Next?',
+      description: 'After mastering C#, explore these paths:',
+      suggestions: [
+        {
+          language: 'TypeScript',
+          languageId: 'TypeScript',
+          description: 'Learn another strongly-typed language for web development',
+          icon: '🛡️'
+        },
+        {
+          language: 'Java',
+          languageId: 'Java',
+          description: 'Explore enterprise development with Java',
+          icon: '☕'
+        }
+      ]
+    }
+  },
+  C: {
+    id: 'C',
+    name: 'C',
+    tagline: 'The foundation of modern computing',
+    description: 'C is one of the most influential programming languages ever created. It\'s the foundation for operating systems, embedded systems, and many other languages. Learning C gives you deep understanding of how computers work at a low level.',
+    whatIsIt: {
+      title: 'What is C?',
+      content: 'C is a low-level, procedural programming language developed in the 1970s. It provides direct access to memory and hardware, making it extremely powerful but requiring careful programming. C is the language behind operating systems like Linux and Windows, and it influenced many modern languages.',
+      visual: 'Think of C as the foundation of a skyscraper - other languages build on top of it, but C gives you direct access to the hardware, like having the blueprint to the building itself.'
+    },
+    whyLearn: [
+      'Understand computers deeply - learn how memory, pointers, and hardware work',
+      'Foundation for other languages - C++, Java, Python, and more are based on C',
+      'System programming - build operating systems, drivers, and embedded systems',
+      'Performance - direct hardware access means maximum speed and efficiency',
+      'Industry standard - still widely used in systems programming and embedded devices'
+    ],
+    keyFeatures: {
+      title: 'Key Features',
+      items: [
+        {
+          name: 'Low-Level Control',
+          description: 'Direct memory management and hardware access',
+          icon: '⚙️'
+        },
+        {
+          name: 'Performance',
+          description: 'Compiled to machine code for maximum speed',
+          icon: '⚡'
+        },
+        {
+          name: 'Portability',
+          description: 'Write once, compile anywhere - runs on any platform',
+          icon: '🌐'
+        },
+        {
+          name: 'Minimal Runtime',
+          description: 'No garbage collector or virtual machine overhead',
+          icon: '🎯'
+        }
+      ]
+    },
+    quickExample: {
+      title: 'Quick Example',
+      code: `// C's powerful and direct syntax
+#include <stdio.h>
+
+// Function definition
+void greet(char* name) {
+    printf("Hello, %s! Welcome to C.\\n", name);
+}
+
+int main() {
+    // Working with arrays
+    int numbers[] = {1, 2, 3, 4, 5};
+    int size = sizeof(numbers) / sizeof(numbers[0]);
+    
+    // Pointers - C's powerful feature
+    int* ptr = numbers;
+    
+    printf("First number: %d\\n", *ptr);
+    greet("Developer");
+    
+    return 0;
+}`,
+      explanation: 'C code gives you direct control over memory and hardware. Notice pointers and manual memory management - they\'re powerful but require care! This example shows functions, arrays, and pointers. You can edit and preview examples live in our interactive lessons!'
+    },
+    useCases: [
+      {
+        title: 'Operating Systems',
+        description: 'Build operating systems, kernels, and system software'
+      },
+      {
+        title: 'Embedded Systems',
+        description: 'Program microcontrollers, IoT devices, and hardware'
+      },
+      {
+        title: 'System Programming',
+        description: 'Create drivers, compilers, and low-level utilities'
+      },
+      {
+        title: 'Performance-Critical Apps',
+        description: 'Build applications where every CPU cycle matters'
+      }
+    ],
+    gettingStarted: {
+      title: 'Getting Started',
+      steps: [
+        {
+          step: 1,
+          title: 'Learn C Basics',
+          description: 'Master variables, functions, arrays, and control flow'
+        },
+        {
+          step: 2,
+          title: 'Understand Pointers',
+          description: 'Learn C\'s most powerful feature - memory addresses and pointers'
+        },
+        {
+          step: 3,
+          title: 'Memory Management',
+          description: 'Master malloc, free, and manual memory management'
+        },
+        {
+          step: 4,
+          title: 'Build System Programs',
+          description: 'Create low-level programs and utilities'
+        }
+      ]
+    },
+    nextSteps: {
+      title: 'What\'s Next?',
+      description: 'After mastering C, explore these paths:',
+      suggestions: [
+        {
+          language: 'C++',
+          languageId: 'C++',
+          description: 'Add object-oriented features and modern C++ capabilities',
+          icon: '🚀'
+        },
+        {
+          language: 'Rust',
+          languageId: 'Rust',
+          description: 'Learn memory safety with modern systems programming',
+          icon: '🦀'
+        }
+      ]
+    }
+  },
+  'C++': {
+    id: 'C++',
+    name: 'C++',
+    tagline: 'Power and performance with modern features',
+    description: 'C++ is an extension of C that adds object-oriented programming, templates, and modern features. It\'s used for high-performance applications, game engines, browsers, and system software. C++ gives you C\'s power with additional abstraction capabilities.',
+    whatIsIt: {
+      title: 'What is C++?',
+      content: 'C++ is a general-purpose programming language that extends C with object-oriented features, templates, and modern abstractions. It maintains C\'s performance while adding higher-level programming constructs. C++ is used for everything from game engines to operating systems.',
+      visual: 'Think of C++ as C with superpowers - you get all of C\'s low-level control, plus object-oriented programming, templates, and modern features, like adding wings to a race car.'
+    },
+    whyLearn: [
+      'High performance - used in game engines, browsers, and performance-critical software',
+      'Versatile - systems programming, games, applications, and more',
+      'Industry standard - powers Unreal Engine, Chrome, Windows, and many AAA games',
+      'Modern features - C++20 brings modern abstractions while maintaining performance',
+      'Career opportunities - highly valued in game development and systems programming'
+    ],
+    keyFeatures: {
+      title: 'Key Features',
+      items: [
+        {
+          name: 'Object-Oriented',
+          description: 'Classes, inheritance, polymorphism, and encapsulation',
+          icon: '🏗️'
+        },
+        {
+          name: 'Templates',
+          description: 'Generic programming with templates for code reuse',
+          icon: '📋'
+        },
+        {
+          name: 'STL',
+          description: 'Standard Template Library with containers and algorithms',
+          icon: '📚'
+        },
+        {
+          name: 'Performance',
+          description: 'Zero-cost abstractions - high-level code with C-like performance',
+          icon: '⚡'
+        }
+      ]
+    },
+    quickExample: {
+      title: 'Quick Example',
+      code: `// C++'s object-oriented and modern features
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+class User {
+public:
+    std::string name;
+    int age;
+    
+    User(std::string n, int a) : name(n), age(a) {}
+    
+    void greet() {
+        std::cout << "Hello, " << name << "! Welcome to C++." << std::endl;
+    }
+};
+
+int main() {
+    // Modern C++ with STL
+    std::vector<int> numbers = {1, 2, 3, 4, 5};
+    std::transform(numbers.begin(), numbers.end(), numbers.begin(),
+                   [](int n) { return n * n; });
+    
+    User user("Developer", 25);
+    user.greet();
+    
+    return 0;
+}`,
+      explanation: 'C++ combines C\'s power with modern features. Notice classes, STL containers, and lambdas - they make development easier while maintaining performance! This example shows OOP and modern C++. You can edit and preview examples live in our interactive lessons!'
+    },
+    useCases: [
+      {
+        title: 'Game Development',
+        description: 'Build game engines and AAA games with Unreal Engine'
+      },
+      {
+        title: 'System Software',
+        description: 'Create operating systems, drivers, and embedded systems'
+      },
+      {
+        title: 'High-Performance Apps',
+        description: 'Build browsers, databases, and performance-critical software'
+      },
+      {
+        title: 'Scientific Computing',
+        description: 'Develop simulations, physics engines, and scientific software'
+      }
+    ],
+    gettingStarted: {
+      title: 'Getting Started',
+      steps: [
+        {
+          step: 1,
+          title: 'Learn C++ Basics',
+          description: 'Master classes, objects, inheritance, and polymorphism'
+        },
+        {
+          step: 2,
+          title: 'Explore STL',
+          description: 'Learn Standard Template Library containers and algorithms'
+        },
+        {
+          step: 3,
+          title: 'Master Templates',
+          description: 'Understand generic programming with templates'
+        },
+        {
+          step: 4,
+          title: 'Build Applications',
+          description: 'Create high-performance applications and games'
+        }
+      ]
+    },
+    nextSteps: {
+      title: 'What\'s Next?',
+      description: 'After mastering C++, explore these paths:',
+      suggestions: [
+        {
+          language: 'Rust',
+          languageId: 'Rust',
+          description: 'Learn memory safety with modern systems programming',
+          icon: '🦀'
+        },
+        {
+          language: 'Go',
+          languageId: 'Go',
+          description: 'Explore concurrent programming and modern systems languages',
+          icon: '🚀'
+        }
+      ]
+    }
+  },
+  Go: {
+    id: 'Go',
+    name: 'Go',
+    tagline: 'Simple, fast, and concurrent',
+    description: 'Go (Golang) is Google\'s modern programming language designed for simplicity and performance. It combines the ease of Python with the speed of C, and has built-in support for concurrent programming. Go is perfect for building scalable servers and cloud applications.',
+    whatIsIt: {
+      title: 'What is Go?',
+      content: 'Go is a statically-typed, compiled programming language designed at Google. It emphasizes simplicity, readability, and concurrent programming. Go compiles quickly, runs fast, and has excellent tooling. It\'s designed to solve problems at scale with built-in concurrency.',
+      visual: 'Think of Go as the best of both worlds - Python\'s simplicity meets C\'s performance, with built-in superpowers for handling thousands of concurrent operations.'
+    },
+    whyLearn: [
+      'Simple syntax - easy to learn, readable code, minimal boilerplate',
+      'Built-in concurrency - goroutines and channels make concurrent programming easy',
+      'Fast compilation - compiles quickly, runs fast, great developer experience',
+      'Cloud-native - perfect for microservices, APIs, and cloud applications',
+      'Industry adoption - used by Google, Docker, Kubernetes, and major tech companies'
+    ],
+    keyFeatures: {
+      title: 'Key Features',
+      items: [
+        {
+          name: 'Goroutines',
+          description: 'Lightweight threads for concurrent programming - handle millions of goroutines',
+          icon: '🔄'
+        },
+        {
+          name: 'Channels',
+          description: 'Built-in communication mechanism for safe concurrent operations',
+          icon: '📡'
+        },
+        {
+          name: 'Fast Compilation',
+          description: 'Compiles quickly to a single binary - no runtime dependencies',
+          icon: '⚡'
+        },
+        {
+          name: 'Simple Syntax',
+          description: 'Clean, minimal syntax - easy to read and maintain',
+          icon: '✨'
+        }
+      ]
+    },
+    quickExample: {
+      title: 'Quick Example',
+      code: `// Go's simple and concurrent syntax
+package main
+
+import "fmt"
+
+// Simple function
+func greet(name string) string {
+    return fmt.Sprintf("Hello, %s! Welcome to Go.", name)
+}
+
+// Goroutine example
+func main() {
+    // Working with slices
+    numbers := []int{1, 2, 3, 4, 5}
+    squared := make([]int, len(numbers))
+    
+    for i, n := range numbers {
+        squared[i] = n * n
+    }
+    
+    // Concurrent execution
+    go func() {
+        fmt.Println("Running in a goroutine!")
+    }()
+    
+    fmt.Println(greet("Developer"))
+    fmt.Printf("Squared: %v\\n", squared)
+}`,
+      explanation: 'Go code is simple and powerful. Notice goroutines for concurrency and slices for collections - they make Go great for scalable applications! This example shows functions, slices, and goroutines. You can edit and preview examples live in our interactive lessons!'
+    },
+    useCases: [
+      {
+        title: 'Cloud Services',
+        description: 'Build microservices, APIs, and cloud-native applications'
+      },
+      {
+        title: 'DevOps Tools',
+        description: 'Create tools like Docker, Kubernetes, and Terraform'
+      },
+      {
+        title: 'Web Servers',
+        description: 'Build high-performance web servers and APIs'
+      },
+      {
+        title: 'Distributed Systems',
+        description: 'Develop scalable distributed systems and services'
+      }
+    ],
+    gettingStarted: {
+      title: 'Getting Started',
+      steps: [
+        {
+          step: 1,
+          title: 'Learn Go Basics',
+          description: 'Master variables, functions, structs, and control flow'
+        },
+        {
+          step: 2,
+          title: 'Understand Concurrency',
+          description: 'Learn goroutines, channels, and concurrent programming'
+        },
+        {
+          step: 3,
+          title: 'Explore Standard Library',
+          description: 'Get familiar with Go\'s comprehensive standard library'
+        },
+        {
+          step: 4,
+          title: 'Build Services',
+          description: 'Create web servers, APIs, and microservices'
+        }
+      ]
+    },
+    nextSteps: {
+      title: 'What\'s Next?',
+      description: 'After mastering Go, explore these paths:',
+      suggestions: [
+        {
+          language: 'Rust',
+          languageId: 'Rust',
+          description: 'Learn memory safety and systems programming',
+          icon: '🦀'
+        },
+        {
+          language: 'Java',
+          languageId: 'Java',
+          description: 'Explore enterprise development and JVM ecosystem',
+          icon: '☕'
+        }
+      ]
+    }
+  },
+  Rust: {
+    id: 'Rust',
+    name: 'Rust',
+    tagline: 'Memory safety without garbage collection',
+    description: 'Rust is a modern systems programming language that provides memory safety without garbage collection. It prevents common bugs like null pointer dereferences and data races at compile time. Rust combines the performance of C++ with modern safety guarantees.',
+    whatIsIt: {
+      title: 'What is Rust?',
+      content: 'Rust is a systems programming language focused on safety, speed, and concurrency. It prevents memory errors and data races at compile time through its ownership system, without needing a garbage collector. Rust gives you low-level control with high-level safety.',
+      visual: 'Think of Rust as a race car with an advanced safety system - you get C++\'s speed and control, but with built-in protections that prevent crashes before they happen.'
+    },
+    whyLearn: [
+      'Memory safety - prevents crashes and security vulnerabilities at compile time',
+      'Zero-cost abstractions - high-level features with C++-like performance',
+      'Fearless concurrency - safe concurrent programming without data races',
+      'Growing ecosystem - used by Mozilla, Microsoft, Amazon, and major tech companies',
+      'Modern language - excellent tooling, package manager, and developer experience'
+    ],
+    keyFeatures: {
+      title: 'Key Features',
+      items: [
+        {
+          name: 'Ownership System',
+          description: 'Unique ownership model prevents memory errors without garbage collection',
+          icon: '🔒'
+        },
+        {
+          name: 'Borrow Checker',
+          description: 'Compile-time checks prevent data races and memory issues',
+          icon: '🛡️'
+        },
+        {
+          name: 'Zero-Cost Abstractions',
+          description: 'High-level features compile to efficient machine code',
+          icon: '⚡'
+        },
+        {
+          name: 'Cargo',
+          description: 'Built-in package manager and build tool - excellent developer experience',
+          icon: '📦'
+        }
+      ]
+    },
+    quickExample: {
+      title: 'Quick Example',
+      code: `// Rust's safe and powerful syntax
+fn greet(name: &str) -> String {
+    format!("Hello, {}! Welcome to Rust.", name)
+}
+
+fn main() {
+    // Ownership and borrowing
+    let name = String::from("Developer");
+    let greeting = greet(&name);
+    
+    // Working with vectors
+    let numbers = vec![1, 2, 3, 4, 5];
+    let squared: Vec<i32> = numbers.iter().map(|n| n * n).collect();
+    
+    println!("{}", greeting);
+    println!("Squared: {:?}", squared);
+    
+    // Safe concurrent programming
+    let handle = std::thread::spawn(|| {
+        println!("Running in a thread!");
+    });
+    handle.join().unwrap();
+}`,
+      explanation: 'Rust code is safe and powerful. Notice ownership, borrowing, and safe concurrency - they prevent bugs at compile time! This example shows functions, ownership, and threads. You can edit and preview examples live in our interactive lessons!'
+    },
+    useCases: [
+      {
+        title: 'Systems Programming',
+        description: 'Build operating systems, drivers, and embedded systems'
+      },
+      {
+        title: 'Web Assembly',
+        description: 'Compile to WebAssembly for high-performance web applications'
+      },
+      {
+        title: 'Blockchain',
+        description: 'Develop blockchain and cryptocurrency projects'
+      },
+      {
+        title: 'Network Services',
+        description: 'Build high-performance network services and APIs'
+      }
+    ],
+    gettingStarted: {
+      title: 'Getting Started',
+      steps: [
+        {
+          step: 1,
+          title: 'Learn Rust Basics',
+          description: 'Master variables, functions, ownership, and borrowing'
+        },
+        {
+          step: 2,
+          title: 'Understand Ownership',
+          description: 'Learn Rust\'s unique ownership system and borrowing rules'
+        },
+        {
+          step: 3,
+          title: 'Explore Cargo',
+          description: 'Get familiar with Cargo package manager and Rust ecosystem'
+        },
+        {
+          step: 4,
+          title: 'Build Systems',
+          description: 'Create safe, high-performance systems programs'
+        }
+      ]
+    },
+    nextSteps: {
+      title: 'What\'s Next?',
+      description: 'After mastering Rust, explore these paths:',
+      suggestions: [
+        {
+          language: 'Go',
+          languageId: 'Go',
+          description: 'Explore concurrent programming and cloud-native development',
+          icon: '🚀'
+        },
+        {
+          language: 'C++',
+          languageId: 'C++',
+          description: 'Deepen your systems programming knowledge',
+          icon: '⚡'
+        }
+      ]
+    }
+  },
+  Java: {
+    id: 'Java',
+    name: 'Java',
+    tagline: 'Write once, run anywhere',
+    description: 'Java is one of the most popular programming languages in the world. It\'s used for enterprise applications, Android development, web services, and large-scale systems. Java\'s "write once, run anywhere" philosophy makes it perfect for cross-platform development.',
+    whatIsIt: {
+      title: 'What is Java?',
+      content: 'Java is an object-oriented, class-based programming language designed to have as few implementation dependencies as possible. It runs on the Java Virtual Machine (JVM), allowing Java programs to run on any device with a JVM. Java is known for its portability, security, and robustness.',
+      visual: 'Think of Java as a universal translator - write your code once, and it runs on Windows, Linux, macOS, Android, and more, thanks to the JVM.'
+    },
+    whyLearn: [
+      'Enterprise standard - used by major companies for large-scale applications',
+      'Android development - primary language for Android app development',
+      'Cross-platform - write once, run anywhere on any device',
+      'Strong ecosystem - massive library ecosystem and active community',
+      'Career opportunities - high demand for Java developers worldwide'
+    ],
+    keyFeatures: {
+      title: 'Key Features',
+      items: [
+        {
+          name: 'Platform Independent',
+          description: 'Compile once, run anywhere with Java Virtual Machine',
+          icon: '🌐'
+        },
+        {
+          name: 'Object-Oriented',
+          description: 'Strong OOP principles - classes, inheritance, polymorphism',
+          icon: '🏗️'
+        },
+        {
+          name: 'Rich Libraries',
+          description: 'Comprehensive standard library and vast ecosystem',
+          icon: '📚'
+        },
+        {
+          name: 'Memory Management',
+          description: 'Automatic garbage collection handles memory management',
+          icon: '🧹'
+        }
+      ]
+    },
+    quickExample: {
+      title: 'Quick Example',
+      code: `// Java's object-oriented and platform-independent syntax
+public class Program {
+    public static String greet(String name) {
+        return "Hello, " + name + "! Welcome to Java.";
+    }
+    
+    public static void main(String[] args) {
+        // Working with collections
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+        List<Integer> squared = numbers.stream()
+            .map(n -> n * n)
+            .collect(Collectors.toList());
+        
+        // Object-oriented programming
+        User user = new User("Developer", 25);
+        
+        System.out.println(greet(user.getName()));
+        System.out.println("Squared: " + squared);
+    }
+}
+
+class User {
+    private String name;
+    private int age;
+    
+    public User(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+    
+    public String getName() { return name; }
+}`,
+      explanation: 'Java code is structured and object-oriented. Notice classes, streams, and encapsulation - they make Java great for large applications! This example shows OOP and modern Java features. You can edit and preview examples live in our interactive lessons!'
+    },
+    useCases: [
+      {
+        title: 'Enterprise Applications',
+        description: 'Build large-scale business applications and systems'
+      },
+      {
+        title: 'Android Development',
+        description: 'Create Android mobile applications'
+      },
+      {
+        title: 'Web Services',
+        description: 'Develop RESTful APIs and microservices with Spring Boot'
+      },
+      {
+        title: 'Big Data',
+        description: 'Work with Hadoop, Spark, and big data technologies'
+      }
+    ],
+    gettingStarted: {
+      title: 'Getting Started',
+      steps: [
+        {
+          step: 1,
+          title: 'Learn Java Basics',
+          description: 'Master classes, objects, inheritance, and polymorphism'
+        },
+        {
+          step: 2,
+          title: 'Understand JVM',
+          description: 'Learn how Java Virtual Machine works and platform independence'
+        },
+        {
+          step: 3,
+          title: 'Explore Frameworks',
+          description: 'Get familiar with Spring, Hibernate, and other Java frameworks'
+        },
+        {
+          step: 4,
+          title: 'Build Applications',
+          description: 'Create enterprise applications or Android apps'
+        }
+      ]
+    },
+    nextSteps: {
+      title: 'What\'s Next?',
+      description: 'After mastering Java, explore these paths:',
+      suggestions: [
+        {
+          language: 'Kotlin',
+          languageId: 'Kotlin',
+          description: 'Learn modern Android development with Kotlin',
+          icon: '🤖'
+        },
+        {
+          language: 'C#',
+          languageId: 'C#',
+          description: 'Explore .NET ecosystem and cross-platform development',
+          icon: '💼'
+        }
+      ]
+    }
+  }
+}
+
+export function getLanguageIntroduction(languageId: string): LanguageIntroduction | undefined {
+  return languageIntroductions[languageId]
+}
+

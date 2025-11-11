@@ -113,7 +113,7 @@ export default function Languages() {
           {filteredLanguages.map((language) => (
             <Link
               key={language.id}
-              to={`/study-program`}
+              to={`/language/${language.id}`}
               className="group"
             >
               <div className="bg-gray-800 border-2 border-gray-700 rounded-lg p-6 hover:border-indigo-500 transition-all hover:shadow-xl hover:scale-105">

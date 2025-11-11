@@ -14,6 +14,7 @@ const Profile = lazy(() => import('./components/pages/Profile'))
 const Settings = lazy(() => import('./components/pages/Settings'))
 const Shop = lazy(() => import('./components/pages/Shop'))
 const Languages = lazy(() => import('./components/pages/Languages'))
+const LanguageIntroduction = lazy(() => import('./components/pages/LanguageIntroduction'))
 const LessonView = lazy(() => import('./components/lessons/LessonView'))
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
@@ -167,6 +168,21 @@ function App() {
                     <Navbar />
                     <Suspense fallback={<LoadingFallback />}>
                       <Languages />
+                    </Suspense>
+                  </>
+                </ErrorBoundary>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/language/:languageId"
+            element={
+              <ProtectedRoute>
+                <ErrorBoundary>
+                  <>
+                    <Navbar />
+                    <Suspense fallback={<LoadingFallback />}>
+                      <LanguageIntroduction />
                     </Suspense>
                   </>
                 </ErrorBoundary>
