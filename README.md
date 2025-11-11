@@ -4,56 +4,97 @@ A comprehensive, interactive learning platform for programming languages with a 
 
 ## Features
 
-- **500+ Programming Languages** - Comprehensive coverage of programming languages across multiple domains
+- **15+ Programming Languages** - Comprehensive coverage across Web, Mobile, and Systems tracks
+- **Language Introduction Pages** - Beautiful, visual introduction pages for each language with official logos
 - **Interactive Code Challenges** - Hands-on coding exercises with Monaco Editor
 - **Flexible Code Validation** - Structural validation that focuses on correctness rather than exact text matching
 - **Progress Tracking** - XP and leveling system with detailed progress tracking
 - **Language Progression System** - Unlock languages by completing prerequisites in each track
-- **Gamification System** - Achievements, daily streaks, and virtual currency (coins)
+- **Comprehensive Gamification**:
+  - **Achievements** - 25+ achievements with celebration animations
+  - **Daily Challenges** - Complete daily tasks for bonus rewards
+  - **Streak System** - Maintain daily coding streaks with streak freezes
+  - **Virtual Currency** - Earn and spend coins on power-ups and unlockables
+  - **Leaderboard** - Compete globally with other learners
+  - **Power-Ups** - Purchase temporary boosts for your learning
+  - **Unlockables** - Unlock special content and customization options
+- **Social Sharing** - Share achievements and progress on social media
+- **Shop System** - Dedicated shop page for power-ups and unlockables
+- **Official Language Logos** - Beautiful, colored logos for each language
+- **Modern Icon System** - Font Awesome icons throughout the platform
 - **Dark Theme** - Modern, techy design with custom fonts and gradients
-- **3D Visualizations** - Immersive 3D experience for learning (optional)
 
 ## Tech Stack
 
 - **React** + **TypeScript** + **Vite** - Modern frontend framework
 - **Tailwind CSS** - Utility-first CSS framework
 - **Monaco Editor** - VS Code editor in the browser
-- **Three.js** + **React Three Fiber** - 3D graphics
 - **Zustand** - State management
 - **sql.js** - SQLite in the browser for data persistence
 - **React Router DOM** - Client-side routing
+- **React Icons** - Font Awesome icons throughout the platform
+- **Simple Icons CDN** - Official language logos with brand colors
+- **canvas-confetti** - Celebration animations for achievements
+- **Three.js** + **React Three Fiber** - 3D graphics (optional)
 
-## Current Progress
+## Available Languages
 
-### Completed Languages (20+ lessons each)
+All languages have comprehensive introduction pages and are organized by difficulty:
 
-- ✅ **JavaScript** - 25 lessons
-- ✅ **HTML** - 25 lessons
-- ✅ **Python** - 22 lessons
-- ✅ **TypeScript** - 25 lessons
-- ✅ **Ruby** - 25 lessons
+### Beginner Languages
 
-### In Progress
+- ✅ **HTML & CSS** - Complete introduction page
+- ✅ **JavaScript** - Complete introduction page
+- ✅ **Python** - Complete introduction page
+- ✅ **Ruby** - Complete introduction page
 
-- 🔄 **React** - 2 lessons (expanding to 20+)
-- ⏳ **PHP** - 2 lessons (expanding to 20+)
-- ⏳ **Node.js** - 2 lessons (expanding to 20+)
-- ⏳ **Swift** - 2 lessons (expanding to 20+)
-- ⏳ **Kotlin** - 2 lessons (expanding to 20+)
-- ⏳ **C++** - 2 lessons (expanding to 20+)
-- ⏳ **Go** - 2 lessons (expanding to 20+)
-- ⏳ **Rust** - 2 lessons (expanding to 20+)
-- ⏳ **C** - 2 lessons (expanding to 20+)
-- ⏳ **Java** - 2 lessons (expanding to 20+)
-- ⏳ **C#** - 2 lessons (expanding to 20+)
+### Intermediate Languages
+
+- ✅ **TypeScript** - Complete introduction page
+- ✅ **Node.js** - Complete introduction page
+- ✅ **PHP** - Complete introduction page
+- ✅ **Swift** - Complete introduction page
+- ✅ **Kotlin** - Complete introduction page
+- ✅ **C#** - Complete introduction page
+
+### Advanced Languages
+
+- ✅ **C** - Complete introduction page
+- ✅ **C++** - Complete introduction page
+- ✅ **Go** - Complete introduction page
+- ✅ **Rust** - Complete introduction page
+- ✅ **Java** - Complete introduction page
 
 ## Language Tracks
 
 Languages are organized into tracks for structured learning:
 
-1. **Beginner/Friendly** - Python, Ruby, JavaScript
-2. **Web/Application Development** - HTML, CSS, JavaScript, TypeScript, React, PHP, Node.js
-3. **Systems Programming/Advanced Concepts** - C, C++, Go, Rust, Swift, Kotlin, Java, C#
+### Web Development Track
+
+- **Beginner**: HTML & CSS, JavaScript, Python, Ruby
+- **Intermediate**: TypeScript, Node.js, PHP
+
+### Mobile Development Track
+
+- **Intermediate**: Swift, Kotlin, C#
+
+### Systems Programming Track
+
+- **Advanced**: C, C++, Go, Rust, Java
+
+## Language Introduction Pages
+
+Each language has a comprehensive introduction page featuring:
+
+- **Visual Overview** - Official language logo with brand colors
+- **What is it?** - Clear explanation with visual analogies
+- **Why Learn?** - 5 compelling reasons to learn the language
+- **Key Features** - 4 main features with icons
+- **Quick Examples** - Interactive code examples
+- **Use Cases** - Real-world applications
+- **Getting Started** - 4-step learning path
+- **Next Steps** - Suggested progression to related languages
+- **Available Lessons** - Direct links to all lessons for that language
 
 ## Lesson Structure
 
@@ -109,6 +150,7 @@ The project includes a GitHub Actions workflow for automated deployment:
    - Environment variables are securely injected during build
 
 3. **Access environment variables in code:**
+
    ```typescript
    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
    const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY
@@ -119,20 +161,41 @@ The project includes a GitHub Actions workflow for automated deployment:
 ```
 src/
 ├── components/
-│   ├── auth/              # Login and registration
-│   ├── lessons/           # Lesson components and code editor
-│   ├── pages/             # Main pages (Home, Study Program, Profile)
-│   ├── ui/                # Reusable UI components
-│   ├── gamification/      # Achievement badges and notifications
-│   └── 3D/                # 3D visualization components
+│   ├── auth/                    # Login and registration
+│   ├── lessons/                 # Lesson components and code editor
+│   ├── pages/                   # Main pages (Home, Study Program, Profile, Shop, Languages)
+│   ├── ui/                      # Reusable UI components (Navbar, LanguageLogo, etc.)
+│   ├── gamification/            # Gamification components
+│   │   ├── AchievementNotification.tsx
+│   │   ├── DailyChallengeCard.tsx
+│   │   ├── Leaderboard.tsx
+│   │   ├── PowerUpShop.tsx
+│   │   ├── ShareButton.tsx
+│   │   ├── StatisticsCard.tsx
+│   │   └── UnlockablesShop.tsx
+│   └── 3D/                      # 3D visualization components
 ├── data/
-│   ├── lessons.ts         # All lesson definitions
-│   ├── languages.ts        # Language configurations and tracks
-│   └── achievements.ts    # Achievement definitions
-├── db/                    # Database operations
-├── store/                 # Zustand state management
-├── utils/                 # Utility functions (password, rate limiting)
-└── App.tsx                # Main app component with routing
+│   ├── lessons.ts               # All lesson definitions
+│   ├── languages.ts             # Language configurations and tracks
+│   ├── achievements.ts          # Achievement definitions
+│   ├── languageIntroductions.ts # Language introduction content
+│   ├── dailyChallenges.ts       # Daily challenge definitions
+│   ├── powerUps.ts             # Power-up definitions
+│   └── unlockables.ts          # Unlockable content definitions
+├── db/                          # Database operations
+│   ├── database.ts             # Core database setup
+│   ├── gamificationDb.ts       # Gamification database operations
+│   └── userStatsDb.ts          # User statistics database
+├── store/                       # Zustand state management
+│   ├── authStore.ts            # Authentication state
+│   ├── progressStore.ts        # Progress and XP tracking
+│   └── gamificationStore.ts    # Gamification state
+├── utils/                       # Utility functions
+│   ├── iconMapper.tsx          # Emoji to icon mapping
+│   ├── languageLogos.ts        # Language logo utilities
+│   ├── celebration.ts          # Confetti animations
+│   └── socialSharing.ts        # Social sharing utilities
+└── App.tsx                      # Main app component with routing
 ```
 
 ## Features in Detail
@@ -157,10 +220,15 @@ This allows students to use their own text/values while ensuring they understand
 
 ### Gamification System
 
-- **Achievements** - 25+ achievements across multiple categories (First Steps, Language Mastery, Speed, Perfect Execution, Consistency, Special)
-- **Daily Streaks** - Maintain your coding streak with daily activity tracking
-- **Virtual Currency** - Earn coins by completing lessons and unlocking achievements
-- **Progress Tracking** - Visual progress indicators and completion statistics
+- **Achievements** - 25+ achievements across multiple categories with celebration animations
+- **Daily Challenges** - Complete daily tasks for bonus coins and XP
+- **Streak System** - Maintain daily coding streaks with streak freeze protection
+- **Virtual Currency** - Earn coins by completing lessons and achievements
+- **Power-Up Shop** - Purchase temporary boosts (XP multipliers, time extensions, etc.)
+- **Unlockables Shop** - Unlock special content, themes, and customization options
+- **Global Leaderboard** - Compete with other learners ranked by XP, level, or streak
+- **Social Sharing** - Share achievements and progress on Twitter, Facebook, LinkedIn, Reddit
+- **Detailed Statistics** - Comprehensive stats tracking on your profile
 
 ### Authentication
 
