@@ -16,3 +16,17 @@ body {
   background-color: #111827;
 }
 
+/* Light bounce animation for hero arrow */
+@keyframes light-bounce {
+  0%, 100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, -10px);
+  }
+}
+
+.animate-light-bounce {
+  animation: light-bounce 2s ease-in-out infinite;
+}
+

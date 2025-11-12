@@ -3,7 +3,7 @@ import { useAuthStore } from '../../store/authStore'
 import { useProgressStore } from '../../store/progressStore'
 import { useEffect, useState } from 'react'
 import { lessons } from '../../data/lessons'
-import { FaBullseye, FaChartBar, FaRocket } from 'react-icons/fa'
+import { FaBullseye, FaChartBar, FaRocket, FaChevronDown } from 'react-icons/fa'
 
 export default function Home() {
   const { user } = useAuthStore()
@@ -17,8 +17,8 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gray-900">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-gray-900 via-indigo-900 to-purple-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+      <section className="relative overflow-hidden bg-gradient-to-br from-gray-900 via-indigo-900 to-purple-900 min-h-[90vh] flex items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 w-full">
           <div className="text-center">
             <h1 className="text-5xl md:text-6xl font-bold font-heading text-white mb-6">
               Welcome to <span className="bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">Codeverse</span>
@@ -36,10 +36,24 @@ export default function Home() {
             </div>
           </div>
         </div>
+        
+        {/* Bouncing Arrow */}
+        <div className="absolute bottom-8 left-1/2 animate-light-bounce">
+          <button
+            onClick={() => {
+              const statsSection = document.getElementById('stats-section')
+              statsSection?.scrollIntoView({ behavior: 'smooth' })
+            }}
+            className="text-white/80 hover:text-white transition-colors focus:outline-none"
+            aria-label="Scroll to stats"
+          >
+            <FaChevronDown className="text-4xl" />
+          </button>
+        </div>
       </section>
 
       {/* Stats Section */}
-      <section className="py-12 bg-gray-800 border-b border-gray-700">
+      <section id="stats-section" className="py-12 bg-gray-800 border-b border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
