@@ -572,6 +572,70 @@ export default function LessonView() {
     checkAccess()
   }, [lesson, getProgress])
 
+  // Transform ES6 module syntax to executable code
+  const transformES6Modules = (code: string): string => {
+    let transformed = code
+
+    // Handle import React from 'react' -> const React = mock object
+    transformed = transformed.replace(/import\s+React\s+from\s+['"]react['"];?/g, 
+      'const React = { createElement: () => ({}), Fragment: () => ({}) };')
+    
+    // Handle import { useState, useEffect } from 'react' -> extract hooks
+    transformed = transformed.replace(/import\s*{\s*([^}]+)\s*}\s+from\s+['"]react['"];?/g, 
+      (match, imports) => {
+        const importList = imports.split(',').map((i: string) => i.trim())
+        const hookDeclarations = importList.map((hook: string) => {
+          if (hook === 'useState') return 'const useState = (initial) => { let state = initial; const setState = (newState) => { state = typeof newState === "function" ? newState(state) : newState }; return [state, setState]; };'
+          if (hook === 'useEffect') return 'const useEffect = () => {};'
+          if (hook === 'useRef') return 'const useRef = (initial) => ({ current: initial });'
+          if (hook === 'useContext') return 'const useContext = () => null;'
+          if (hook === 'useReducer') return 'const useReducer = () => [null, () => {}];'
+          if (hook === 'useMemo') return 'const useMemo = (fn) => fn();'
+          if (hook === 'useCallback') return 'const useCallback = (fn) => fn;'
+          if (hook === 'useLayoutEffect') return 'const useLayoutEffect = () => {};'
+          if (hook === 'useImperativeHandle') return 'const useImperativeHandle = () => {};'
+          if (hook === 'useDebugValue') return 'const useDebugValue = () => {};'
+          return `const ${hook} = () => {};`
+        }).join('\n')
+        return hookDeclarations
+      })
+    
+    // Handle combined import: import React, { useState } from 'react'
+    transformed = transformed.replace(/import\s+React\s*,\s*{\s*([^}]+)\s*}\s+from\s+['"]react['"];?/g,
+      (match, imports) => {
+        const importList = imports.split(',').map((i: string) => i.trim())
+        const hookDeclarations = importList.map((hook: string) => {
+          if (hook === 'useState') return 'const useState = (initial) => { let state = initial; const setState = (newState) => { state = typeof newState === "function" ? newState(state) : newState }; return [state, setState]; };'
+          if (hook === 'useEffect') return 'const useEffect = () => {};'
+          if (hook === 'useRef') return 'const useRef = (initial) => ({ current: initial });'
+          return `const ${hook} = () => {};`
+        }).join('\n')
+        return 'const React = { createElement: () => ({}), Fragment: () => ({}) };\n' + hookDeclarations
+      })
+    
+    // import Something from 'module' -> const Something = {}
+    transformed = transformed.replace(/import\s+(\w+)\s+from\s+['"][^'"]+['"];?/g, 
+      'const $1 = {};')
+    
+    // import * as Something from 'module' -> const Something = {}
+    transformed = transformed.replace(/import\s+\*\s+as\s+(\w+)\s+from\s+['"][^'"]+['"];?/g, 
+      'const $1 = {};')
+    
+    // Handle export default - transform to assignment so component is accessible
+    // export default ComponentName -> ComponentName is already defined, just make it global
+    transformed = transformed.replace(/export\s+default\s+(\w+);?/g, 
+      (match, componentName) => {
+        // Make component available globally for test code
+        return `if (typeof ${componentName} !== 'undefined') { window.${componentName} = ${componentName}; }`
+      })
+    
+    // Handle named exports - remove export keyword but keep declaration
+    transformed = transformed.replace(/export\s+(const|let|var|function|class)\s+/g, '$1 ')
+    transformed = transformed.replace(/export\s*{\s*([^}]+)\s*};?/g, '')
+    
+    return transformed
+  }
+
   // Validate code
   const validateCode = async (code: string): Promise<{ isValid: boolean; error?: string }> => {
     if (!lesson?.challenge) {
@@ -592,9 +656,21 @@ export default function LessonView() {
         // First, clear console output
         consoleOutput = ''
         
+        // Check if code contains ES6 module syntax (import/export)
+        const hasES6Modules = /import\s+.*from|export\s+(default|{)/.test(code)
+        const transformedCode = hasES6Modules ? transformES6Modules(code) : code
+        
         // Execute user code to capture console output
-        const func = new Function(code)
-        func()
+        try {
+          const func = new Function(transformedCode)
+          func()
+        } catch (e) {
+          // If execution fails due to module syntax, try transformed version
+          if (hasES6Modules && e instanceof SyntaxError && e.message.includes('import')) {
+            // Already transformed, so this is a different error
+            throw e
+          }
+        }
         
         // Store the console output from user code
         const userCodeOutput = consoleOutput.trim()
@@ -604,7 +680,7 @@ export default function LessonView() {
           // Combine user code and test code so test code can access user's variables
           // We need to prevent user code from running again, so we'll wrap it to suppress console.log
           // Replace all console.log in user code with a no-op during test execution
-          const userCodeWithoutLogs = code.replace(/console\.log\(/g, '// Suppressed: console.log(')
+          const userCodeWithoutLogs = transformedCode.replace(/console\.log\(/g, '// Suppressed: console.log(')
           const testCodeWithoutLogs = lesson.challenge.testCode.replace(/console\.log\(/g, '// console.log(')
           const combinedCode = userCodeWithoutLogs + '\n\n' + testCodeWithoutLogs
           
@@ -1018,9 +1094,13 @@ export default function LessonView() {
           // First, clear console output
           consoleOutput = ''
           
+          // Check if code contains ES6 module syntax (import/export)
+          const hasES6Modules = /import\s+.*from|export\s+(default|{)/.test(code)
+          const transformedCode = hasES6Modules ? transformES6Modules(code) : code
+          
           // Try executing the code (works for JS-like languages)
           try {
-            const func = new Function(code)
+            const func = new Function(transformedCode)
             func()
           } catch (e) {
             // If execution fails, that's okay - we'll rely on testCode
@@ -1032,7 +1112,7 @@ export default function LessonView() {
           if (lesson.challenge.testCode) {
             // Try to combine user code and test code
             try {
-              const userCodeWithoutLogs = code.replace(/console\.log\(/g, '// Suppressed: console.log(')
+              const userCodeWithoutLogs = transformedCode.replace(/console\.log\(/g, '// Suppressed: console.log(')
               const testCodeWithoutLogs = lesson.challenge.testCode.replace(/console\.log\(/g, '// console.log(')
               const combinedCode = userCodeWithoutLogs + '\n\n' + testCodeWithoutLogs
               const testFunc = new Function(combinedCode)
