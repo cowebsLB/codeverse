@@ -255,12 +255,13 @@ export const useGamificationStore = create<GamificationState>()((set, get) => ({
 
     try {
       await addCoins(userId, amount)
-      const newCoins = get().coins + amount
-      set({ coins: newCoins })
+      // Reload coins from database to ensure accuracy
+      const updatedCoins = await getCoins(userId)
+      set({ coins: updatedCoins })
 
       // Update user stats (don't await to avoid blocking)
       const progressStore = useProgressStore.getState()
-      updateUserStats(userId, progressStore.xp, progressStore.level, newCoins).catch((error) => {
+      updateUserStats(userId, progressStore.xp, progressStore.level, updatedCoins).catch((error) => {
         console.error('Failed to update user stats:', error)
       })
     } catch (error) {
@@ -376,7 +377,6 @@ export const useGamificationStore = create<GamificationState>()((set, get) => ({
     if (!userId) return
 
     const today = new Date().toISOString().split('T')[0]
-    const progressStore = useProgressStore.getState()
     
     // Get today's challenge
     const challenges = get().dailyChallenges
@@ -399,52 +399,74 @@ export const useGamificationStore = create<GamificationState>()((set, get) => ({
     // Calculate progress based on challenge type
     let progress = 0
     const todayDate = new Date().toISOString().split('T')[0]
+    const todayStart = new Date(todayDate).getTime()
+    const todayEnd = todayStart + 24 * 60 * 60 * 1000 - 1
 
     switch (challenge.challenge.type) {
-      case 'complete_lessons':
-        progress = Object.values(progressStore.lessons).filter((l) => {
-          if (!l.completed) return false
-          const completedDate = new Date(l.lastAccessed).toISOString().split('T')[0]
-          return completedDate === todayDate
+      case 'complete_lessons': {
+        // Read directly from database to get accurate data
+        const { getAllProgress } = await import('../db/progressDb')
+        const allProgress = await getAllProgress(userId)
+        
+        // Count lessons completed today (completed = 1 and last_accessed is today)
+        progress = allProgress.filter((p) => {
+          if (p.completed !== 1) return false
+          // Check if last_accessed timestamp is within today
+          return p.last_accessed >= todayStart && p.last_accessed <= todayEnd
         }).length
         break
-      case 'earn_xp':
-        // Get XP earned today (simplified - would need to track daily XP)
-        progress = Math.floor(progressStore.xp / 100) // Simplified
+      }
+      case 'earn_xp': {
+        // Get current XP from progress store
+        const progressStore = useProgressStore.getState()
+        // This is simplified - ideally we'd track daily XP separately
+        // For now, we'll use a rough estimate based on lessons completed today
+        const { getAllProgress } = await import('../db/progressDb')
+        const allProgress = await getAllProgress(userId)
+        const lessonsToday = allProgress.filter((p) => {
+          if (p.completed !== 1) return false
+          return p.last_accessed >= todayStart && p.last_accessed <= todayEnd
+        }).length
+        // Estimate: 100 XP per lesson completed today
+        progress = lessonsToday * 100
         break
+      }
       case 'maintain_streak':
         progress = get().currentStreak > 0 ? 1 : 0
         break
-      case 'unlock_achievements':
+      case 'unlock_achievements': {
         // Get achievements unlocked today (simplified - would need to track unlock dates)
+        // For now, count all unlocked achievements
         progress = get().unlockedAchievements.length
         break
+      }
     }
 
     const completed = progress >= challenge.challenge.target
-    await updateDailyChallenge(userId, today, challenge.challenge.id, progress, completed)
+    const wasAlreadyCompleted = challenge.completed
+    
+    // Only update database if status changed
+    if (completed !== wasAlreadyCompleted) {
+      await updateDailyChallenge(userId, today, challenge.challenge.id, progress, completed)
+    }
 
-    if (completed && !challenge.completed) {
+    // Award rewards only if just completed (not already completed)
+    if (completed && !wasAlreadyCompleted) {
+      console.log(`Daily challenge completed! Awarding ${challenge.rewardCoins} coins and ${challenge.rewardXP} XP`)
       // Award rewards
       await get().addCoins(challenge.rewardCoins)
+      const progressStore = useProgressStore.getState()
       await progressStore.addXP(challenge.rewardXP)
-      
-      // Update challenge status
-      set({
-        dailyChallenges: [{
-          ...challenge,
-          progress,
-          completed: true,
-        }],
-      })
-    } else {
-      set({
-        dailyChallenges: [{
-          ...challenge,
-          progress,
-        }],
-      })
     }
+    
+    // Update challenge status in state
+    set({
+      dailyChallenges: [{
+        ...challenge,
+        progress,
+        completed,
+      }],
+    })
   },
 
   completeDailyChallenge: async (challengeId: string) => {

@@ -15,24 +15,31 @@ const rarityColors: Record<AchievementRarity, string> = {
   legendary: 'border-yellow-500 bg-yellow-900/30',
 }
 
-const sizeClasses = {
-  sm: 'w-12 h-12 text-2xl',
-  md: 'w-16 h-16 text-3xl',
-  lg: 'w-20 h-20 text-4xl',
+const containerSizes = {
+  sm: 'w-12 h-12',
+  md: 'w-16 h-16',
+  lg: 'w-20 h-20',
+}
+
+const iconSizes = {
+  sm: 'text-2xl',
+  md: 'text-4xl',
+  lg: 'text-6xl',
 }
 
 export default function AchievementBadge({ achievement, unlocked, size = 'md' }: AchievementBadgeProps) {
   const rarityColor = rarityColors[achievement.rarity]
-  const sizeClass = sizeClasses[size]
+  const containerSize = containerSizes[size]
+  const iconSize = iconSizes[size]
 
   return (
     <div
       className={`relative rounded-lg border-2 p-2 flex items-center justify-center transition-all ${
         unlocked ? rarityColor : 'border-gray-700 bg-gray-900 opacity-50'
-      } ${sizeClass}`}
+      } ${containerSize}`}
       title={unlocked ? achievement.name : 'Locked'}
     >
-      <span className={unlocked ? '' : 'grayscale'}>{getIconFromEmoji(achievement.icon, sizeClass)}</span>
+      <span className={unlocked ? '' : 'grayscale'}>{getIconFromEmoji(achievement.icon, iconSize)}</span>
       {!unlocked && (
         <div className="absolute inset-0 flex items-center justify-center">
           <FaLock className="text-gray-600 text-xs" />

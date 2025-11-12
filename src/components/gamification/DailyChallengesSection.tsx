@@ -19,7 +19,7 @@ export default function DailyChallengesSection() {
   }, [])
 
   useEffect(() => {
-    // Update progress when challenges are loaded (only once)
+    // Update progress when challenges are loaded
     if (dailyChallenges.length > 0 && !dailyChallenges[0]?.completed) {
       let cancelled = false
       const updateProgress = async () => {
@@ -40,7 +40,7 @@ export default function DailyChallengesSection() {
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dailyChallenges.length])
+  }, [dailyChallenges.length, dailyChallenges[0]?.progress])
 
   if (dailyChallenges.length === 0) {
     return (

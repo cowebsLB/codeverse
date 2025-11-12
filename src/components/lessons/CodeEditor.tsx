@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react'
 import Editor from '@monaco-editor/react'
 import { CodeChallenge } from '../../data/lessons'
-import { FaCheckCircle, FaTimesCircle } from 'react-icons/fa'
+import { FaCheckCircle, FaTimesCircle, FaCode, FaEye } from 'react-icons/fa'
 
 interface CodeEditorProps {
   challenge: CodeChallenge
@@ -14,7 +14,9 @@ export default function CodeEditor({ challenge, onCodeChange, onValidate, isComp
   const [code, setCode] = useState(challenge.starterCode || '')
   const [isValidating, setIsValidating] = useState(false)
   const [validationResult, setValidationResult] = useState<{ isValid: boolean; error?: string } | null>(null)
+  const [showPreview, setShowPreview] = useState(false)
   const editorRef = useRef<any>(null)
+  const isHtml = challenge.language === 'html'
 
   const handleEditorDidMount = (editor: any) => {
     editorRef.current = editor
@@ -90,14 +92,42 @@ export default function CodeEditor({ challenge, onCodeChange, onValidate, isComp
     <div className="space-y-4">
       <div className="bg-gray-900 rounded-lg border border-gray-700 overflow-hidden">
         <div className="flex items-center justify-between px-4 py-2 bg-gray-800 border-b border-gray-700">
-          <span className="text-sm font-medium text-gray-300 font-code">Code Editor</span>
+          <div className="flex items-center gap-3">
+            <span className="text-sm font-medium text-gray-300 font-code">Code Editor</span>
+            {isHtml && (
+              <div className="flex items-center gap-2 bg-gray-700 rounded-lg p-1">
+                <button
+                  onClick={() => setShowPreview(false)}
+                  className={`px-3 py-1 rounded text-sm font-medium transition-all flex items-center gap-2 ${
+                    !showPreview
+                      ? 'bg-indigo-600 text-white'
+                      : 'text-gray-400 hover:text-white'
+                  }`}
+                >
+                  <FaCode className="text-xs" />
+                  Code
+                </button>
+                <button
+                  onClick={() => setShowPreview(true)}
+                  className={`px-3 py-1 rounded text-sm font-medium transition-all flex items-center gap-2 ${
+                    showPreview
+                      ? 'bg-indigo-600 text-white'
+                      : 'text-gray-400 hover:text-white'
+                  }`}
+                >
+                  <FaEye className="text-xs" />
+                  Preview
+                </button>
+              </div>
+            )}
+          </div>
           <button
             onClick={handleRun}
-            disabled={isValidating || isCompleted}
+            disabled={isValidating || isCompleted || showPreview}
             className={`px-4 py-2 rounded-lg font-medium transition-all ${
               isCompleted
                 ? 'bg-green-600 text-white cursor-not-allowed'
-                : isValidating
+                : isValidating || showPreview
                 ? 'bg-gray-600 text-gray-300 cursor-not-allowed'
                 : 'bg-indigo-600 text-white hover:bg-indigo-700'
             }`}
@@ -105,23 +135,34 @@ export default function CodeEditor({ challenge, onCodeChange, onValidate, isComp
             {isCompleted ? '✓ Completed' : isValidating ? 'Validating...' : 'Run & Check'}
           </button>
         </div>
-        <Editor
-          height="400px"
-          language={getLanguage()}
-          value={code}
-          onChange={handleCodeChange}
-          onMount={handleEditorDidMount}
-          theme="vs-dark"
-          options={{
-            minimap: { enabled: false },
-            fontSize: 14,
-            lineNumbers: 'on',
-            roundedSelection: false,
-            scrollBeyondLastLine: false,
-            readOnly: isCompleted,
-            automaticLayout: true,
-          }}
-        />
+        {showPreview && isHtml ? (
+          <div className="h-[400px] bg-white overflow-auto">
+            <iframe
+              srcDoc={code}
+              title="HTML Preview"
+              className="w-full h-full border-0"
+              sandbox="allow-scripts allow-same-origin"
+            />
+          </div>
+        ) : (
+          <Editor
+            height="400px"
+            language={getLanguage()}
+            value={code}
+            onChange={handleCodeChange}
+            onMount={handleEditorDidMount}
+            theme="vs-dark"
+            options={{
+              minimap: { enabled: false },
+              fontSize: 14,
+              lineNumbers: 'on',
+              roundedSelection: false,
+              scrollBeyondLastLine: false,
+              readOnly: isCompleted,
+              automaticLayout: true,
+            }}
+          />
+        )}
       </div>
 
       {/* Validation Result */}
