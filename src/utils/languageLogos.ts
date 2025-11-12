@@ -23,7 +23,13 @@ const languageSlugMap: Record<string, string> = {
   'CSS': 'css3',
   'React': 'react',
   'Vue': 'vue.js',
+  'Vue.js': 'vue.js',
+  'Svelte': 'svelte',
   'Angular': 'angular',
+  'Deno': 'deno',
+  'Ruby on Rails': 'rubyonrails',
+  'Flutter': 'flutter',
+  'React Native': 'react',
   'Node.js': 'nodedotjs',
   'Java': 'java',
   'C#': 'csharp',
@@ -50,8 +56,11 @@ const languageSlugMap: Record<string, string> = {
   'Objective-C': 'objectivec',
   'Shell': 'gnubash',
   'Bash': 'gnubash',
+  'Bash / Shell': 'gnubash',
   'PowerShell': 'powershell',
   'SQL': 'mysql',
+  'Assembly': 'assemblyscript',
+  'Julia': 'julia',
   'PostgreSQL': 'postgresql',
   'MongoDB': 'mongodb',
   'Redis': 'redis',
@@ -111,7 +120,11 @@ export function getLanguageLogo(languageName: string): LanguageLogo {
     'css3': '#1572B6', // CSS3 blue
     'react': '#61DAFB', // React cyan
     'vue.js': '#4FC08D', // Vue.js green
+    'svelte': '#FF3E00', // Svelte orange
     'angular': '#DD0031', // Angular red
+    'deno': '#000000', // Deno black
+    'rubyonrails': '#CC0000', // Ruby on Rails red
+    'flutter': '#02569B', // Flutter blue
     'nodedotjs': '#339933', // Node.js green
     'java': '#ED8B00', // Java orange
     'csharp': '#239120', // C# green
@@ -148,6 +161,8 @@ export function getLanguageLogo(languageName: string): LanguageLogo {
     'github': '#181717', // GitHub black
     'gitlab': '#FC6D26', // GitLab orange
     'bitbucket': '#0052CC', // Bitbucket blue
+    'assemblyscript': '#007AAC', // AssemblyScript blue
+    'julia': '#9558B2', // Julia purple
   }
   
   return {

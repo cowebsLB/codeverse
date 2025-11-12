@@ -2001,6 +2001,2975 @@ class User {
         }
       ]
     }
+  },
+  // New languages - Web/Frontend
+  'Vue.js': {
+    id: 'Vue.js',
+    name: 'Vue.js',
+    tagline: 'The progressive JavaScript framework',
+    description: 'Vue.js is a progressive, incrementally adoptable JavaScript framework for building user interfaces. It\'s designed from the ground up to be incrementally adoptable, making it perfect for both small projects and large-scale applications.',
+    whatIsIt: {
+      title: 'What is Vue.js?',
+      content: 'Vue.js is a progressive JavaScript framework for building user interfaces. Unlike monolithic frameworks, Vue is designed to be incrementally adoptable. The core library focuses on the view layer only, and it\'s easy to pick up and integrate with other libraries or existing projects.',
+      visual: 'Think of Vue.js as a friendly, approachable framework that grows with you - start simple and add complexity only when you need it.'
+    },
+    whyLearn: [
+      'Beginner-friendly - easy to learn with clear documentation and gentle learning curve',
+      'Progressive - use as much or as little as you need, from simple scripts to full SPAs',
+      'Versatile - works for small widgets or large enterprise applications',
+      'Great performance - virtual DOM and optimized rendering',
+      'Active community - growing ecosystem with excellent tooling'
+    ],
+    keyFeatures: {
+      title: 'Key Features',
+      items: [
+        {
+          name: 'Reactive Data Binding',
+          description: 'Automatic updates when data changes with two-way data binding',
+          icon: '🔄'
+        },
+        {
+          name: 'Component-Based',
+          description: 'Build reusable components for better code organization',
+          icon: '🧩'
+        },
+        {
+          name: 'Single File Components',
+          description: 'Combine template, script, and styles in one .vue file',
+          icon: '📄'
+        },
+        {
+          name: 'Vue Router & Vuex',
+          description: 'Official routing and state management solutions',
+          icon: '🗺️'
+        }
+      ]
+    },
+    quickExample: {
+      title: 'Quick Example',
+      code: `<template>
+  <div>
+    <h1>{{ message }}</h1>
+    <button @click="increment">Count: {{ count }}</button>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      message: 'Hello, Vue.js!',
+      count: 0
+    }
+  },
+  methods: {
+    increment() {
+      this.count++
+    }
+  }
+}
+</script>`,
+      explanation: 'Vue.js makes it easy to create reactive interfaces. Notice the simple template syntax and automatic reactivity! You can edit and preview examples live in our interactive lessons!'
+    },
+    useCases: [
+      {
+        title: 'Single Page Applications',
+        description: 'Build modern SPAs with Vue Router and Vuex'
+      },
+      {
+        title: 'Progressive Web Apps',
+        description: 'Create PWAs with Vue and service workers'
+      },
+      {
+        title: 'Component Libraries',
+        description: 'Build reusable UI component libraries'
+      },
+      {
+        title: 'Interactive Widgets',
+        description: 'Add interactivity to existing websites'
+      }
+    ],
+    gettingStarted: {
+      title: 'Getting Started',
+      steps: [
+        {
+          step: 1,
+          title: 'Learn Vue Basics',
+          description: 'Master templates, directives, and data binding'
+        },
+        {
+          step: 2,
+          title: 'Understand Components',
+          description: 'Learn to create and compose Vue components'
+        },
+        {
+          step: 3,
+          title: 'Explore Vue Router',
+          description: 'Add routing to create multi-page applications'
+        },
+        {
+          step: 4,
+          title: 'Master State Management',
+          description: 'Use Vuex for complex state management'
+        }
+      ]
+    },
+    nextSteps: {
+      title: 'What\'s Next?',
+      description: 'After mastering Vue.js, explore these paths:',
+      suggestions: [
+        {
+          language: 'React',
+          languageId: 'React',
+          description: 'Learn another popular frontend framework',
+          icon: '⚛️'
+        },
+        {
+          language: 'TypeScript',
+          languageId: 'TypeScript',
+          description: 'Add type safety to your Vue applications',
+          icon: '🛡️'
+        }
+      ]
+    }
+  },
+  'React': {
+    id: 'React',
+    name: 'React',
+    tagline: 'A JavaScript library for building user interfaces',
+    description: 'React is a declarative, efficient, and flexible JavaScript library for building user interfaces. Created by Facebook, it lets you compose complex UIs from small, isolated pieces of code called components.',
+    whatIsIt: {
+      title: 'What is React?',
+      content: 'React is a JavaScript library for building user interfaces, particularly web applications. It uses a component-based architecture where you build encapsulated components that manage their own state, then compose them to make complex UIs.',
+      visual: 'Think of React as LEGO blocks for web interfaces - build small, reusable components and snap them together to create amazing applications.'
+    },
+    whyLearn: [
+      'Industry standard - used by Facebook, Netflix, Airbnb, and thousands of companies',
+      'Component-based - reusable, maintainable code architecture',
+      'Huge ecosystem - massive community and extensive library support',
+      'Job market - one of the most in-demand skills in web development',
+      'Modern features - hooks, concurrent rendering, and excellent developer experience'
+    ],
+    keyFeatures: {
+      title: 'Key Features',
+      items: [
+        {
+          name: 'Virtual DOM',
+          description: 'Efficient rendering with virtual DOM for optimal performance',
+          icon: '⚡'
+        },
+        {
+          name: 'JSX',
+          description: 'Write HTML-like syntax directly in JavaScript',
+          icon: '📝'
+        },
+        {
+          name: 'Hooks',
+          description: 'Modern way to use state and lifecycle features in functional components',
+          icon: '🪝'
+        },
+        {
+          name: 'One-Way Data Flow',
+          description: 'Predictable data flow makes debugging easier',
+          icon: '🔄'
+        }
+      ]
+    },
+    quickExample: {
+      title: 'Quick Example',
+      code: `import React, { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+  
+  return (
+    <div>
+      <h1>Count: {count}</h1>
+      <button onClick={() => setCount(count + 1)}>
+        Increment
+      </button>
+    </div>
+  );
+}
+
+export default Counter;`,
+      explanation: 'React makes it easy to build interactive UIs with hooks and JSX. Notice how simple state management is with useState! You can edit and preview examples live in our interactive lessons!'
+    },
+    useCases: [
+      {
+        title: 'Web Applications',
+        description: 'Build modern, interactive web applications'
+      },
+      {
+        title: 'Mobile Apps',
+        description: 'Create mobile apps with React Native'
+      },
+      {
+        title: 'Component Libraries',
+        description: 'Build and share reusable UI components'
+      },
+      {
+        title: 'Enterprise Applications',
+        description: 'Scale to large applications with React ecosystem'
+      }
+    ],
+    gettingStarted: {
+      title: 'Getting Started',
+      steps: [
+        {
+          step: 1,
+          title: 'Learn React Basics',
+          description: 'Master JSX, components, props, and state'
+        },
+        {
+          step: 2,
+          title: 'Understand Hooks',
+          description: 'Learn useState, useEffect, and custom hooks'
+        },
+        {
+          step: 3,
+          title: 'Explore React Router',
+          description: 'Add routing and navigation to your apps'
+        },
+        {
+          step: 4,
+          title: 'Master State Management',
+          description: 'Use Context API or Redux for complex state'
+        }
+      ]
+    },
+    nextSteps: {
+      title: 'What\'s Next?',
+      description: 'After mastering React, explore these paths:',
+      suggestions: [
+        {
+          language: 'React Native',
+          languageId: 'React Native',
+          description: 'Build mobile apps with React',
+          icon: '📱'
+        },
+        {
+          language: 'TypeScript',
+          languageId: 'TypeScript',
+          description: 'Add type safety to your React applications',
+          icon: '🛡️'
+        }
+      ]
+    }
+  },
+  'Svelte': {
+    id: 'Svelte',
+    name: 'Svelte',
+    tagline: 'Cybernetically enhanced web apps',
+    description: 'Svelte is a radical new approach to building user interfaces. Instead of using techniques like virtual DOM diffing, Svelte writes code that surgically updates the DOM when the state of your app changes.',
+    whatIsIt: {
+      title: 'What is Svelte?',
+      content: 'Svelte is a compiler that converts your component code into highly optimized vanilla JavaScript at build time. Unlike traditional frameworks, Svelte shifts work from the browser to the compile step, resulting in smaller bundle sizes and faster runtime performance.',
+      visual: 'Think of Svelte as a framework that disappears at runtime - it compiles away, leaving you with pure, optimized JavaScript.'
+    },
+    whyLearn: [
+      'No virtual DOM - compiles to vanilla JavaScript for better performance',
+      'Smaller bundles - no framework runtime means smaller file sizes',
+      'Simple syntax - easy to learn with minimal boilerplate',
+      'Great performance - faster than React and Vue in many benchmarks',
+      'Growing ecosystem - active community and excellent tooling'
+    ],
+    keyFeatures: {
+      title: 'Key Features',
+      items: [
+        {
+          name: 'Compiler-Based',
+          description: 'Compiles to optimized vanilla JavaScript at build time',
+          icon: '⚙️'
+        },
+        {
+          name: 'Reactive Statements',
+          description: 'Automatic reactivity with $: reactive declarations',
+          icon: '🔄'
+        },
+        {
+          name: 'Scoped Styles',
+          description: 'Component-scoped CSS by default',
+          icon: '🎨'
+        },
+        {
+          name: 'Built-in Animations',
+          description: 'Easy animations and transitions built-in',
+          icon: '✨'
+        }
+      ]
+    },
+    quickExample: {
+      title: 'Quick Example',
+      code: `<script>
+  let count = 0;
+  
+  function increment() {
+    count += 1;
+  }
+</script>
+
+<button on:click={increment}>
+  Count: {count}
+</button>
+
+<style>
+  button {
+    padding: 10px 20px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+  }
+</style>`,
+      explanation: 'Svelte code is clean and simple. Notice how reactive it is - no hooks or special syntax needed! You can edit and preview examples live in our interactive lessons!'
+    },
+    useCases: [
+      {
+        title: 'Web Applications',
+        description: 'Build fast, lightweight web applications'
+      },
+      {
+        title: 'Progressive Web Apps',
+        description: 'Create PWAs with excellent performance'
+      },
+      {
+        title: 'Interactive Components',
+        description: 'Build reusable, performant UI components'
+      },
+      {
+        title: 'Data Visualization',
+        description: 'Create smooth, animated data visualizations'
+      }
+    ],
+    gettingStarted: {
+      title: 'Getting Started',
+      steps: [
+        {
+          step: 1,
+          title: 'Learn Svelte Basics',
+          description: 'Master components, props, and reactive statements'
+        },
+        {
+          step: 2,
+          title: 'Understand Reactivity',
+          description: 'Learn $: reactive declarations and stores'
+        },
+        {
+          step: 3,
+          title: 'Explore SvelteKit',
+          description: 'Build full-stack apps with SvelteKit framework'
+        },
+        {
+          step: 4,
+          title: 'Master Animations',
+          description: 'Create smooth transitions and animations'
+        }
+      ]
+    },
+    nextSteps: {
+      title: 'What\'s Next?',
+      description: 'After mastering Svelte, explore these paths:',
+      suggestions: [
+        {
+          language: 'Vue.js',
+          languageId: 'Vue.js',
+          description: 'Learn another progressive framework',
+          icon: '💚'
+        },
+        {
+          language: 'TypeScript',
+          languageId: 'TypeScript',
+          description: 'Add type safety to your Svelte apps',
+          icon: '🛡️'
+        }
+      ]
+    }
+  },
+  'Angular': {
+    id: 'Angular',
+    name: 'Angular',
+    tagline: 'The web development framework',
+    description: 'Angular is a platform and framework for building single-page client applications using HTML and TypeScript. Angular is written in TypeScript and implements core and optional functionality as a set of TypeScript libraries.',
+    whatIsIt: {
+      title: 'What is Angular?',
+      content: 'Angular is a comprehensive framework for building web applications. It provides everything you need out of the box: routing, forms, HTTP client, testing utilities, and more. Angular uses TypeScript by default and follows a component-based architecture.',
+      visual: 'Think of Angular as a complete toolkit for building enterprise applications - everything you need is included and well-integrated.'
+    },
+    whyLearn: [
+      'Enterprise-ready - designed for large-scale applications',
+      'TypeScript-first - built with TypeScript for type safety',
+      'Complete framework - includes routing, forms, HTTP, and more',
+      'Strong tooling - excellent CLI and development tools',
+      'Google-backed - maintained by Google with long-term support'
+    ],
+    keyFeatures: {
+      title: 'Key Features',
+      items: [
+        {
+          name: 'TypeScript',
+          description: 'Built with TypeScript for type safety and better tooling',
+          icon: '🛡️'
+        },
+        {
+          name: 'Dependency Injection',
+          description: 'Built-in DI system for better code organization',
+          icon: '💉'
+        },
+        {
+          name: 'RxJS Integration',
+          description: 'Reactive programming with Observables',
+          icon: '🔄'
+        },
+        {
+          name: 'Angular CLI',
+          description: 'Powerful command-line interface for development',
+          icon: '⚡'
+        }
+      ]
+    },
+    quickExample: {
+      title: 'Quick Example',
+      code: `import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-counter',
+  template: \`
+    <div>
+      <h1>Count: {{ count }}</h1>
+      <button (click)="increment()">Increment</button>
+    </div>
+  \`
+})
+export class CounterComponent {
+  count = 0;
+  
+  increment() {
+    this.count++;
+  }
+}`,
+      explanation: 'Angular uses decorators and TypeScript for a structured approach. Notice the component decorator and class-based syntax! You can edit and preview examples live in our interactive lessons!'
+    },
+    useCases: [
+      {
+        title: 'Enterprise Applications',
+        description: 'Build large-scale, maintainable applications'
+      },
+      {
+        title: 'Single Page Applications',
+        description: 'Create complex SPAs with routing and state management'
+      },
+      {
+        title: 'Progressive Web Apps',
+        description: 'Build PWAs with Angular Service Workers'
+      },
+      {
+        title: 'Mobile Apps',
+        description: 'Create mobile apps with Ionic and Angular'
+      }
+    ],
+    gettingStarted: {
+      title: 'Getting Started',
+      steps: [
+        {
+          step: 1,
+          title: 'Learn TypeScript',
+          description: 'Master TypeScript basics as Angular uses it by default'
+        },
+        {
+          step: 2,
+          title: 'Understand Components',
+          description: 'Learn Angular components, templates, and data binding'
+        },
+        {
+          step: 3,
+          title: 'Explore Services',
+          description: 'Use services and dependency injection'
+        },
+        {
+          step: 4,
+          title: 'Master Routing',
+          description: 'Build multi-page applications with Angular Router'
+        }
+      ]
+    },
+    nextSteps: {
+      title: 'What\'s Next?',
+      description: 'After mastering Angular, explore these paths:',
+      suggestions: [
+        {
+          language: 'TypeScript',
+          languageId: 'TypeScript',
+          description: 'Deepen your TypeScript knowledge',
+          icon: '🛡️'
+        },
+        {
+          language: 'Node.js',
+          languageId: 'Node.js',
+          description: 'Build full-stack applications',
+          icon: '🚀'
+        }
+      ]
+    }
+  },
+  'Deno': {
+    id: 'Deno',
+    name: 'Deno',
+    tagline: 'A secure runtime for JavaScript and TypeScript',
+    description: 'Deno is a modern runtime for JavaScript and TypeScript that uses V8 and is built in Rust. Created by Ryan Dahl (creator of Node.js), Deno addresses many of Node.js\'s design decisions with security and developer experience in mind.',
+    whatIsIt: {
+      title: 'What is Deno?',
+      content: 'Deno is a secure runtime for JavaScript and TypeScript, built on V8 and Rust. It was created by Ryan Dahl to address what he saw as mistakes in Node.js, particularly around security, module resolution, and developer experience. Deno has built-in TypeScript support and secure-by-default permissions.',
+      visual: 'Think of Deno as Node.js 2.0 - same creator, but with lessons learned and modern best practices built-in from the start.'
+    },
+    whyLearn: [
+      'Security-first - explicit permissions for file, network, and environment access',
+      'TypeScript built-in - no need for separate compilation step',
+      'Modern features - ES modules, top-level await, and Web APIs',
+      'Single executable - no package manager or node_modules needed',
+      'Future of JavaScript - represents modern JavaScript runtime design'
+    ],
+    keyFeatures: {
+      title: 'Key Features',
+      items: [
+        {
+          name: 'Security by Default',
+          description: 'Explicit permissions for file, network, and environment access',
+          icon: '🔒'
+        },
+        {
+          name: 'TypeScript Support',
+          description: 'Built-in TypeScript support without configuration',
+          icon: '🛡️'
+        },
+        {
+          name: 'Web Standards',
+          description: 'Uses Web APIs like fetch, WebSocket, and more',
+          icon: '🌐'
+        },
+        {
+          name: 'No Package Manager',
+          description: 'Import directly from URLs, no npm or node_modules',
+          icon: '📦'
+        }
+      ]
+    },
+    quickExample: {
+      title: 'Quick Example',
+      code: `// Simple Deno server
+import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+
+serve((req) => {
+  return new Response("Hello from Deno!", {
+    headers: { "content-type": "text/plain" },
+  });
+}, { port: 8000 });
+
+console.log("Server running on http://localhost:8000");`,
+      explanation: 'Deno code is clean and modern. Notice the URL imports and built-in TypeScript! You can edit and preview examples live in our interactive lessons!'
+    },
+    useCases: [
+      {
+        title: 'Web Servers',
+        description: 'Build secure web servers and APIs'
+      },
+      {
+        title: 'Scripts & Tools',
+        description: 'Create command-line tools and automation scripts'
+      },
+      {
+        title: 'Full-Stack Apps',
+        description: 'Build complete applications with Deno Deploy'
+      },
+      {
+        title: 'Modern Development',
+        description: 'Use cutting-edge JavaScript and TypeScript features'
+      }
+    ],
+    gettingStarted: {
+      title: 'Getting Started',
+      steps: [
+        {
+          step: 1,
+          title: 'Install Deno',
+          description: 'Install Deno and understand the runtime'
+        },
+        {
+          step: 2,
+          title: 'Learn URL Imports',
+          description: 'Understand how to import modules from URLs'
+        },
+        {
+          step: 3,
+          title: 'Understand Permissions',
+          description: 'Learn Deno\'s security model and permissions'
+        },
+        {
+          step: 4,
+          title: 'Build Applications',
+          description: 'Create servers, APIs, and full-stack applications'
+        }
+      ]
+    },
+    nextSteps: {
+      title: 'What\'s Next?',
+      description: 'After mastering Deno, explore these paths:',
+      suggestions: [
+        {
+          language: 'Node.js',
+          languageId: 'Node.js',
+          description: 'Compare with Node.js and understand differences',
+          icon: '🟢'
+        },
+        {
+          language: 'TypeScript',
+          languageId: 'TypeScript',
+          description: 'Deepen your TypeScript knowledge',
+          icon: '🛡️'
+        }
+      ]
+    }
+  },
+  'Ruby on Rails': {
+    id: 'Ruby on Rails',
+    name: 'Ruby on Rails',
+    tagline: 'Convention over configuration',
+    description: 'Ruby on Rails, often called Rails, is a server-side web application framework written in Ruby. Rails emphasizes convention over configuration and the DRY (Don\'t Repeat Yourself) principle, making it perfect for rapid development.',
+    whatIsIt: {
+      title: 'What is Ruby on Rails?',
+      content: 'Rails is a full-stack web application framework that provides everything needed to create database-backed web applications. It follows the MVC (Model-View-Controller) pattern and includes everything from database migrations to email sending out of the box.',
+      visual: 'Think of Rails as a framework that makes decisions for you - follow conventions, and you can build applications incredibly fast.'
+    },
+    whyLearn: [
+      'Rapid development - build applications quickly with built-in features',
+      'Convention over configuration - less code, more productivity',
+      'Mature ecosystem - stable, well-tested, and battle-proven',
+      'Great for startups - perfect for MVPs and rapid prototyping',
+      'Active community - friendly, helpful community and extensive resources'
+    ],
+    keyFeatures: {
+      title: 'Key Features',
+      items: [
+        {
+          name: 'MVC Architecture',
+          description: 'Clean separation with Model-View-Controller pattern',
+          icon: '🏗️'
+        },
+        {
+          name: 'Active Record',
+          description: 'Powerful ORM for database interactions',
+          icon: '🗄️'
+        },
+        {
+          name: 'RESTful Routes',
+          description: 'Convention-based routing for REST APIs',
+          icon: '🛣️'
+        },
+        {
+          name: 'Built-in Testing',
+          description: 'Testing framework included by default',
+          icon: '🧪'
+        }
+      ]
+    },
+    quickExample: {
+      title: 'Quick Example',
+      code: `# Rails controller
+class UsersController < ApplicationController
+  def index
+    @users = User.all
+  end
+  
+  def show
+    @user = User.find(params[:id])
+  end
+  
+  def create
+    @user = User.new(user_params)
+    if @user.save
+      redirect_to @user
+    else
+      render :new
+    end
+  end
+  
+  private
+  
+  def user_params
+    params.require(:user).permit(:name, :email)
+  end
+end`,
+      explanation: 'Rails code is elegant and follows conventions. Notice how much functionality you get with minimal code! You can edit and preview examples live in our interactive lessons!'
+    },
+    useCases: [
+      {
+        title: 'Web Applications',
+        description: 'Build full-stack web applications rapidly'
+      },
+      {
+        title: 'APIs',
+        description: 'Create RESTful APIs and backend services'
+      },
+      {
+        title: 'Startups & MVPs',
+        description: 'Rapidly prototype and build minimum viable products'
+      },
+      {
+        title: 'E-Commerce',
+        description: 'Build online stores and marketplaces'
+      }
+    ],
+    gettingStarted: {
+      title: 'Getting Started',
+      steps: [
+        {
+          step: 1,
+          title: 'Learn Ruby Basics',
+          description: 'Master Ruby fundamentals before diving into Rails'
+        },
+        {
+          step: 2,
+          title: 'Understand MVC',
+          description: 'Learn the Model-View-Controller pattern'
+        },
+        {
+          step: 3,
+          title: 'Explore Active Record',
+          description: 'Master database interactions with Active Record'
+        },
+        {
+          step: 4,
+          title: 'Build Your First App',
+          description: 'Create a complete Rails application'
+        }
+      ]
+    },
+    nextSteps: {
+      title: 'What\'s Next?',
+      description: 'After mastering Rails, explore these paths:',
+      suggestions: [
+        {
+          language: 'Ruby',
+          languageId: 'Ruby',
+          description: 'Deepen your Ruby knowledge',
+          icon: '💎'
+        },
+        {
+          language: 'JavaScript',
+          languageId: 'JavaScript',
+          description: 'Add frontend interactivity',
+          icon: '⚡'
+        }
+      ]
+    }
+  },
+  'Elixir': {
+    id: 'Elixir',
+    name: 'Elixir',
+    tagline: 'Functional, concurrent, distributed',
+    description: 'Elixir is a dynamic, functional language designed for building scalable and maintainable applications. It runs on the Erlang VM, giving you access to an ecosystem used for building distributed, fault-tolerant systems.',
+    whatIsIt: {
+      title: 'What is Elixir?',
+      content: 'Elixir is a functional programming language built on the Erlang VM. It combines the productivity of Ruby with the robustness of Erlang, making it perfect for building distributed, fault-tolerant systems. Elixir is known for its excellent concurrency model and the Phoenix web framework.',
+      visual: 'Think of Elixir as Ruby\'s functional cousin running on Erlang\'s battle-tested virtual machine - productivity meets reliability.'
+    },
+    whyLearn: [
+      'Fault-tolerant - built for systems that need to stay running',
+      'Excellent concurrency - handle millions of concurrent processes',
+      'Phoenix framework - high-performance web framework',
+      'Functional programming - learn modern functional concepts',
+      'Growing ecosystem - active community and great tooling'
+    ],
+    keyFeatures: {
+      title: 'Key Features',
+      items: [
+        {
+          name: 'Actor Model',
+          description: 'Lightweight processes for excellent concurrency',
+          icon: '🎭'
+        },
+        {
+          name: 'Pattern Matching',
+          description: 'Powerful pattern matching for elegant code',
+          icon: '🎯'
+        },
+        {
+          name: 'Phoenix Framework',
+          description: 'High-performance web framework with real-time features',
+          icon: '🔥'
+        },
+        {
+          name: 'Fault Tolerance',
+          description: 'Let it crash philosophy with supervision trees',
+          icon: '🛡️'
+        }
+      ]
+    },
+    quickExample: {
+      title: 'Quick Example',
+      code: `# Pattern matching and functions
+defmodule Math do
+  def factorial(0), do: 1
+  def factorial(n) when n > 0, do: n * factorial(n - 1)
+  
+  def sum([]), do: 0
+  def sum([head | tail]), do: head + sum(tail)
+end
+
+# Working with processes
+pid = spawn(fn -> 
+  receive do
+    {:hello, sender} -> send(sender, "Hello back!")
+  end
+end)
+
+send(pid, {:hello, self()})`,
+      explanation: 'Elixir code is elegant with pattern matching and functional style. Notice the pattern matching in function definitions! You can edit and preview examples live in our interactive lessons!'
+    },
+    useCases: [
+      {
+        title: 'Real-Time Applications',
+        description: 'Build chat apps, gaming servers, and live systems'
+      },
+      {
+        title: 'Distributed Systems',
+        description: 'Create fault-tolerant, distributed applications'
+      },
+      {
+        title: 'Web Applications',
+        description: 'Build high-performance web apps with Phoenix'
+      },
+      {
+        title: 'IoT & Embedded',
+        description: 'Use Nerves framework for embedded systems'
+      }
+    ],
+    gettingStarted: {
+      title: 'Getting Started',
+      steps: [
+        {
+          step: 1,
+          title: 'Learn Elixir Basics',
+          description: 'Master pattern matching, functions, and data structures'
+        },
+        {
+          step: 2,
+          title: 'Understand Processes',
+          description: 'Learn the actor model and concurrency'
+        },
+        {
+          step: 3,
+          title: 'Explore Phoenix',
+          description: 'Build web applications with Phoenix framework'
+        },
+        {
+          step: 4,
+          title: 'Master OTP',
+          description: 'Learn OTP for building robust systems'
+        }
+      ]
+    },
+    nextSteps: {
+      title: 'What\'s Next?',
+      description: 'After mastering Elixir, explore these paths:',
+      suggestions: [
+        {
+          language: 'Ruby',
+          languageId: 'Ruby',
+          description: 'Compare functional vs OOP approaches',
+          icon: '💎'
+        },
+        {
+          language: 'Haskell',
+          languageId: 'Haskell',
+          description: 'Explore pure functional programming',
+          icon: '🔷'
+        }
+      ]
+    }
+  },
+  'SQL': {
+    id: 'SQL',
+    name: 'SQL',
+    tagline: 'The language of databases',
+    description: 'SQL (Structured Query Language) is the standard language for managing and manipulating relational databases. Whether you\'re a web developer, data analyst, or software engineer, SQL is an essential skill.',
+    whatIsIt: {
+      title: 'What is SQL?',
+      content: 'SQL is a domain-specific language used for managing data in relational database management systems. It allows you to create, read, update, and delete data, as well as define database structures and manage access permissions.',
+      visual: 'Think of SQL as the universal language for talking to databases - learn it once, use it everywhere.'
+    },
+    whyLearn: [
+      'Universal - works with all major database systems',
+      'Essential skill - required for most development and data roles',
+      'Powerful queries - extract and analyze data efficiently',
+      'Career opportunities - high demand across industries',
+      'Foundation - understanding databases is crucial for any developer'
+    ],
+    keyFeatures: {
+      title: 'Key Features',
+      items: [
+        {
+          name: 'Data Manipulation',
+          description: 'SELECT, INSERT, UPDATE, DELETE operations',
+          icon: '📊'
+        },
+        {
+          name: 'Data Definition',
+          description: 'CREATE, ALTER, DROP tables and schemas',
+          icon: '🏗️'
+        },
+        {
+          name: 'Joins & Relationships',
+          description: 'Combine data from multiple tables',
+          icon: '🔗'
+        },
+        {
+          name: 'Aggregations',
+          description: 'GROUP BY, HAVING, and aggregate functions',
+          icon: '📈'
+        }
+      ]
+    },
+    quickExample: {
+      title: 'Quick Example',
+      code: `-- Create a table
+CREATE TABLE users (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(100) UNIQUE,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Insert data
+INSERT INTO users (name, email) 
+VALUES ('Alice', 'alice@example.com');
+
+-- Query data
+SELECT name, email 
+FROM users 
+WHERE created_at > '2024-01-01'
+ORDER BY name;
+
+-- Join tables
+SELECT u.name, o.total
+FROM users u
+JOIN orders o ON u.id = o.user_id
+WHERE o.total > 100;`,
+      explanation: 'SQL makes it easy to work with databases. Notice how intuitive the syntax is for querying and manipulating data! You can edit and preview examples live in our interactive lessons!'
+    },
+    useCases: [
+      {
+        title: 'Web Development',
+        description: 'Store and retrieve data for web applications'
+      },
+      {
+        title: 'Data Analysis',
+        description: 'Analyze and extract insights from databases'
+      },
+      {
+        title: 'Business Intelligence',
+        description: 'Create reports and dashboards from data'
+      },
+      {
+        title: 'Database Administration',
+        description: 'Manage and maintain database systems'
+      }
+    ],
+    gettingStarted: {
+      title: 'Getting Started',
+      steps: [
+        {
+          step: 1,
+          title: 'Learn Basic Queries',
+          description: 'Master SELECT, WHERE, ORDER BY, and LIMIT'
+        },
+        {
+          step: 2,
+          title: 'Understand Joins',
+          description: 'Learn INNER, LEFT, RIGHT, and FULL JOINs'
+        },
+        {
+          step: 3,
+          title: 'Master Aggregations',
+          description: 'Use GROUP BY, HAVING, and aggregate functions'
+        },
+        {
+          step: 4,
+          title: 'Practice with Real Data',
+          description: 'Work with sample databases and real projects'
+        }
+      ]
+    },
+    nextSteps: {
+      title: 'What\'s Next?',
+      description: 'After mastering SQL, explore these paths:',
+      suggestions: [
+        {
+          language: 'PostgreSQL',
+          languageId: 'PostgreSQL',
+          description: 'Learn advanced PostgreSQL features',
+          icon: '🐘'
+        },
+        {
+          language: 'Node.js',
+          languageId: 'Node.js',
+          description: 'Use SQL in your backend applications',
+          icon: '🚀'
+        }
+      ]
+    }
+  },
+  'PostgreSQL': {
+    id: 'PostgreSQL',
+    name: 'PostgreSQL',
+    tagline: 'The world\'s most advanced open source database',
+    description: 'PostgreSQL is a powerful, open-source object-relational database system with over 30 years of active development. It has earned a strong reputation for reliability, feature robustness, and performance.',
+    whatIsIt: {
+      title: 'What is PostgreSQL?',
+      content: 'PostgreSQL is an advanced, open-source relational database management system. It extends SQL with additional features like JSON support, full-text search, and advanced indexing. PostgreSQL is known for its standards compliance and extensibility.',
+      visual: 'Think of PostgreSQL as the Swiss Army knife of databases - powerful, reliable, and feature-rich.'
+    },
+    whyLearn: [
+      'Advanced features - JSON, arrays, full-text search, and more',
+      'ACID compliant - reliable transactions and data integrity',
+      'Extensible - add custom functions, types, and operators',
+      'Open source - free, community-driven, and well-maintained',
+      'Industry standard - used by major companies worldwide'
+    ],
+    keyFeatures: {
+      title: 'Key Features',
+      items: [
+        {
+          name: 'JSON Support',
+          description: 'Native JSON and JSONB data types with indexing',
+          icon: '📄'
+        },
+        {
+          name: 'Full-Text Search',
+          description: 'Built-in full-text search capabilities',
+          icon: '🔍'
+        },
+        {
+          name: 'Advanced Indexing',
+          description: 'B-tree, hash, GIN, GiST, and custom indexes',
+          icon: '📇'
+        },
+        {
+          name: 'Stored Procedures',
+          description: 'Write functions in multiple languages',
+          icon: '⚙️'
+        }
+      ]
+    },
+    quickExample: {
+      title: 'Quick Example',
+      code: `-- JSON support
+CREATE TABLE products (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(100),
+  attributes JSONB
+);
+
+INSERT INTO products (name, attributes) 
+VALUES ('Laptop', '{"brand": "Dell", "ram": "16GB", "storage": "512GB"}');
+
+-- Query JSON
+SELECT name, attributes->>'brand' as brand
+FROM products
+WHERE attributes @> '{"ram": "16GB"}';
+
+-- Full-text search
+CREATE TABLE articles (
+  id SERIAL PRIMARY KEY,
+  title VARCHAR(200),
+  content TEXT
+);
+
+SELECT title, content
+FROM articles
+WHERE to_tsvector('english', content) @@ to_tsquery('english', 'database');`,
+      explanation: 'PostgreSQL extends SQL with powerful features like JSON support and full-text search. Notice how you can query JSON data directly! You can edit and preview examples live in our interactive lessons!'
+    },
+    useCases: [
+      {
+        title: 'Web Applications',
+        description: 'Power backend databases for web apps'
+      },
+      {
+        title: 'Data Warehousing',
+        description: 'Store and analyze large datasets'
+      },
+      {
+        title: 'Geospatial Data',
+        description: 'Use PostGIS for geographic information systems'
+      },
+      {
+        title: 'Analytics',
+        description: 'Complex queries and data analysis'
+      }
+    ],
+    gettingStarted: {
+      title: 'Getting Started',
+      steps: [
+        {
+          step: 1,
+          title: 'Learn SQL Basics',
+          description: 'Master fundamental SQL concepts first'
+        },
+        {
+          step: 2,
+          title: 'Explore PostgreSQL Features',
+          description: 'Learn JSON, arrays, and advanced data types'
+        },
+        {
+          step: 3,
+          title: 'Understand Indexing',
+          description: 'Master different index types and optimization'
+        },
+        {
+          step: 4,
+          title: 'Practice Advanced Queries',
+          description: 'Work with complex queries and stored procedures'
+        }
+      ]
+    },
+    nextSteps: {
+      title: 'What\'s Next?',
+      description: 'After mastering PostgreSQL, explore these paths:',
+      suggestions: [
+        {
+          language: 'SQL',
+          languageId: 'SQL',
+          description: 'Deepen your SQL knowledge',
+          icon: '📊'
+        },
+        {
+          language: 'Node.js',
+          languageId: 'Node.js',
+          description: 'Use PostgreSQL in your applications',
+          icon: '🚀'
+        }
+      ]
+    }
+  },
+  'MySQL': {
+    id: 'MySQL',
+    name: 'MySQL',
+    tagline: 'The world\'s most popular open source database',
+    description: 'MySQL is the world\'s most popular open-source relational database management system. It\'s fast, reliable, and easy to use, making it the database of choice for many web applications.',
+    whatIsIt: {
+      title: 'What is MySQL?',
+      content: 'MySQL is an open-source relational database management system that uses SQL. It\'s known for its speed, reliability, and ease of use. MySQL is widely used in web applications and is the M in the LAMP stack (Linux, Apache, MySQL, PHP).',
+      visual: 'Think of MySQL as the workhorse of web databases - reliable, fast, and trusted by millions of applications.'
+    },
+    whyLearn: [
+      'Most popular - widely used across the web',
+      'Fast performance - optimized for speed',
+      'Easy to use - simple setup and administration',
+      'Great documentation - extensive resources and community',
+      'Industry standard - used by major platforms like WordPress'
+    ],
+    keyFeatures: {
+      title: 'Key Features',
+      items: [
+        {
+          name: 'High Performance',
+          description: 'Optimized for speed and efficiency',
+          icon: '⚡'
+        },
+        {
+          name: 'Scalability',
+          description: 'Handles everything from small to large applications',
+          icon: '📈'
+        },
+        {
+          name: 'Replication',
+          description: 'Master-slave and master-master replication',
+          icon: '🔄'
+        },
+        {
+          name: 'Storage Engines',
+          description: 'Multiple storage engines (InnoDB, MyISAM, etc.)',
+          icon: '💾'
+        }
+      ]
+    },
+    quickExample: {
+      title: 'Quick Example',
+      code: `-- Create database and table
+CREATE DATABASE myapp;
+USE myapp;
+
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(50) UNIQUE NOT NULL,
+  email VARCHAR(100) UNIQUE NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Insert data
+INSERT INTO users (username, email) 
+VALUES ('john_doe', 'john@example.com'),
+       ('jane_smith', 'jane@example.com');
+
+-- Query with joins
+SELECT u.username, p.title, p.created_at
+FROM users u
+LEFT JOIN posts p ON u.id = p.user_id
+ORDER BY p.created_at DESC;`,
+      explanation: 'MySQL makes database management straightforward. Notice the simple syntax and powerful querying capabilities! You can edit and preview examples live in our interactive lessons!'
+    },
+    useCases: [
+      {
+        title: 'Web Applications',
+        description: 'Power millions of websites and web apps'
+      },
+      {
+        title: 'Content Management',
+        description: 'Used by WordPress, Drupal, and other CMS platforms'
+      },
+      {
+        title: 'E-Commerce',
+        description: 'Store product and order data for online stores'
+      },
+      {
+        title: 'Data Analysis',
+        description: 'Analyze business data and generate reports'
+      }
+    ],
+    gettingStarted: {
+      title: 'Getting Started',
+      steps: [
+        {
+          step: 1,
+          title: 'Learn SQL Basics',
+          description: 'Master fundamental SQL with MySQL'
+        },
+        {
+          step: 2,
+          title: 'Understand Storage Engines',
+          description: 'Learn about InnoDB, MyISAM, and other engines'
+        },
+        {
+          step: 3,
+          title: 'Master Indexing',
+          description: 'Optimize queries with proper indexing'
+        },
+        {
+          step: 4,
+          title: 'Practice Administration',
+          description: 'Learn backup, restore, and maintenance'
+        }
+      ]
+    },
+    nextSteps: {
+      title: 'What\'s Next?',
+      description: 'After mastering MySQL, explore these paths:',
+      suggestions: [
+        {
+          language: 'PostgreSQL',
+          languageId: 'PostgreSQL',
+          description: 'Explore advanced database features',
+          icon: '🐘'
+        },
+        {
+          language: 'PHP',
+          languageId: 'PHP',
+          description: 'Build web apps with MySQL and PHP',
+          icon: '🐘'
+        }
+      ]
+    }
+  },
+  // Mobile languages
+  'Flutter': {
+    id: 'Flutter',
+    name: 'Flutter / Dart',
+    tagline: 'Build beautiful native apps',
+    description: 'Flutter is Google\'s UI toolkit for building natively compiled applications for mobile, web, desktop, and embedded devices from a single codebase. Flutter uses Dart, a modern language optimized for client-side development.',
+    whatIsIt: {
+      title: 'What is Flutter?',
+      content: 'Flutter is a cross-platform framework that lets you build apps for iOS, Android, Web, Windows, macOS, and Linux from a single codebase. It uses Dart programming language and provides a rich set of pre-built widgets for creating beautiful, fast user interfaces.',
+      visual: 'Think of Flutter as "write once, run everywhere" done right - one codebase, native performance on all platforms.'
+    },
+    whyLearn: [
+      'Cross-platform - build for iOS, Android, Web, and desktop from one codebase',
+      'Fast development - hot reload for instant updates',
+      'Beautiful UI - rich widget library and custom designs',
+      'Native performance - compiled to native code',
+      'Growing ecosystem - backed by Google with active community'
+    ],
+    keyFeatures: {
+      title: 'Key Features',
+      items: [
+        {
+          name: 'Hot Reload',
+          description: 'See changes instantly without losing app state',
+          icon: '⚡'
+        },
+        {
+          name: 'Rich Widgets',
+          description: 'Extensive library of beautiful, customizable widgets',
+          icon: '🧩'
+        },
+        {
+          name: 'Dart Language',
+          description: 'Modern language optimized for UI development',
+          icon: '🎯'
+        },
+        {
+          name: 'Native Performance',
+          description: 'Compiled to native ARM code for fast execution',
+          icon: '🚀'
+        }
+      ]
+    },
+    quickExample: {
+      title: 'Quick Example',
+      code: `import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(title: Text('Flutter Demo')),
+        body: Center(
+          child: Text('Hello, Flutter!'),
+        ),
+      ),
+    );
+  }
+}`,
+      explanation: 'Flutter code is declarative and widget-based. Notice how everything is a widget! You can edit and preview examples live in our interactive lessons!'
+    },
+    useCases: [
+      {
+        title: 'Mobile Apps',
+        description: 'Build iOS and Android apps from one codebase'
+      },
+      {
+        title: 'Web Applications',
+        description: 'Create web apps with Flutter for Web'
+      },
+      {
+        title: 'Desktop Apps',
+        description: 'Build Windows, macOS, and Linux applications'
+      },
+      {
+        title: 'Embedded Systems',
+        description: 'Use Flutter for embedded devices and IoT'
+      }
+    ],
+    gettingStarted: {
+      title: 'Getting Started',
+      steps: [
+        {
+          step: 1,
+          title: 'Learn Dart Basics',
+          description: 'Master Dart programming language fundamentals'
+        },
+        {
+          step: 2,
+          title: 'Understand Widgets',
+          description: 'Learn Flutter\'s widget system and composition'
+        },
+        {
+          step: 3,
+          title: 'Explore State Management',
+          description: 'Use setState, Provider, or Riverpod for state'
+        },
+        {
+          step: 4,
+          title: 'Build Your First App',
+          description: 'Create a complete mobile application'
+        }
+      ]
+    },
+    nextSteps: {
+      title: 'What\'s Next?',
+      description: 'After mastering Flutter, explore these paths:',
+      suggestions: [
+        {
+          language: 'Dart',
+          languageId: 'Flutter',
+          description: 'Deepen your Dart knowledge',
+          icon: '🎯'
+        },
+        {
+          language: 'React Native',
+          languageId: 'React Native',
+          description: 'Compare with React Native',
+          icon: '⚛️'
+        }
+      ]
+    }
+  },
+  'React Native': {
+    id: 'React Native',
+    name: 'React Native',
+    tagline: 'Learn once, write anywhere',
+    description: 'React Native lets you build mobile apps using only JavaScript. It uses the same design as React, letting you compose a rich mobile UI from declarative components.',
+    whatIsIt: {
+      title: 'What is React Native?',
+      content: 'React Native is a framework for building native mobile applications using React and JavaScript. It allows you to write code once and deploy it to both iOS and Android, while still providing access to native platform features.',
+      visual: 'Think of React Native as React for mobile - same concepts, same developer experience, but for building native mobile apps.'
+    },
+    whyLearn: [
+      'Code reuse - share code between iOS and Android',
+      'React knowledge - use your existing React skills',
+      'Native performance - compiles to native components',
+      'Hot reload - see changes instantly',
+      'Large ecosystem - huge community and library support'
+    ],
+    keyFeatures: {
+      title: 'Key Features',
+      items: [
+        {
+          name: 'Cross-Platform',
+          description: 'Write once, run on iOS and Android',
+          icon: '📱'
+        },
+        {
+          name: 'React Concepts',
+          description: 'Use familiar React patterns and hooks',
+          icon: '⚛️'
+        },
+        {
+          name: 'Native Components',
+          description: 'Access to native platform APIs',
+          icon: '🔧'
+        },
+        {
+          name: 'Fast Refresh',
+          description: 'Instant updates during development',
+          icon: '⚡'
+        }
+      ]
+    },
+    quickExample: {
+      title: 'Quick Example',
+      code: `import React, { useState } from 'react';
+import { View, Text, Button } from 'react-native';
+
+function App() {
+  const [count, setCount] = useState(0);
+  
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Count: {count}</Text>
+      <Button title="Increment" onPress={() => setCount(count + 1)} />
+    </View>
+  );
+}
+
+export default App;`,
+      explanation: 'React Native uses React concepts you already know! Notice how similar it is to React web development. You can edit and preview examples live in our interactive lessons!'
+    },
+    useCases: [
+      {
+        title: 'Mobile Apps',
+        description: 'Build iOS and Android applications'
+      },
+      {
+        title: 'Cross-Platform',
+        description: 'Share code between platforms efficiently'
+      },
+      {
+        title: 'Startups',
+        description: 'Rapidly develop MVPs for mobile'
+      },
+      {
+        title: 'Enterprise Apps',
+        description: 'Build large-scale mobile applications'
+      }
+    ],
+    gettingStarted: {
+      title: 'Getting Started',
+      steps: [
+        {
+          step: 1,
+          title: 'Learn React First',
+          description: 'Master React basics before React Native'
+        },
+        {
+          step: 2,
+          title: 'Understand Native Components',
+          description: 'Learn View, Text, Image, and other components'
+        },
+        {
+          step: 3,
+          title: 'Explore Navigation',
+          description: 'Use React Navigation for app navigation'
+        },
+        {
+          step: 4,
+          title: 'Build Your First App',
+          description: 'Create a complete mobile application'
+        }
+      ]
+    },
+    nextSteps: {
+      title: 'What\'s Next?',
+      description: 'After mastering React Native, explore these paths:',
+      suggestions: [
+        {
+          language: 'React',
+          languageId: 'React',
+          description: 'Deepen your React knowledge',
+          icon: '⚛️'
+        },
+        {
+          language: 'TypeScript',
+          languageId: 'TypeScript',
+          description: 'Add type safety to React Native',
+          icon: '🛡️'
+        }
+      ]
+    }
+  },
+  'Objective-C': {
+    id: 'Objective-C',
+    name: 'Objective-C',
+    tagline: 'The original iOS language',
+    description: 'Objective-C is the primary programming language used for writing software for macOS and iOS. While Swift is now preferred, Objective-C is still widely used in legacy codebases and is valuable for maintaining existing applications.',
+    whatIsIt: {
+      title: 'What is Objective-C?',
+      content: 'Objective-C is an object-oriented programming language that adds Smalltalk-style messaging to C. It was the primary language for Apple platforms before Swift and is still used in many existing iOS and macOS applications.',
+      visual: 'Think of Objective-C as C with object-oriented superpowers - it extends C with dynamic runtime and messaging capabilities.'
+    },
+    whyLearn: [
+      'Legacy codebases - many iOS apps still use Objective-C',
+      'Foundation knowledge - understand how Apple platforms work',
+      'C compatibility - works seamlessly with C code',
+      'Dynamic runtime - powerful runtime features',
+      'Career opportunities - maintain and update existing apps'
+    ],
+    keyFeatures: {
+      title: 'Key Features',
+      items: [
+        {
+          name: 'Dynamic Runtime',
+          description: 'Powerful runtime with dynamic method dispatch',
+          icon: '⚡'
+        },
+        {
+          name: 'Message Passing',
+          description: 'Smalltalk-style messaging between objects',
+          icon: '💬'
+        },
+        {
+          name: 'C Compatibility',
+          description: 'Full compatibility with C and C++',
+          icon: '🔗'
+        },
+        {
+          name: 'Cocoa Framework',
+          description: 'Access to Apple\'s Cocoa and Cocoa Touch frameworks',
+          icon: '🍎'
+        }
+      ]
+    },
+    quickExample: {
+      title: 'Quick Example',
+      code: `// Objective-C class
+#import <Foundation/Foundation.h>
+
+@interface Person : NSObject
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, assign) NSInteger age;
+
+- (void)greet;
+@end
+
+@implementation Person
+- (void)greet {
+    NSLog(@"Hello, I'm %@ and I'm %ld years old", self.name, (long)self.age);
+}
+@end
+
+// Usage
+Person *person = [[Person alloc] init];
+person.name = @"Alice";
+person.age = 25;
+[person greet];`,
+      explanation: 'Objective-C uses a unique syntax with square brackets for method calls. Notice the @interface and @implementation syntax! You can edit and preview examples live in our interactive lessons!'
+    },
+    useCases: [
+      {
+        title: 'Legacy iOS Apps',
+        description: 'Maintain and update existing iOS applications'
+      },
+      {
+        title: 'macOS Development',
+        description: 'Build desktop applications for Mac'
+      },
+      {
+        title: 'Framework Development',
+        description: 'Create libraries and frameworks for Apple platforms'
+      },
+      {
+        title: 'System Programming',
+        description: 'Low-level system programming on macOS'
+      }
+    ],
+    gettingStarted: {
+      title: 'Getting Started',
+      steps: [
+        {
+          step: 1,
+          title: 'Learn C Basics',
+          description: 'Master C programming fundamentals first'
+        },
+        {
+          step: 2,
+          title: 'Understand OOP',
+          description: 'Learn object-oriented concepts in Objective-C'
+        },
+        {
+          step: 3,
+          title: 'Explore Cocoa',
+          description: 'Get familiar with Cocoa and Cocoa Touch frameworks'
+        },
+        {
+          step: 4,
+          title: 'Build iOS Apps',
+          description: 'Create iOS applications with Xcode'
+        }
+      ]
+    },
+    nextSteps: {
+      title: 'What\'s Next?',
+      description: 'After mastering Objective-C, explore these paths:',
+      suggestions: [
+        {
+          language: 'Swift',
+          languageId: 'Swift',
+          description: 'Learn modern iOS development with Swift',
+          icon: '🦉'
+        },
+        {
+          language: 'C',
+          languageId: 'C',
+          description: 'Deepen your C knowledge',
+          icon: '⚙️'
+        }
+      ]
+    }
+  },
+  // Systems languages
+  'Assembly': {
+    id: 'Assembly',
+    name: 'Assembly',
+    tagline: 'The language closest to the machine',
+    description: 'Assembly language is a low-level programming language that corresponds closely to machine code instructions. Learning assembly gives you deep understanding of how computers work at the hardware level.',
+    whatIsIt: {
+      title: 'What is Assembly?',
+      content: 'Assembly language is a low-level programming language that uses mnemonics to represent machine code instructions. Each assembly instruction corresponds to a single machine instruction, giving you direct control over the CPU and memory.',
+      visual: 'Think of Assembly as the native language of your computer\'s processor - every instruction you write directly controls the hardware.'
+    },
+    whyLearn: [
+      'Deep understanding - learn how computers really work',
+      'Performance - maximum control and optimization',
+      'Embedded systems - essential for microcontroller programming',
+      'Reverse engineering - understand compiled code',
+      'Educational value - fundamental computer science knowledge'
+    ],
+    keyFeatures: {
+      title: 'Key Features',
+      items: [
+        {
+          name: 'Direct Hardware Control',
+          description: 'Direct access to CPU registers and memory',
+          icon: '⚙️'
+        },
+        {
+          name: 'Minimal Abstraction',
+          description: 'One-to-one mapping with machine instructions',
+          icon: '🎯'
+        },
+        {
+          name: 'Maximum Performance',
+          description: 'No overhead, complete control over execution',
+          icon: '⚡'
+        },
+        {
+          name: 'Platform Specific',
+          description: 'Different for x86, ARM, and other architectures',
+          icon: '🖥️'
+        }
+      ]
+    },
+    quickExample: {
+      title: 'Quick Example',
+      code: `; x86-64 Assembly example
+section .data
+    msg db 'Hello, Assembly!', 0xA
+    len equ $ - msg
+
+section .text
+    global _start
+
+_start:
+    ; Write to stdout
+    mov rax, 1        ; sys_write
+    mov rdi, 1        ; file descriptor (stdout)
+    mov rsi, msg      ; message address
+    mov rdx, len      ; message length
+    syscall
+    
+    ; Exit
+    mov rax, 60       ; sys_exit
+    mov rdi, 0        ; exit code
+    syscall`,
+      explanation: 'Assembly gives you direct control over the CPU. Notice how each instruction directly manipulates registers and memory! You can edit and preview examples live in our interactive lessons!'
+    },
+    useCases: [
+      {
+        title: 'Embedded Systems',
+        description: 'Program microcontrollers and embedded devices'
+      },
+      {
+        title: 'Operating Systems',
+        description: 'Write kernel code and system software'
+      },
+      {
+        title: 'Performance Optimization',
+        description: 'Optimize critical code sections'
+      },
+      {
+        title: 'Reverse Engineering',
+        description: 'Understand and analyze compiled programs'
+      }
+    ],
+    gettingStarted: {
+      title: 'Getting Started',
+      steps: [
+        {
+          step: 1,
+          title: 'Learn Computer Architecture',
+          description: 'Understand CPU, registers, and memory'
+        },
+        {
+          step: 2,
+          title: 'Master Basic Instructions',
+          description: 'Learn MOV, ADD, SUB, and control flow'
+        },
+        {
+          step: 3,
+          title: 'Understand Calling Conventions',
+          description: 'Learn how functions work at assembly level'
+        },
+        {
+          step: 4,
+          title: 'Practice with Projects',
+          description: 'Write assembly programs and debug them'
+        }
+      ]
+    },
+    nextSteps: {
+      title: 'What\'s Next?',
+      description: 'After mastering Assembly, explore these paths:',
+      suggestions: [
+        {
+          language: 'C',
+          languageId: 'C',
+          description: 'See how C compiles to assembly',
+          icon: '⚙️'
+        },
+        {
+          language: 'Rust',
+          languageId: 'Rust',
+          description: 'Learn modern systems programming',
+          icon: '🦀'
+        }
+      ]
+    }
+  },
+  'R': {
+    id: 'R',
+    name: 'R',
+    tagline: 'The language of data science',
+    description: 'R is a programming language and environment for statistical computing and graphics. It\'s widely used by statisticians, data analysts, and researchers for data analysis, visualization, and statistical modeling.',
+    whatIsIt: {
+      title: 'What is R?',
+      content: 'R is a language and environment for statistical computing and graphics. It provides a wide variety of statistical and graphical techniques and is highly extensible. R is particularly strong in data manipulation, statistical analysis, and data visualization.',
+      visual: 'Think of R as a specialized tool for data scientists - designed from the ground up for statistical analysis and data visualization.'
+    },
+    whyLearn: [
+      'Data science - essential for statistical analysis and research',
+      'Powerful visualization - excellent plotting and graphics capabilities',
+      'Rich ecosystem - thousands of packages for data analysis',
+      'Academic standard - widely used in research and academia',
+      'Career opportunities - high demand for data science skills'
+    ],
+    keyFeatures: {
+      title: 'Key Features',
+      items: [
+        {
+          name: 'Statistical Analysis',
+          description: 'Built-in functions for statistical tests and modeling',
+          icon: '📊'
+        },
+        {
+          name: 'Data Visualization',
+          description: 'Powerful plotting with ggplot2 and base graphics',
+          icon: '📈'
+        },
+        {
+          name: 'Data Frames',
+          description: 'Native support for tabular data structures',
+          icon: '📋'
+        },
+        {
+          name: 'Package Ecosystem',
+          description: 'CRAN with thousands of specialized packages',
+          icon: '📦'
+        }
+      ]
+    },
+    quickExample: {
+      title: 'Quick Example',
+      code: `# Create a data frame
+data <- data.frame(
+  name = c("Alice", "Bob", "Charlie"),
+  age = c(25, 30, 35),
+  score = c(85, 92, 78)
+)
+
+# Basic statistics
+mean(data$score)
+summary(data)
+
+# Visualization
+plot(data$age, data$score, 
+     main = "Age vs Score",
+     xlab = "Age", 
+     ylab = "Score")
+
+# Linear regression
+model <- lm(score ~ age, data = data)
+summary(model)`,
+      explanation: 'R makes statistical analysis straightforward. Notice how intuitive the syntax is for data manipulation and analysis! You can edit and preview examples live in our interactive lessons!'
+    },
+    useCases: [
+      {
+        title: 'Data Analysis',
+        description: 'Analyze datasets and extract insights'
+      },
+      {
+        title: 'Statistical Modeling',
+        description: 'Build regression models and statistical tests'
+      },
+      {
+        title: 'Data Visualization',
+        description: 'Create publication-quality plots and charts'
+      },
+      {
+        title: 'Research',
+        description: 'Academic research and scientific computing'
+      }
+    ],
+    gettingStarted: {
+      title: 'Getting Started',
+      steps: [
+        {
+          step: 1,
+          title: 'Learn R Basics',
+          description: 'Master vectors, data frames, and basic operations'
+        },
+        {
+          step: 2,
+          title: 'Explore Data Manipulation',
+          description: 'Use dplyr for data wrangling'
+        },
+        {
+          step: 3,
+          title: 'Master Visualization',
+          description: 'Create plots with ggplot2'
+        },
+        {
+          step: 4,
+          title: 'Practice Statistics',
+          description: 'Perform statistical tests and modeling'
+        }
+      ]
+    },
+    nextSteps: {
+      title: 'What\'s Next?',
+      description: 'After mastering R, explore these paths:',
+      suggestions: [
+        {
+          language: 'Python',
+          languageId: 'Python',
+          description: 'Compare with Python for data science',
+          icon: '🐍'
+        },
+        {
+          language: 'SQL',
+          languageId: 'SQL',
+          description: 'Combine R with SQL for data analysis',
+          icon: '📊'
+        }
+      ]
+    }
+  },
+  'MATLAB': {
+    id: 'MATLAB',
+    name: 'MATLAB',
+    tagline: 'The language of technical computing',
+    description: 'MATLAB is a high-level programming language and interactive environment for numerical computation, visualization, and programming. It\'s widely used in engineering, science, and mathematics.',
+    whatIsIt: {
+      title: 'What is MATLAB?',
+      content: 'MATLAB (Matrix Laboratory) is a programming platform designed for engineers and scientists. It combines a desktop environment tuned for iterative analysis and design processes with a programming language that expresses matrix and array mathematics directly.',
+      visual: 'Think of MATLAB as a powerful calculator for engineers and scientists - designed for mathematical computation and visualization.'
+    },
+    whyLearn: [
+      'Engineering standard - widely used in engineering and science',
+      'Matrix operations - optimized for mathematical computations',
+      'Rich toolboxes - specialized tools for various domains',
+      'Visualization - excellent plotting and 3D graphics',
+      'Industry demand - valuable skill in engineering fields'
+    ],
+    keyFeatures: {
+      title: 'Key Features',
+      items: [
+        {
+          name: 'Matrix Operations',
+          description: 'Native support for matrix and array mathematics',
+          icon: '🔢'
+        },
+        {
+          name: 'Toolboxes',
+          description: 'Specialized toolboxes for various engineering domains',
+          icon: '🧰'
+        },
+        {
+          name: 'Simulink',
+          description: 'Model-based design and simulation',
+          icon: '📐'
+        },
+        {
+          name: 'Visualization',
+          description: 'Powerful 2D and 3D plotting capabilities',
+          icon: '📊'
+        }
+      ]
+    },
+    quickExample: {
+      title: 'Quick Example',
+      code: `% Create matrices
+A = [1, 2, 3; 4, 5, 6; 7, 8, 9];
+B = [9, 8, 7; 6, 5, 4; 3, 2, 1];
+
+% Matrix operations
+C = A * B;
+D = A .* B;  % Element-wise multiplication
+
+% Plotting
+x = 0:0.1:10;
+y = sin(x);
+plot(x, y);
+title('Sine Wave');
+xlabel('x');
+ylabel('sin(x)');
+
+% Statistics
+mean_value = mean(A(:));
+std_value = std(A(:));`,
+      explanation: 'MATLAB makes mathematical computation intuitive. Notice how natural matrix operations are! You can edit and preview examples live in our interactive lessons!'
+    },
+    useCases: [
+      {
+        title: 'Engineering',
+        description: 'Signal processing, control systems, and simulations'
+      },
+      {
+        title: 'Scientific Computing',
+        description: 'Numerical analysis and scientific research'
+      },
+      {
+        title: 'Data Analysis',
+        description: 'Analyze experimental data and results'
+      },
+      {
+        title: 'Image Processing',
+        description: 'Process and analyze images and signals'
+      }
+    ],
+    gettingStarted: {
+      title: 'Getting Started',
+      steps: [
+        {
+          step: 1,
+          title: 'Learn MATLAB Basics',
+          description: 'Master matrices, arrays, and basic operations'
+        },
+        {
+          step: 2,
+          title: 'Understand Scripts & Functions',
+          description: 'Write reusable MATLAB scripts and functions'
+        },
+        {
+          step: 3,
+          title: 'Explore Toolboxes',
+          description: 'Use specialized toolboxes for your domain'
+        },
+        {
+          step: 4,
+          title: 'Practice Visualization',
+          description: 'Create plots and 3D visualizations'
+        }
+      ]
+    },
+    nextSteps: {
+      title: 'What\'s Next?',
+      description: 'After mastering MATLAB, explore these paths:',
+      suggestions: [
+        {
+          language: 'Python',
+          languageId: 'Python',
+          description: 'Compare with Python for scientific computing',
+          icon: '🐍'
+        },
+        {
+          language: 'R',
+          languageId: 'R',
+          description: 'Explore statistical computing with R',
+          icon: '📊'
+        }
+      ]
+    }
+  },
+  'Haskell': {
+    id: 'Haskell',
+    name: 'Haskell',
+    tagline: 'Purely functional programming',
+    description: 'Haskell is a purely functional programming language with strong static typing and lazy evaluation. It\'s known for its mathematical elegance and is excellent for learning functional programming concepts.',
+    whatIsIt: {
+      title: 'What is Haskell?',
+      content: 'Haskell is a purely functional programming language, meaning functions have no side effects and the same input always produces the same output. It features strong static typing, type inference, and lazy evaluation, making it both powerful and elegant.',
+      visual: 'Think of Haskell as mathematics made into a programming language - elegant, pure, and mathematically sound.'
+    },
+    whyLearn: [
+      'Functional programming - learn pure functional concepts',
+      'Type safety - powerful type system prevents many errors',
+      'Mathematical elegance - beautiful, concise code',
+      'Mind-expanding - changes how you think about programming',
+      'Academic value - widely taught in computer science programs'
+    ],
+    keyFeatures: {
+      title: 'Key Features',
+      items: [
+        {
+          name: 'Pure Functions',
+          description: 'No side effects, referential transparency',
+          icon: '✨'
+        },
+        {
+          name: 'Strong Typing',
+          description: 'Powerful type system with type inference',
+          icon: '🛡️'
+        },
+        {
+          name: 'Lazy Evaluation',
+          description: 'Expressions evaluated only when needed',
+          icon: '⏱️'
+        },
+        {
+          name: 'Pattern Matching',
+          description: 'Elegant pattern matching and guards',
+          icon: '🎯'
+        }
+      ]
+    },
+    quickExample: {
+      title: 'Quick Example',
+      code: `-- Function definitions
+factorial :: Integer -> Integer
+factorial 0 = 1
+factorial n = n * factorial (n - 1)
+
+-- List comprehensions
+squares = [x^2 | x <- [1..10]]
+
+-- Higher-order functions
+map (*2) [1, 2, 3, 4, 5]
+filter (>3) [1, 2, 3, 4, 5]
+
+-- Pattern matching
+fibonacci :: Integer -> Integer
+fibonacci 0 = 0
+fibonacci 1 = 1
+fibonacci n = fibonacci (n-1) + fibonacci (n-2)`,
+      explanation: 'Haskell code is elegant and mathematical. Notice the pattern matching and type signatures! You can edit and preview examples live in our interactive lessons!'
+    },
+    useCases: [
+      {
+        title: 'Functional Programming',
+        description: 'Learn and practice pure functional programming'
+      },
+      {
+        title: 'Research',
+        description: 'Academic research and language design'
+      },
+      {
+        title: 'Financial Systems',
+        description: 'Build reliable financial and trading systems'
+      },
+      {
+        title: 'Compilers',
+        description: 'Write compilers and language tools'
+      }
+    ],
+    gettingStarted: {
+      title: 'Getting Started',
+      steps: [
+        {
+          step: 1,
+          title: 'Learn Functional Concepts',
+          description: 'Understand immutability and pure functions'
+        },
+        {
+          step: 2,
+          title: 'Master Types',
+          description: 'Learn Haskell\'s type system and type inference'
+        },
+        {
+          step: 3,
+          title: 'Understand Lazy Evaluation',
+          description: 'Learn how lazy evaluation works'
+        },
+        {
+          step: 4,
+          title: 'Practice with Projects',
+          description: 'Build functional programs and solve problems'
+        }
+      ]
+    },
+    nextSteps: {
+      title: 'What\'s Next?',
+      description: 'After mastering Haskell, explore these paths:',
+      suggestions: [
+        {
+          language: 'Elixir',
+          languageId: 'Elixir',
+          description: 'Apply functional concepts to practical applications',
+          icon: '💜'
+        },
+        {
+          language: 'Scala',
+          languageId: 'Scala',
+          description: 'Learn functional programming on the JVM',
+          icon: '🔷'
+        }
+      ]
+    }
+  },
+  'Scala': {
+    id: 'Scala',
+    name: 'Scala',
+    tagline: 'Scalable language for the JVM',
+    description: 'Scala is a modern programming language that combines object-oriented and functional programming. It runs on the Java Virtual Machine and is designed to be concise, elegant, and scalable.',
+    whatIsIt: {
+      title: 'What is Scala?',
+      content: 'Scala (Scalable Language) is a general-purpose programming language that supports both object-oriented and functional programming paradigms. It runs on the JVM and is fully interoperable with Java, making it popular for building large-scale systems.',
+      visual: 'Think of Scala as Java\'s sophisticated cousin - more expressive, more functional, but still runs on the JVM.'
+    },
+    whyLearn: [
+      'JVM ecosystem - runs on Java Virtual Machine with Java interop',
+      'Functional + OOP - best of both programming paradigms',
+      'Concise syntax - write less code than Java',
+      'Big Data - used by Spark, Kafka, and big data tools',
+      'Type safety - strong static typing with type inference'
+    ],
+    keyFeatures: {
+      title: 'Key Features',
+      items: [
+        {
+          name: 'Functional & OOP',
+          description: 'Combines object-oriented and functional programming',
+          icon: '🔄'
+        },
+        {
+          name: 'Type Inference',
+          description: 'Compiler infers types automatically',
+          icon: '🧠'
+        },
+        {
+          name: 'Immutability',
+          description: 'Strong support for immutable data structures',
+          icon: '🔒'
+        },
+        {
+          name: 'Pattern Matching',
+          description: 'Powerful pattern matching capabilities',
+          icon: '🎯'
+        }
+      ]
+    },
+    quickExample: {
+      title: 'Quick Example',
+      code: `// Simple function
+def greet(name: String): String = s"Hello, $name!"
+
+// Pattern matching
+def factorial(n: Int): Int = n match {
+  case 0 => 1
+  case _ => n * factorial(n - 1)
+}
+
+// Higher-order functions
+val numbers = List(1, 2, 3, 4, 5)
+val doubled = numbers.map(_ * 2)
+val evens = numbers.filter(_ % 2 == 0)
+
+// Case classes
+case class Person(name: String, age: Int)
+val alice = Person("Alice", 25)`,
+      explanation: 'Scala code is concise and expressive. Notice the pattern matching and functional style! You can edit and preview examples live in our interactive lessons!'
+    },
+    useCases: [
+      {
+        title: 'Big Data',
+        description: 'Build applications with Apache Spark and Kafka'
+      },
+      {
+        title: 'Web Applications',
+        description: 'Build web apps with Play Framework'
+      },
+      {
+        title: 'Distributed Systems',
+        description: 'Create scalable, distributed applications'
+      },
+      {
+        title: 'Enterprise Applications',
+        description: 'Build large-scale JVM applications'
+      }
+    ],
+    gettingStarted: {
+      title: 'Getting Started',
+      steps: [
+        {
+          step: 1,
+          title: 'Learn Scala Basics',
+          description: 'Master syntax, functions, and data structures'
+        },
+        {
+          step: 2,
+          title: 'Understand Functional Programming',
+          description: 'Learn immutability, higher-order functions, and collections'
+        },
+        {
+          step: 3,
+          title: 'Explore Pattern Matching',
+          description: 'Master pattern matching and case classes'
+        },
+        {
+          step: 4,
+          title: 'Build Applications',
+          description: 'Create applications with Scala frameworks'
+        }
+      ]
+    },
+    nextSteps: {
+      title: 'What\'s Next?',
+      description: 'After mastering Scala, explore these paths:',
+      suggestions: [
+        {
+          language: 'Java',
+          languageId: 'Java',
+          description: 'Deepen your JVM knowledge',
+          icon: '☕'
+        },
+        {
+          language: 'Haskell',
+          languageId: 'Haskell',
+          description: 'Explore pure functional programming',
+          icon: '🔷'
+        }
+      ]
+    }
+  },
+  'Lua': {
+    id: 'Lua',
+    name: 'Lua',
+    tagline: 'Lightweight, embeddable scripting',
+    description: 'Lua is a lightweight, high-level, multi-paradigm programming language designed primarily for embedded use in applications. It\'s known for its simplicity, small size, and ease of embedding.',
+    whatIsIt: {
+      title: 'What is Lua?',
+      content: 'Lua is a powerful, efficient, lightweight, embeddable scripting language. It supports procedural, object-oriented, functional, and data-driven programming. Lua is designed to be embedded in applications to provide scripting capabilities.',
+      visual: 'Think of Lua as a scripting language that fits anywhere - small, fast, and easy to embed in games, applications, and systems.'
+    },
+    whyLearn: [
+      'Game development - used in Roblox, World of Warcraft, and many games',
+      'Embeddable - easy to integrate into C/C++ applications',
+      'Lightweight - small footprint and fast execution',
+      'Simple syntax - easy to learn and use',
+      'Versatile - used in games, web servers, and embedded systems'
+    ],
+    keyFeatures: {
+      title: 'Key Features',
+      items: [
+        {
+          name: 'Lightweight',
+          description: 'Small size and minimal dependencies',
+          icon: '⚡'
+        },
+        {
+          name: 'Embeddable',
+          description: 'Easy to embed in C/C++ applications',
+          icon: '🔌'
+        },
+        {
+          name: 'Fast',
+          description: 'Fast execution with LuaJIT',
+          icon: '🚀'
+        },
+        {
+          name: 'Flexible',
+          description: 'Supports multiple programming paradigms',
+          icon: '🔄'
+        }
+      ]
+    },
+    quickExample: {
+      title: 'Quick Example',
+      code: `-- Simple function
+function greet(name)
+    return "Hello, " .. name .. "!"
+end
+
+-- Tables (Lua's data structure)
+person = {
+    name = "Alice",
+    age = 25,
+    city = "New York"
+}
+
+-- Iteration
+numbers = {1, 2, 3, 4, 5}
+for i, num in ipairs(numbers) do
+    print(num * 2)
+end
+
+-- Metatables for OOP
+Person = {}
+Person.__index = Person
+
+function Person:new(name, age)
+    local obj = {name = name, age = age}
+    setmetatable(obj, Person)
+    return obj
+end`,
+      explanation: 'Lua code is simple and clean. Notice how tables work as both arrays and dictionaries! You can edit and preview examples live in our interactive lessons!'
+    },
+    useCases: [
+      {
+        title: 'Game Development',
+        description: 'Script games in Roblox, World of Warcraft, and more'
+      },
+      {
+        title: 'Embedded Scripting',
+        description: 'Add scripting to C/C++ applications'
+      },
+      {
+        title: 'Web Development',
+        description: 'Build web applications with OpenResty/Lua'
+      },
+      {
+        title: 'Configuration',
+        description: 'Use for configuration files and automation'
+      }
+    ],
+    gettingStarted: {
+      title: 'Getting Started',
+      steps: [
+        {
+          step: 1,
+          title: 'Learn Lua Basics',
+          description: 'Master tables, functions, and control flow'
+        },
+        {
+          step: 2,
+          title: 'Understand Metatables',
+          description: 'Learn metatables for OOP and operator overloading'
+        },
+        {
+          step: 3,
+          title: 'Explore LuaJIT',
+          description: 'Use LuaJIT for better performance'
+        },
+        {
+          step: 4,
+          title: 'Build Projects',
+          description: 'Create scripts for games or applications'
+        }
+      ]
+    },
+    nextSteps: {
+      title: 'What\'s Next?',
+      description: 'After mastering Lua, explore these paths:',
+      suggestions: [
+        {
+          language: 'Python',
+          languageId: 'Python',
+          description: 'Compare with another scripting language',
+          icon: '🐍'
+        },
+        {
+          language: 'C',
+          languageId: 'C',
+          description: 'Learn to embed Lua in C applications',
+          icon: '⚙️'
+        }
+      ]
+    }
+  },
+  'Bash': {
+    id: 'Bash',
+    name: 'Bash / Shell',
+    tagline: 'Automate everything',
+    description: 'Bash (Bourne Again Shell) is a Unix shell and command language. It\'s the default shell on most Linux distributions and macOS, making it essential for system administration, automation, and DevOps.',
+    whatIsIt: {
+      title: 'What is Bash?',
+      content: 'Bash is a command processor that typically runs in a text window where users type commands. It can also read and execute commands from files called shell scripts. Bash is the default shell on Linux and macOS.',
+      visual: 'Think of Bash as the command-line interface to your operating system - automate tasks, manage files, and control your system.'
+    },
+    whyLearn: [
+      'System administration - essential for Linux/Unix administration',
+      'Automation - automate repetitive tasks and workflows',
+      'DevOps - crucial for CI/CD, deployment, and infrastructure',
+      'Universal - works on Linux, macOS, and Windows (WSL)',
+      'Productivity - save time with powerful scripting capabilities'
+    ],
+    keyFeatures: {
+      title: 'Key Features',
+      items: [
+        {
+          name: 'Command Chaining',
+          description: 'Pipe and chain commands together',
+          icon: '🔗'
+        },
+        {
+          name: 'Scripting',
+          description: 'Write reusable shell scripts',
+          icon: '📜'
+        },
+        {
+          name: 'Variables & Functions',
+          description: 'Use variables and define functions',
+          icon: '📦'
+        },
+        {
+          name: 'Process Control',
+          description: 'Manage processes and job control',
+          icon: '⚙️'
+        }
+      ]
+    },
+    quickExample: {
+      title: 'Quick Example',
+      code: `#!/bin/bash
+
+# Variables
+name="Alice"
+age=25
+
+# Function
+greet() {
+    echo "Hello, $1! You are $2 years old."
+}
+
+# Call function
+greet "$name" "$age"
+
+# Loop
+for i in {1..5}; do
+    echo "Count: $i"
+done
+
+# Conditional
+if [ $age -ge 18 ]; then
+    echo "Adult"
+else
+    echo "Minor"
+fi
+
+# Command substitution
+files=$(ls -1 | wc -l)
+echo "Number of files: $files"`,
+      explanation: 'Bash makes automation straightforward. Notice how you can chain commands and automate tasks! You can edit and preview examples live in our interactive lessons!'
+    },
+    useCases: [
+      {
+        title: 'System Administration',
+        description: 'Manage Linux/Unix systems and servers'
+      },
+      {
+        title: 'Automation',
+        description: 'Automate repetitive tasks and workflows'
+      },
+      {
+        title: 'DevOps',
+        description: 'CI/CD scripts, deployment, and infrastructure'
+      },
+      {
+        title: 'File Management',
+        description: 'Batch process files and directories'
+      }
+    ],
+    gettingStarted: {
+      title: 'Getting Started',
+      steps: [
+        {
+          step: 1,
+          title: 'Learn Basic Commands',
+          description: 'Master ls, cd, grep, find, and other commands'
+        },
+        {
+          step: 2,
+          title: 'Understand Scripting',
+          description: 'Write shell scripts with variables and functions'
+        },
+        {
+          step: 3,
+          title: 'Master Pipes & Redirection',
+          description: 'Chain commands and redirect input/output'
+        },
+        {
+          step: 4,
+          title: 'Practice Automation',
+          description: 'Automate real-world tasks and workflows'
+        }
+      ]
+    },
+    nextSteps: {
+      title: 'What\'s Next?',
+      description: 'After mastering Bash, explore these paths:',
+      suggestions: [
+        {
+          language: 'Python',
+          languageId: 'Python',
+          description: 'Use Python for more complex automation',
+          icon: '🐍'
+        },
+        {
+          language: 'PowerShell',
+          languageId: 'PowerShell',
+          description: 'Learn PowerShell for Windows automation',
+          icon: '💻'
+        }
+      ]
+    }
+  },
+  'PowerShell': {
+    id: 'PowerShell',
+    name: 'PowerShell',
+    tagline: 'Automation for Windows and beyond',
+    description: 'PowerShell is a task automation and configuration management framework from Microsoft. It consists of a command-line shell and scripting language built on .NET, making it powerful for Windows administration and cross-platform automation.',
+    whatIsIt: {
+      title: 'What is PowerShell?',
+      content: 'PowerShell is a cross-platform task automation solution made up of a command-line shell, a scripting language, and a configuration management framework. It\'s built on .NET and works on Windows, Linux, and macOS.',
+      visual: 'Think of PowerShell as Bash for Windows, but with object-oriented capabilities and .NET integration.'
+    },
+    whyLearn: [
+      'Windows administration - essential for Windows system management',
+      'Cross-platform - works on Windows, Linux, and macOS',
+      'Object-oriented - works with objects, not just text',
+      '.NET integration - access to .NET framework and libraries',
+      'Enterprise standard - widely used in enterprise environments'
+    ],
+    keyFeatures: {
+      title: 'Key Features',
+      items: [
+        {
+          name: 'Object-Oriented',
+          description: 'Works with objects instead of text streams',
+          icon: '📦'
+        },
+        {
+          name: '.NET Integration',
+          description: 'Full access to .NET framework and libraries',
+          icon: '🔗'
+        },
+        {
+          name: 'Cmdlets',
+          description: 'Powerful built-in commands (cmdlets)',
+          icon: '⚡'
+        },
+        {
+          name: 'Pipeline',
+          description: 'Powerful pipeline for chaining commands',
+          icon: '🔗'
+        }
+      ]
+    },
+    quickExample: {
+      title: 'Quick Example',
+      code: `# Variables
+$name = "Alice"
+$age = 25
+
+# Function
+function Greet-Person {
+    param([string]$Name, [int]$Age)
+    Write-Host "Hello, $Name! You are $Age years old."
+}
+
+# Call function
+Greet-Person -Name $name -Age $age
+
+# Objects
+$person = [PSCustomObject]@{
+    Name = "Alice"
+    Age = 25
+    City = "New York"
+}
+
+# Pipeline
+Get-Process | Where-Object {$_.CPU -gt 100} | Select-Object Name, CPU
+
+# Loops
+1..5 | ForEach-Object {
+    Write-Host "Count: $_"
+}`,
+      explanation: 'PowerShell works with objects, making it powerful for automation. Notice how you can work with .NET objects directly! You can edit and preview examples live in our interactive lessons!'
+    },
+    useCases: [
+      {
+        title: 'Windows Administration',
+        description: 'Manage Windows systems and Active Directory'
+      },
+      {
+        title: 'Automation',
+        description: 'Automate Windows and cross-platform tasks'
+      },
+      {
+        title: 'DevOps',
+        description: 'CI/CD, Azure automation, and infrastructure'
+      },
+      {
+        title: 'System Management',
+        description: 'Configure and manage Windows servers'
+      }
+    ],
+    gettingStarted: {
+      title: 'Getting Started',
+      steps: [
+        {
+          step: 1,
+          title: 'Learn PowerShell Basics',
+          description: 'Master cmdlets, variables, and basic syntax'
+        },
+        {
+          step: 2,
+          title: 'Understand Objects',
+          description: 'Learn how PowerShell works with objects'
+        },
+        {
+          step: 3,
+          title: 'Master Pipeline',
+          description: 'Chain cmdlets using the pipeline'
+        },
+        {
+          step: 4,
+          title: 'Write Scripts',
+          description: 'Create reusable PowerShell scripts and modules'
+        }
+      ]
+    },
+    nextSteps: {
+      title: 'What\'s Next?',
+      description: 'After mastering PowerShell, explore these paths:',
+      suggestions: [
+        {
+          language: 'C#',
+          languageId: 'C#',
+          description: 'Deepen your .NET knowledge',
+          icon: '💼'
+        },
+        {
+          language: 'Bash',
+          languageId: 'Bash',
+          description: 'Compare with Bash for Linux automation',
+          icon: '🐧'
+        }
+      ]
+    }
+  },
+  'Perl': {
+    id: 'Perl',
+    name: 'Perl',
+    tagline: 'The duct tape of the internet',
+    description: 'Perl is a high-level, general-purpose, interpreted programming language. Known for its powerful text processing capabilities and regular expressions, Perl has been called "the duct tape of the internet" for its versatility.',
+    whatIsIt: {
+      title: 'What is Perl?',
+      content: 'Perl is a family of high-level, general-purpose programming languages. Perl 5 is widely used for system administration, web development, network programming, and text processing. It\'s known for its powerful regular expressions and text manipulation capabilities.',
+      visual: 'Think of Perl as a Swiss Army knife for text processing - incredibly powerful for parsing, processing, and manipulating text.'
+    },
+    whyLearn: [
+      'Text processing - excellent for parsing and manipulating text',
+      'Regular expressions - powerful regex capabilities',
+      'System administration - widely used for automation',
+      'Legacy systems - many systems still use Perl',
+      'CPAN - comprehensive library ecosystem'
+    ],
+    keyFeatures: {
+      title: 'Key Features',
+      items: [
+        {
+          name: 'Regular Expressions',
+          description: 'Powerful built-in regex support',
+          icon: '🔍'
+        },
+        {
+          name: 'Text Processing',
+          description: 'Excellent for parsing and manipulating text',
+          icon: '📝'
+        },
+        {
+          name: 'CPAN',
+          description: 'Comprehensive Perl Archive Network',
+          icon: '📦'
+        },
+        {
+          name: 'Flexible Syntax',
+          description: 'Multiple ways to accomplish tasks (TIMTOWTDI)',
+          icon: '🔄'
+        }
+      ]
+    },
+    quickExample: {
+      title: 'Quick Example',
+      code: `# Simple script
+my $name = "Alice";
+my $age = 25;
+
+sub greet {
+    my ($name, $age) = @_;
+    return "Hello, $name! You are $age years old.";
+}
+
+print greet($name, $age) . "\\n";
+
+# Regular expressions
+my $text = "Email: alice@example.com";
+if ($text =~ /(\\w+@\\w+\\.\\w+)/) {
+    print "Found email: $1\\n";
+}
+
+# File processing
+open(my $fh, '<', 'data.txt') or die "Cannot open file: $!";
+while (my $line = <$fh>) {
+    chomp $line;
+    print "Line: $line\\n";
+}
+close($fh);`,
+      explanation: 'Perl excels at text processing. Notice the powerful regular expressions and file handling! You can edit and preview examples live in our interactive lessons!'
+    },
+    useCases: [
+      {
+        title: 'Text Processing',
+        description: 'Parse logs, process files, and manipulate text'
+      },
+      {
+        title: 'System Administration',
+        description: 'Automate system tasks and administration'
+      },
+      {
+        title: 'Web Development',
+        description: 'Build web applications with CGI and frameworks'
+      },
+      {
+        title: 'Bioinformatics',
+        description: 'Process biological data and sequences'
+      }
+    ],
+    gettingStarted: {
+      title: 'Getting Started',
+      steps: [
+        {
+          step: 1,
+          title: 'Learn Perl Basics',
+          description: 'Master variables, functions, and control structures'
+        },
+        {
+          step: 2,
+          title: 'Master Regular Expressions',
+          description: 'Learn Perl\'s powerful regex capabilities'
+        },
+        {
+          step: 3,
+          title: 'Understand File I/O',
+          description: 'Read and write files efficiently'
+        },
+        {
+          step: 4,
+          title: 'Explore CPAN',
+          description: 'Use CPAN modules for extended functionality'
+        }
+      ]
+    },
+    nextSteps: {
+      title: 'What\'s Next?',
+      description: 'After mastering Perl, explore these paths:',
+      suggestions: [
+        {
+          language: 'Python',
+          languageId: 'Python',
+          description: 'Compare with modern scripting languages',
+          icon: '🐍'
+        },
+        {
+          language: 'Bash',
+          languageId: 'Bash',
+          description: 'Learn shell scripting for automation',
+          icon: '🐧'
+        }
+      ]
+    }
+  },
+  'Julia': {
+    id: 'Julia',
+    name: 'Julia',
+    tagline: 'Fast as C, dynamic as Python',
+    description: 'Julia is a high-level, high-performance programming language for technical computing. It combines the ease of use of Python with the speed of C, making it perfect for scientific computing and data science.',
+    whatIsIt: {
+      title: 'What is Julia?',
+      content: 'Julia is a high-performance programming language designed for numerical and scientific computing. It was created to solve the "two-language problem" - the need to prototype in one language (like Python) and optimize in another (like C).',
+      visual: 'Think of Julia as Python\'s speed demon cousin - as easy to write as Python, but as fast as C.'
+    },
+    whyLearn: [
+      'High performance - approaches C and Fortran speeds',
+      'Scientific computing - designed for numerical computing',
+      'Easy syntax - Python-like syntax that\'s easy to learn',
+      'Parallel computing - built-in support for parallel execution',
+      'Growing ecosystem - active scientific computing community'
+    ],
+    keyFeatures: {
+      title: 'Key Features',
+      items: [
+        {
+          name: 'Just-In-Time Compilation',
+          description: 'JIT compilation for high performance',
+          icon: '⚡'
+        },
+        {
+          name: 'Multiple Dispatch',
+          description: 'Powerful multiple dispatch system',
+          icon: '🔄'
+        },
+        {
+          name: 'Parallel Computing',
+          description: 'Built-in support for parallel and distributed computing',
+          icon: '🔄'
+        },
+        {
+          name: 'Scientific Libraries',
+          description: 'Rich ecosystem for scientific computing',
+          icon: '📚'
+        }
+      ]
+    },
+    quickExample: {
+      title: 'Quick Example',
+      code: `# Simple function
+function greet(name)
+    return "Hello, $name!"
+end
+
+# Multiple dispatch
+abstract type Animal end
+struct Dog <: Animal
+    name::String
+end
+struct Cat <: Animal
+    name::String
+end
+
+make_sound(animal::Dog) = "$(animal.name) says Woof!"
+make_sound(animal::Cat) = "$(animal.name) says Meow!"
+
+# Arrays and operations
+numbers = [1, 2, 3, 4, 5]
+squared = numbers .^ 2  # Element-wise operation
+
+# Performance
+function sum_squares(n)
+    s = 0
+    for i in 1:n
+        s += i^2
+    end
+    return s
+end`,
+      explanation: 'Julia combines ease of use with high performance. Notice the multiple dispatch and mathematical syntax! You can edit and preview examples live in our interactive lessons!'
+    },
+    useCases: [
+      {
+        title: 'Scientific Computing',
+        description: 'Numerical analysis and scientific research'
+      },
+      {
+        title: 'Data Science',
+        description: 'High-performance data analysis and machine learning'
+      },
+      {
+        title: 'Parallel Computing',
+        description: 'Distributed and parallel scientific computing'
+      },
+      {
+        title: 'Financial Modeling',
+        description: 'High-performance financial calculations'
+      }
+    ],
+    gettingStarted: {
+      title: 'Getting Started',
+      steps: [
+        {
+          step: 1,
+          title: 'Learn Julia Basics',
+          description: 'Master syntax, functions, and data structures'
+        },
+        {
+          step: 2,
+          title: 'Understand Multiple Dispatch',
+          description: 'Learn Julia\'s unique type system'
+        },
+        {
+          step: 3,
+          title: 'Explore Scientific Libraries',
+          description: 'Use packages for scientific computing'
+        },
+        {
+          step: 4,
+          title: 'Optimize Performance',
+          description: 'Write high-performance Julia code'
+        }
+      ]
+    },
+    nextSteps: {
+      title: 'What\'s Next?',
+      description: 'After mastering Julia, explore these paths:',
+      suggestions: [
+        {
+          language: 'Python',
+          languageId: 'Python',
+          description: 'Compare with Python for data science',
+          icon: '🐍'
+        },
+        {
+          language: 'R',
+          languageId: 'R',
+          description: 'Explore statistical computing',
+          icon: '📊'
+        }
+      ]
+    }
   }
 }
 
